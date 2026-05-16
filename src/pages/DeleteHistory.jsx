@@ -22,6 +22,48 @@ const DeleteHistory = () => {
     setDeletedTasks([]);
   };
 
+const restoreTask = (id) => {
+  // Get deleted tasks
+  const deleted =
+    JSON.parse(localStorage.getItem("deleted_tasks")) || [];
+
+  // Get active tasks
+  const tasks =
+    JSON.parse(localStorage.getItem("tasks")) || [];
+
+  // Find the task to restore
+  const taskToRestore = deleted.find(
+    (task) => task.id === id
+  );
+
+  if (!taskToRestore) return;
+
+  // Remove from deleted tasks
+  const updatedDeletedTasks = deleted.filter(
+    (task) => task.id !== id
+  );
+
+  // Add back to active tasks
+  const updatedTasks = [...tasks, taskToRestore];
+
+  // Update localStorage
+  localStorage.setItem(
+    "deleted_tasks",
+    JSON.stringify(updatedDeletedTasks)
+  );
+
+  localStorage.setItem(
+    "tasks",
+    JSON.stringify(updatedTasks)
+  );
+
+  // Update state
+  setDeletedTasks(updatedDeletedTasks);
+
+  // Toast feedback
+  toast.success("Task restored to roadmap.");
+};
+
   return (
     <div className="h-screen w-full bg-white text-black font-sans overflow-hidden flex flex-col p-8">
       <div className="max-w-6xl w-full mx-auto flex flex-col h-full">
@@ -74,18 +116,29 @@ const DeleteHistory = () => {
                     </div>
 
                     {/* Right Side */}
-                    <div className="text-right">
-                      <div className="text-xs font-medium text-gray-500 group-hover:text-gray-200 transition-colors duration-300">
-                        {task.deletedAt
-                          ? new Date(task.deletedAt).toLocaleDateString()
-                          : ""}
+                    <div className="text-right flex flex-col items-end gap-3">
+
+                      <div>
+                        <div className="text-xs font-medium text-gray-500 group-hover:text-gray-200 transition-colors duration-300">
+                          {task.deletedAt
+                            ? new Date(task.deletedAt).toLocaleDateString()
+                            : ""}
+                        </div>
+
+                        <div className="text-[10px] uppercase tracking-[0.2em] text-gray-300 group-hover:text-gray-400 transition-colors duration-300 mt-1">
+                          {task.deletedAt
+                            ? new Date(task.deletedAt).toLocaleTimeString()
+                            : ""}
+                        </div>
                       </div>
 
-                      <div className="text-[10px] uppercase tracking-[0.2em] text-gray-300 group-hover:text-gray-400 transition-colors duration-300 mt-1">
-                        {task.deletedAt
-                          ? new Date(task.deletedAt).toLocaleTimeString()
-                          : ""}
-                      </div>
+                      <button
+                        onClick={() => restoreTask(task.id)}
+                        className="border border-black/20 px-3 py-1 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-black hover:text-white transition-all duration-300"
+                      >
+                        Restore
+                      </button>
+
                     </div>
                   </div>
                 ))
@@ -102,7 +155,7 @@ const DeleteHistory = () => {
               </div>
 
               <h2 className="text-3xl font-black uppercase tracking-tight">
-                Danger Zone
+                Beware!!!
               </h2>
 
               <p className="text-gray-500 font-medium leading-relaxed">
@@ -115,7 +168,7 @@ const DeleteHistory = () => {
                 onClick={handleWipeOut}
                 className="group relative w-full py-6 bg-white border-2 border-black rounded-2xl font-black uppercase tracking-widest hover:bg-black hover:text-white transition-all duration-300 flex items-center justify-center overflow-hidden"
               >
-                <span className="relative z-10">Wipe All Data</span>
+                <span className="relative z-10">Clear History</span>
                 <div className="absolute inset-0 bg-red-600 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
               </button>
  
