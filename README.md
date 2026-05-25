@@ -86,23 +86,23 @@ Got a feature idea, an architectural suggestion, or just want to chat about the 
 Ready to write some code? We actively maintain highly descriptive templates for first-time contributors. Look out for the `good first issue` and `help wanted` labels inside our **[GitHub Issues](https://github.com/shamilahmdt/devtasks/issues)** tracker!
 
 ### 💡 Featured Roadmap Tasks
-Here are a few exciting features currently open for implementation:
+Here are the current active issues open for implementation on our repository:
 
-* 🟢 **Task Due Dates & Deadline Badges** ([Issue Template](file:///C:/Users/ASUS/.gemini/antigravity/brain/067a5bcb-1307-40d6-8cc4-047f9fcfafb3/github_issue_task_due_dates.md))
-  * *Goal*: Add a date picker when adding tasks and show `Due Today` / `Overdue` alerts inside the task list.
-  * *Skills*: Date calculations, conditional rendering.
+* 🟢 **Add Global Keyboard Shortcuts & Shortcuts HUD Modal** ([#78](https://github.com/shamilahmdt/devtasks/issues/78))
+  * *Goal*: Implement global keyboard shortcuts (e.g. `Alt + A`, `Alt + L`) and a sleek keyboard cheatsheet HUD overlay when pressing `?` to maximize engineer productivity.
+  * *Skills*: Keyboard event listeners, React state management, Tailwind transition overlays.
 
-* 🟢 **Dedicated Import & Export Data Center** ([Issue Template](file:///C:/Users/ASUS/.gemini/antigravity/brain/067a5bcb-1307-40d6-8cc4-047f9fcfafb3/github_issue_import_export.md))
-  * *Goal*: Create a dedicated page for backup data transfer, dynamically sorting active, completed, and deleted logs into correct state targets.
-  * *Skills*: LocalStorage JSON parsing, routing, validation toasts.
+* 🟢 **Improve Mobile Responsiveness Across Core Pages** ([#76](https://github.com/shamilahmdt/devtasks/issues/76))
+  * *Goal*: Optimize layouts for mobile displays ensuring dashboard cards, task list items, and system logs adapt gracefully to small screen sizes.
+  * *Skills*: Responsive design, Tailwind CSS breakpoints, mobile UX.
 
-* 🟢 **Filter Counters & Bulk Clear Action** ([Issue Template](file:///C:/Users/ASUS/.gemini/antigravity/brain/067a5bcb-1307-40d6-8cc4-047f9fcfafb3/github_issue_task_counters.md))
-  * *Goal*: Render total active and completed task counts inside the filter buttons, and implement a "Clear Completed" trigger button to bulk archive tasks in one click.
-  * *Skills*: Array lengths, array state manipulation.
+* 🟢 **Improve Task Editing UX, Dropdown Behavior & Validation Feedback** ([#71](https://github.com/shamilahmdt/devtasks/issues/71))
+  * *Goal*: Polish the inline task editing flow, secure inputs with simple validation notifications, and refine category dropdown animations.
+  * *Skills*: Controlled inputs, inline state toggles, validation feedback.
 
-* 🟢 **"Undo Delete" Interactive Toast Action** ([Issue Template](file:///C:/Users/ASUS/.gemini/antigravity/brain/067a5bcb-1307-40d6-8cc4-047f9fcfafb3/github_issue_undo_delete.md))
-  * *Goal*: Add a functional "Undo" action trigger directly inside the task deletion toast notification using Sonner's API.
-  * *Skills*: State rollback, interactive notification components.
+* 🟢 **Improve Dark Mode Consistency & Consolidate Backup Actions** ([#61](https://github.com/shamilahmdt/devtasks/issues/61))
+  * *Goal*: Unify zinc color schemes for perfect dark/light contrast on all components, and consolidate backup actions under a consistent interface.
+  * *Skills*: Theme switching, custom design consistency, standard layout rules.
 
 ---
 
