@@ -88,21 +88,30 @@ Ready to write some code? We actively maintain highly descriptive templates for 
 ### 💡 Featured Roadmap Tasks
 Here are the current active issues open for implementation on our repository:
 
-* 🟢 **Add Global Keyboard Shortcuts & Shortcuts HUD Modal** ([#78](https://github.com/shamilahmdt/devtasks/issues/78))
-  * *Goal*: Implement global keyboard shortcuts (e.g. `Alt + A`, `Alt + L`) and a sleek keyboard cheatsheet HUD overlay when pressing `?` to maximize engineer productivity.
-  * *Skills*: Keyboard event listeners, React state management, Tailwind transition overlays.
+* 🟢 **Interactive Toast Actions & Route Navigation** ([#87](https://github.com/shamilahmdt/devtasks/issues/87))
+  * *Goal*: Add interactive action links inside toast notifications (e.g., direct navigation shortcut back to list or dashboard page) and configure smooth transitions.
+  * *Skills*: Toast configuration, navigation APIs, user flow orchestration.
+
+* 🟢 **Improve Keyboard Shortcuts & HUD Browser Compatibility** ([#78](https://github.com/shamilahmdt/devtasks/issues/78))
+  * *Goal*: Refactor the keyboard shortcut listener system to resolve compatibility bugs where some keys do not fire correctly on certain OS/browser combinations (such as `Alt` key menu activation in Windows Chrome), and optimize text input focus filtering.
+  * *Skills*: Global window event listeners, preventDefault handling, cross-platform key mapping.
 
 * 🟢 **Improve Mobile Responsiveness Across Core Pages** ([#76](https://github.com/shamilahmdt/devtasks/issues/76))
   * *Goal*: Optimize layouts for mobile displays ensuring dashboard cards, task list items, and system logs adapt gracefully to small screen sizes.
   * *Skills*: Responsive design, Tailwind CSS breakpoints, mobile UX.
 
-* 🟢 **Improve Task Editing UX, Dropdown Behavior & Validation Feedback** ([#71](https://github.com/shamilahmdt/devtasks/issues/71))
-  * *Goal*: Polish the inline task editing flow, secure inputs with simple validation notifications, and refine category dropdown animations.
-  * *Skills*: Controlled inputs, inline state toggles, validation feedback.
-
 * 🟢 **Improve Dark Mode Consistency & Consolidate Backup Actions** ([#61](https://github.com/shamilahmdt/devtasks/issues/61))
   * *Goal*: Unify zinc color schemes for perfect dark/light contrast on all components, and consolidate backup actions under a consistent interface.
   * *Skills*: Theme switching, custom design consistency, standard layout rules.
+
+---
+
+## 🚀 Future Architectural Vision (Next Milestones)
+
+We are planning a major milestone refactoring of DevTasks to significantly boost developer workflow speed:
+
+* 🎛️ **The Unified Dev Board & Workspace**: Consolidate `AddTasks`, `ListTasks`, `DeleteHistory`, and `DataCenter` into a single, high-efficiency split-pane dashboard workspace (`/workspace`). This eliminates redundant view-switching and lets developers create, filter, purge, and backup tasks in one cohesive command center.
+* 📦 **Minimalist Snippet Vault**: Introduce a companion dashboard (`/snippets`) for engineers to store, search, and instantly copy reusable terminal commands and code blocks with smooth, micro-animated clipboard actions.
 
 ---
 
