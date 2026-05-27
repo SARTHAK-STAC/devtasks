@@ -42,7 +42,7 @@ const DeleteHistory = () => {
     toast.success("Task restored to roadmap.");
   };
 
-  const handleExport=()=>{
+ /* const handleExport=()=>{
     const tasks=JSON.parse(localStorage.getItem("tasks") || "[]");
     const deletedTasks=JSON.parse(localStorage.getItem("deleted_tasks") || "[]");
     let exportData=[...tasks,...deletedTasks];
@@ -54,9 +54,9 @@ const DeleteHistory = () => {
     a.download="devtasks-backup.json";
     a.click();
     URL.revokeObjectURL(url);
-  }
+  }*/
 
-  const handleImport=()=>{
+  /*const handleImport=()=>{
     const input=document.createElement("input");
     input.type="file";
     input.accept=".json";
@@ -86,7 +86,7 @@ const DeleteHistory = () => {
       }
     }
     input.click();
-  }
+  }*/
   
 
   return (
@@ -197,21 +197,22 @@ const DeleteHistory = () => {
                 <span className="relative z-10">Clear History</span>
                 <div className="absolute inset-0 bg-red-600 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
               </button>
+              <Link
+                to="/data-center"
+                className={`flex items-center justify-between px-5 py-4 rounded-2xl border transition-all duration-300 ${
+                  dark
+                    ? "border-zinc-800 bg-zinc-900/50 hover:bg-zinc-800 text-gray-300"
+                    : "border-gray-200 bg-gray-50 hover:bg-gray-100 text-gray-700"
+                }`}
+              >
+                <span className="text-xs font-black uppercase tracking-widest">
+                  Go to Data Center for backups 
+                </span>
               
-              <div className="grid grid-cols-2 gap-3">
-                <button 
-                  onClick={handleImport}
-                  className={`py-3.5 border rounded-xl text-xs font-black uppercase tracking-widest transition-all duration-300 ${dark ? "border-zinc-800 bg-zinc-900/50 hover:bg-zinc-800 text-gray-300" : "border-gray-200 bg-gray-50 hover:bg-gray-100 text-gray-700"}`}
-                >
-                  Import Data
-                </button>
-                <button
-                  onClick={handleExport}
-                  className={`py-3.5 border rounded-xl text-xs font-black uppercase tracking-widest transition-all duration-300 ${dark ? "border-zinc-800 bg-zinc-900/50 hover:bg-zinc-800 text-gray-300" : "border-gray-200 bg-gray-50 hover:bg-gray-100 text-gray-700"}`}
-                >
-                  Export Backup
-                </button>
-              </div>
+                <span className="text-lg">→</span>
+              
+              </Link>  
+
             </div>
           </div>
         </div>
