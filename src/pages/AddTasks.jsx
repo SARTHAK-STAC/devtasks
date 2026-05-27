@@ -6,6 +6,7 @@ import { useCategory } from "../context/CategoryContext";
 import ThemeToggle from "../components/ThemeToggle";
 
 const AddTasks = () => {
+  const navigate = useNavigate();
   const { dark } = useTheme();
   const { categories, addCategory, deleteCategory } = useCategory();
 
@@ -348,7 +349,7 @@ const AddTasks = () => {
         </form>
 
         {/* FOOTER */}
-        <div className="px-5 sm:px-8 pb-8">
+        <div className="px-5 sm:px-8 pb-8 flex justify-between items-center">
           <Link
             to="/dashboard"
             className={`inline-flex items-center gap-2 text-xs sm:text-sm font-black uppercase tracking-widest transition-all duration-300 ${
@@ -359,6 +360,17 @@ const AddTasks = () => {
           >
             <span>←</span>
             <span>Back to Dashboard</span>
+          </Link>
+          <Link
+            to="/list-tasks"
+            className={`inline-flex items-center gap-2 text-xs sm:text-sm font-black uppercase tracking-widest transition-all duration-300 ${
+              dark
+                ? "text-neutral-400 hover:text-white"
+                : "text-neutral-500 hover:text-black"
+            }`}
+          >
+            <span>Task List</span>
+            <span>→</span>
           </Link>
         </div>
       </div>

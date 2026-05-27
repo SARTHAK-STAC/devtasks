@@ -8,6 +8,7 @@ import ThemeToggle from "../components/ThemeToggle";
 const FILTERS = ["ALL", "ACTIVE", "COMPLETED"];
 
 const ListTasks = () => {
+  const navigate = useNavigate();
   const { dark } = useTheme();
   const { categories } = useCategory();
   const [tasks, setTasks] = useState(() => {
@@ -27,15 +28,14 @@ const ListTasks = () => {
 
   const dropdownRef = useRef(null);
   const editInputRef = useRef(null);
-  const navigate = useNavigate();
 
   const filteredTasks = tasks.filter((task) => {
     const matchFilter =
       filter === "ACTIVE"
         ? !task.completed
         : filter === "COMPLETED"
-          ? task.completed
-          : true;
+        ? task.completed
+        : true;
     const matchSearch = task.text
       .toLowerCase()
       .includes(searchQuery.toLowerCase());
@@ -101,7 +101,7 @@ const ListTasks = () => {
     }
 
     const updatedTasks = tasks.map((task) =>
-      task.id === id ? { ...task, text: trimmed } : task,
+      task.id === id ? { ...task, text: trimmed } : task
     );
     setTasks(updatedTasks);
     localStorage.setItem("tasks", JSON.stringify(updatedTasks));
@@ -156,7 +156,7 @@ const ListTasks = () => {
     let deletedTasks = localStorage.getItem("deleted_tasks");
     if (deletedTasks) {
       deletedTasks = JSON.parse(deletedTasks).filter(
-        (t) => t.id !== taskToRestore.id,
+        (t) => t.id !== taskToRestore.id
       );
       localStorage.setItem("deleted_tasks", JSON.stringify(deletedTasks));
     }
@@ -201,7 +201,7 @@ const ListTasks = () => {
     });
     setTimeout(() => {
       toast.info("Task deleted. Click 'View Logs' to see deletion history.", {
-        id: `history-${id}`, // ID obligatoirement différent
+        id: `history-${id}`,
         style: { background: "#000000", color: "#ffffff" },
         action: {
           label: "View Logs",
@@ -235,22 +235,33 @@ const ListTasks = () => {
 
     localStorage.setItem(
       "deleted_tasks",
-      JSON.stringify([...deletedTasks, ...completedWithTimestamps]),
+      JSON.stringify([...deletedTasks, ...completedWithTimestamps])
     );
     localStorage.setItem("tasks", JSON.stringify(updatedTasks));
     setTasks(updatedTasks);
 
-    toast.success(
-      `${completedTasks.length} completed ${completedTasks.length === 1 ? "task" : "tasks"} moved to delete history.`,
-      {
-        style: { background: "#000000", color: "#ffffff" },
+    toast.success(`${completedTasks.length} completed ${completedTasks.length === 1 ? 'task' : 'tasks'} moved`, {
+      description: "Sent to delete history",
+      style: { background: "#000000", color: "#ffffff" },
+      action: {
+        label: "View Logs",
+        onClick: () => navigate("/delete-history"),
       },
-    );
+      actionButtonStyle: {
+        backgroundColor: "transparent",
+        borderColor: "#ffffff",
+        border: "1px solid #ffffff",
+        color: "#ffffff",
+        borderRadius: "8px",
+        padding: "6px 16px",
+        cursor: "pointer",
+      },
+    });
   };
 
   const toggleComplete = (id) => {
     const updatedTasks = tasks.map((task) =>
-      task.id === id ? { ...task, completed: !task.completed } : task,
+      task.id === id ? { ...task, completed: !task.completed } : task
     );
     setTasks(updatedTasks);
     localStorage.setItem("tasks", JSON.stringify(updatedTasks));
@@ -261,15 +272,28 @@ const ListTasks = () => {
         style: { background: "#000000", color: "#ffffff" },
       });
     } else {
-      toast.info("Task marked as complete.", {
+      toast.success("Task completed ✅", {
         style: { background: "#000000", color: "#ffffff" },
+        action: {
+          label: "View Completed",
+          onClick: () => setFilter("COMPLETED"),
+        },
+        actionButtonStyle: {
+          backgroundColor: "transparent",
+          borderColor: "#ffffff",
+          border: "1px solid #ffffff",
+          color: "#ffffff",
+          borderRadius: "8px",
+          padding: "6px 16px",
+          cursor: "pointer",
+        },
       });
     }
   };
 
   const updateCategory = (taskId, newCategory) => {
     const updatedTasks = tasks.map((t) =>
-      t.id === taskId ? { ...t, category: newCategory } : t,
+      t.id === taskId ? { ...t, category: newCategory } : t
     );
     setTasks(updatedTasks);
     localStorage.setItem("tasks", JSON.stringify(updatedTasks));
@@ -292,7 +316,6 @@ const ListTasks = () => {
         name="description"
         content="View, search, filter, edit, and update active developer tasks and roadmaps. Manage bug tracking lists, refactor plans, and features."
       />
-
       <meta
         name="keywords"
         content="devtasks, dev tasks, list-tasks, add lists, engineering roadmaps, todo lists"
@@ -343,6 +366,8 @@ const ListTasks = () => {
                   : dark
                     ? "border-zinc-600 text-neutral-300 hover:border-white hover:text-white"
                     : "border-neutral-300 text-neutral-600 hover:border-black hover:text-black"
+                  ? "border-zinc-600 text-neutral-300 hover:border-white hover:text-white"
+                  : "border-neutral-300 text-neutral-600 hover:border-black hover:text-black"
               }`}
             >
               Date
@@ -358,6 +383,8 @@ const ListTasks = () => {
                   : dark
                     ? "border-zinc-600 text-neutral-300 hover:border-white hover:text-white"
                     : "border-neutral-300 text-neutral-600 hover:border-black hover:text-black"
+                  ? "border-zinc-600 text-neutral-300 hover:border-white hover:text-white"
+                  : "border-neutral-300 text-neutral-600 hover:border-black hover:text-black"
               }`}
             >
               Priority
@@ -373,6 +400,8 @@ const ListTasks = () => {
                   : dark
                     ? "border-zinc-600 text-neutral-300 hover:border-white hover:text-white"
                     : "border-neutral-300 text-neutral-600 hover:border-black hover:text-black"
+                  ? "border-zinc-600 text-neutral-300 hover:border-white hover:text-white"
+                  : "border-neutral-300 text-neutral-600 hover:border-black hover:text-black"
               }`}
             >
               A–Z
@@ -412,6 +441,8 @@ const ListTasks = () => {
                     : dark
                       ? "bg-transparent text-neutral-400 hover:text-white border border-transparent hover:border-zinc-600"
                       : "bg-transparent text-neutral-400 hover:text-black border border-transparent hover:border-neutral-300"
+                    ? "bg-transparent text-neutral-400 hover:text-white border border-transparent hover:border-zinc-600"
+                    : "bg-transparent text-neutral-400 hover:text-black border border-transparent hover:border-neutral-300"
                 }`}
               >
                 {f} ({taskCounts[f]})
@@ -443,10 +474,10 @@ const ListTasks = () => {
             {searchQuery
               ? "No tasks match your search."
               : filter === "ACTIVE"
-                ? "No active tasks. You're all caught up!"
-                : filter === "COMPLETED"
-                  ? "No completed tasks yet."
-                  : "No tasks added yet."}
+              ? "No active tasks. You're all caught up!"
+              : filter === "COMPLETED"
+              ? "No completed tasks yet."
+              : "No tasks added yet."}
           </p>
         ) : (
           <ul className="space-y-4">
@@ -494,6 +525,8 @@ const ListTasks = () => {
                               : dark
                                 ? "text-white"
                                 : "text-black"
+                              ? "text-white"
+                              : "text-black"
                           }`}
                         >
                           {task.text}
@@ -511,6 +544,7 @@ const ListTasks = () => {
                             onClick={() =>
                               setActiveDropdownId(
                                 activeDropdownId === task.id ? null : task.id,
+                                activeDropdownId === task.id ? null : task.id
                               )
                             }
                             className={`text-[11px] font-black uppercase px-2 py-1 rounded-full cursor-pointer transition-all duration-200 ${
@@ -543,6 +577,8 @@ const ListTasks = () => {
                                       : dark
                                         ? "text-neutral-300 hover:bg-zinc-700"
                                         : "text-neutral-700 hover:bg-neutral-100"
+                                      ? "text-neutral-300 hover:bg-zinc-700"
+                                      : "text-neutral-700 hover:bg-neutral-100"
                                   }`}
                                 >
                                   {cat}
@@ -561,6 +597,8 @@ const ListTasks = () => {
                                 : task.priority === "MEDIUM"
                                   ? "bg-yellow-500/10 text-yellow-600"
                                   : "bg-blue-500/10 text-blue-500"
+                                ? "bg-yellow-500/10 text-yellow-600"
+                                : "bg-blue-500/10 text-blue-500"
                             }`}
                           >
                             {task.priority}
@@ -602,18 +640,45 @@ const ListTasks = () => {
           </ul>
         )}
 
-        {/* Back Link */}
-        <Link
-          to="/dashboard"
-          className={`mt-12 font-bold text-sm uppercase tracking-widest transition-all duration-300 flex items-center space-x-2 ${
-            dark
-              ? "text-neutral-400 hover:text-white"
-              : "text-neutral-400 hover:text-black"
-          }`}
-        >
-          <span>←</span>
-          <span>Back to Dashboard</span>
-        </Link>
+        {/* Footer Navigation */}
+        <div className="flex flex-col sm:flex-row gap-4 justify-between items-center mt-12 border-t border-neutral-100 dark:border-zinc-800 pt-6">
+          <Link
+            to="/dashboard"
+            className={`inline-flex items-center gap-2 text-xs sm:text-sm font-black uppercase tracking-widest transition-all duration-300 ${
+              dark
+                ? "text-neutral-400 hover:text-white"
+                : "text-neutral-500 hover:text-black"
+            }`}
+          >
+            <span>←</span>
+            <span>Back to Dashboard</span>
+          </Link>
+
+          <div className="flex gap-4">
+            <Link
+              to="/delete-history"
+              className={`inline-flex items-center gap-2 text-xs sm:text-sm font-black uppercase tracking-widest transition-all duration-300 ${
+                dark
+                  ? "text-neutral-400 hover:text-white"
+                  : "text-neutral-500 hover:text-black"
+              }`}
+            >
+              <span>Deleted Tasks</span>
+            </Link>
+            <span className={dark ? "text-zinc-700" : "text-neutral-300"}>|</span>
+            <Link
+              to="/data-center"
+              className={`inline-flex items-center gap-2 text-xs sm:text-sm font-black uppercase tracking-widest transition-all duration-300 ${
+                dark
+                  ? "text-neutral-400 hover:text-white"
+                  : "text-neutral-500 hover:text-black"
+              }`}
+            >
+              <span>Data Center</span>
+              <span>→</span>
+            </Link>
+          </div>
+        </div>
       </div>
     </div>
   );

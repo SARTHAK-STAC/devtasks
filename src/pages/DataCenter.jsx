@@ -153,7 +153,22 @@ const DataCenter = () => {
         dark ? "bg-zinc-950" : "bg-[#F7F7F7]"
       }`}
     >
-      <title>Data Center & Backups — Dev Tasks</title>
+      <title>Data Center & Backups — Dev Tasks JSON Portability</title>
+      <meta
+        name="description"
+        content="Import and export your developer roadmaps and task lists as JSON backups. Keep task structures fully portable and safe."
+      />
+      <meta
+        name="keywords"
+        content="devtasks, data-center, json export, task backup, restore lists, developer tools"
+      />
+
+      {/* BACKGROUND */}
+      <div
+        className={`absolute top-[-120px] right-[-120px] w-[280px] sm:w-[420px] h-[280px] sm:h-[420px] rounded-full blur-3xl opacity-40 ${
+          dark ? "bg-zinc-800" : "bg-neutral-200"
+        }`}
+      />
 
       {/* BACKGROUND */}
       <div
@@ -261,7 +276,7 @@ const DataCenter = () => {
         />
 
         {/* FOOTER */}
-        <div className="px-5 sm:px-8 pb-8">
+        <div className="px-5 sm:px-8 pb-8 flex flex-col sm:flex-row gap-4 justify-between items-center border-t border-neutral-100 dark:border-zinc-800 pt-6 mt-4">
           <Link
             to="/dashboard"
             className={`inline-flex items-center gap-2 text-xs sm:text-sm font-black uppercase tracking-widest transition-all duration-300 ${
@@ -273,6 +288,30 @@ const DataCenter = () => {
             <span>←</span>
             <span>Back to Dashboard</span>
           </Link>
+
+          <div className="flex gap-4">
+            <Link
+              to="/list-tasks"
+              className={`inline-flex items-center gap-2 text-xs sm:text-sm font-black uppercase tracking-widest transition-all duration-300 ${
+                dark
+                  ? "text-neutral-400 hover:text-white"
+                  : "text-neutral-500 hover:text-black"
+              }`}
+            >
+              <span>Task List</span>
+            </Link>
+            <span className={dark ? "text-zinc-700" : "text-neutral-300"}>|</span>
+            <Link
+              to="/delete-history"
+              className={`inline-flex items-center gap-2 text-xs sm:text-sm font-black uppercase tracking-widest transition-all duration-300 ${
+                dark
+                  ? "text-neutral-400 hover:text-white"
+                  : "text-neutral-500 hover:text-black"
+              }`}
+            >
+              <span>Deleted Tasks</span>
+            </Link>
+          </div>
         </div>
       </div>
     </div>

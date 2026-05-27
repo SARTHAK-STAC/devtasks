@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { useTheme } from "../context/ThemeContext";
 import ThemeToggle from "../components/ThemeToggle";
 
 const DeleteHistory = () => {
+  const navigate = useNavigate();
   const { dark } = useTheme();
   const [deletedTasks, setDeletedTasks] = useState(() => {
     const stored = localStorage.getItem("deleted_tasks");
@@ -20,9 +21,27 @@ const DeleteHistory = () => {
   });
 
   const handleWipeOut = () => {
-    localStorage.removeItem("deleted_tasks");
-    toast.success("All data wiped successfully.");
-    setDeletedTasks([]);
+    toast("Are you sure you want to delete all history?", {
+      description: "This action cannot be undone.",
+      action: {
+        label: "Yes, Delete",
+        onClick: () => {
+          localStorage.removeItem("deleted_tasks");
+          setDeletedTasks([]);
+          toast.success("All data wiped successfully.", {
+            style: { background: "#000000", color: "#ffffff" },
+          });
+        },
+      },
+      cancel: {
+        label: "Cancel",
+        onClick: () => {
+          toast("Deletion cancelled", {
+            style: { background: "#000000", color: "#ffffff" },
+          });
+        },
+      },
+    });
   };
 
   const restoreTask = (id) => {
@@ -37,15 +56,39 @@ const DeleteHistory = () => {
 
     localStorage.setItem("deleted_tasks", JSON.stringify(updatedDeletedTasks));
     localStorage.setItem("tasks", JSON.stringify(updatedTasks));
-
     setDeletedTasks(updatedDeletedTasks);
-    toast.success("Task restored to roadmap.");
+
+    // Toast with navigation + undo
+    toast("Task restored", {
+      description: "Moved back to roadmap",
+      action: {
+        label: "View Tasks",
+        onClick: () => navigate("/list-tasks"),
+      },
+      cancel: {
+        label: "Undo",
+        onClick: () => {
+          const currentTasks = JSON.parse(localStorage.getItem("tasks")) || [];
+          const currentDeleted = JSON.parse(localStorage.getItem("deleted_tasks")) || [];
+
+          const revertedTasks = currentTasks.filter((t) => t.id !== id);
+          const revertedDeleted = currentDeleted.some((t) => t.id === id)
+            ? currentDeleted
+            : [...currentDeleted, taskToRestore];
+
+          localStorage.setItem("deleted_tasks", JSON.stringify(revertedDeleted));
+          localStorage.setItem("tasks", JSON.stringify(revertedTasks));
+          setDeletedTasks(revertedDeleted);
+        },
+      },
+    });
   };
 
   const handleExport = () => {
     const tasks = JSON.parse(localStorage.getItem("tasks") || "[]");
     const deletedTasks = JSON.parse(
       localStorage.getItem("deleted_tasks") || "[]",
+      localStorage.getItem("deleted_tasks") || "[]"
     );
     let exportData = [...tasks, ...deletedTasks];
     exportData = JSON.stringify(exportData, null, 2);
@@ -75,6 +118,10 @@ const DeleteHistory = () => {
           );
           const deleted = data.filter(
             (item) => item.text && item.id && item.deletedAt,
+            (item) => item.text && item.id && !item.deletedAt
+          );
+          const deleted = data.filter(
+            (item) => item.text && item.id && item.deletedAt
           );
           const existingTasks = JSON.parse(localStorage.getItem("tasks")) || [];
           const existingDeleted =
@@ -96,6 +143,35 @@ const DeleteHistory = () => {
       } catch (e) {
         console.error(e);
         toast.error("Invalid file format");
+          // Register custom categories
+          const savedCategories = localStorage.getItem("available_categories");
+          const currentCategories = savedCategories ? JSON.parse(savedCategories) : ["FEATURE", "BUG", "REFACTOR"];
+          const importedCategories = [...new Set(data.filter(item => item.category).map(item => item.category.trim().toUpperCase()))];
+          const updatedCategories = [...new Set([...currentCategories, ...importedCategories])];
+          localStorage.setItem("available_categories", JSON.stringify(updatedCategories));
+
+          localStorage.setItem(
+            "tasks",
+            JSON.stringify([...existingTasks, ...tasks])
+          );
+          localStorage.setItem(
+            "deleted_tasks",
+            JSON.stringify([...existingDeleted, ...deleted])
+          );
+          setDeletedTasks([...existingDeleted, ...deleted]);
+          toast.success("Data imported successfully", {
+            style: { background: "#000000", color: "#ffffff" },
+          });
+        } else {
+          toast.error("Invalid file structure", {
+            style: { background: "#000000", color: "#ffffff" },
+          });
+        }
+      } catch (err) {
+        console.error(err);
+        toast.error("Invalid file format", {
+          style: { background: "#000000", color: "#ffffff" },
+        });
       }
     };
     input.click();
@@ -105,6 +181,10 @@ const DeleteHistory = () => {
     /* CORRECTION 1 : min-h-screen, overflow adaptif et réduction du padding global sur mobile */
     <div
       className={`min-h-screen md:h-screen w-full font-sans overflow-y-auto md:overflow-hidden flex flex-col p-4 md:p-8 transition-colors duration-300 ${dark ? "bg-black text-white" : "bg-white text-black"}`}
+    <div
+      className={`min-h-screen md:h-screen w-full font-sans overflow-y-auto md:overflow-hidden flex flex-col p-4 md:p-8 transition-colors duration-300 ${
+        dark ? "bg-black text-white" : "bg-white text-black"
+      }`}
     >
       {/* React 19 Document Metadata Hoisting */}
       <title>System Logs & Purge History — Dev Tasks</title>
@@ -149,6 +229,9 @@ const DeleteHistory = () => {
               {deletedTasks.length === 0 ? (
                 <div
                   className={`text-center font-medium py-10 border border-dashed rounded-2xl ${dark ? "text-gray-500 border-gray-700" : "text-gray-400 border-gray-200"}`}
+                  className={`text-center font-medium py-10 border border-dashed rounded-2xl ${
+                    dark ? "text-gray-500 border-gray-700" : "text-gray-400 border-gray-200"
+                  }`}
                 >
                   No deleted tasks found
                 </div>
@@ -224,6 +307,46 @@ const DeleteHistory = () => {
                 Clearing history will permanently remove all completed tasks,
                 system logs, and cached activity. This action cannot be undone.
               </p>
+            </div>
+
+            <div className="grid gap-4">
+              <button
+                onClick={handleWipeOut}
+                id="clear-history-button"
+                className={`group relative w-full py-6 border-2 rounded-2xl font-black uppercase tracking-widest transition-all duration-300 flex items-center justify-center overflow-hidden ${
+                  dark
+                    ? "bg-black border-white text-white"
+                    : "bg-white border-black text-black"
+                } hover:text-white`}
+              >
+                <span className="relative z-10">Clear History</span>
+                <div className="absolute inset-0 bg-red-600 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+              </button>
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-between items-center mt-6 border-t border-neutral-100 dark:border-zinc-800 pt-6">
+                <Link
+                  to="/list-tasks"
+                  className={`inline-flex items-center gap-2 text-xs sm:text-sm font-black uppercase tracking-widest transition-all duration-300 ${
+                    dark
+                      ? "text-neutral-400 hover:text-white"
+                      : "text-neutral-500 hover:text-black"
+                  }`}
+                >
+                  <span>Task List</span>
+                </Link>
+
+                <Link
+                  to="/data-center"
+                  className={`inline-flex items-center gap-2 text-xs sm:text-sm font-black uppercase tracking-widest transition-all duration-300 ${
+                    dark
+                      ? "text-neutral-400 hover:text-white"
+                      : "text-neutral-500 hover:text-black"
+                  }`}
+                >
+                  <span>Data Center</span>
+                  <span>→</span>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
