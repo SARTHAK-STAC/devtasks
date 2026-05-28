@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-import { useTheme } from "../context/ThemeContext";
-import { useCategory } from "../context/CategoryContext";
-import ThemeToggle from "../components/ThemeToggle";
+import { useTheme } from "../../../context/ThemeContext";
+import { useCategory } from "../../../context/CategoryContext";
+import ThemeToggle from "../../../components/ThemeToggle";
 
 const AddTasks = () => {
   const navigate = useNavigate();
@@ -56,7 +56,7 @@ const AddTasks = () => {
       },
       action: {
         label: "View List",
-        onClick: () => navigate("/list-tasks"),
+        onClick: () => navigate("/taskmanage/list-tasks"),
       },
       actionButtonStyle: {
         backgroundColor: "transparent",
@@ -349,7 +349,7 @@ const AddTasks = () => {
         {/* FOOTER */}
         <div className="px-5 sm:px-8 pb-8 flex justify-between items-center">
           <Link
-            to="/dashboard"
+            to="/taskmanage"
             className={`inline-flex items-center gap-2 text-xs sm:text-sm font-black uppercase tracking-widest transition-all duration-300 ${
               dark
                 ? "text-neutral-400 hover:text-white"
@@ -357,10 +357,10 @@ const AddTasks = () => {
             }`}
           >
             <span>←</span>
-            <span>Back to Dashboard</span>
+            <span>Back to Workspace</span>
           </Link>
           <Link
-            to="/list-tasks"
+            to="/taskmanage/list-tasks"
             className={`inline-flex items-center gap-2 text-xs sm:text-sm font-black uppercase tracking-widest transition-all duration-300 ${
               dark
                 ? "text-neutral-400 hover:text-white"

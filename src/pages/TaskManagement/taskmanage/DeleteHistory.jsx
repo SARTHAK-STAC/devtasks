@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-import { useTheme } from "../context/ThemeContext";
-import ThemeToggle from "../components/ThemeToggle";
+import { useTheme } from "../../../context/ThemeContext";
+import ThemeToggle from "../../../components/ThemeToggle";
 
 const DeleteHistory = () => {
   const navigate = useNavigate();
@@ -63,7 +63,7 @@ const DeleteHistory = () => {
       description: "Moved back to roadmap",
       action: {
         label: "View Tasks",
-        onClick: () => navigate("/list-tasks"),
+        onClick: () => navigate("/taskmanage/list-tasks"),
       },
       cancel: {
         label: "Undo",
@@ -190,10 +190,10 @@ const DeleteHistory = () => {
           <div className="flex items-center gap-4">
             <ThemeToggle />
             <Link
-              to="/dashboard"
+              to="/taskmanage"
               className="text-xs font-bold uppercase tracking-widest hover:underline pb-1 flex items-center"
             >
-              <span className="mr-2">←</span> Back to Dashboard
+              <span className="mr-2">←</span> Back to Workspace
             </Link>
           </div>
         </header>
@@ -301,7 +301,7 @@ const DeleteHistory = () => {
 
               <div className="flex flex-col sm:flex-row gap-4 justify-between items-center mt-6 border-t border-neutral-100 dark:border-zinc-800 pt-6">
                 <Link
-                  to="/list-tasks"
+                  to="/taskmanage/list-tasks"
                   className={`inline-flex items-center gap-2 text-xs sm:text-sm font-black uppercase tracking-widest transition-all duration-300 ${
                     dark
                       ? "text-neutral-400 hover:text-white"
@@ -312,7 +312,7 @@ const DeleteHistory = () => {
                 </Link>
 
                 <Link
-                  to="/data-center"
+                  to="/taskmanage/data-center"
                   className={`inline-flex items-center gap-2 text-xs sm:text-sm font-black uppercase tracking-widest transition-all duration-300 ${
                     dark
                       ? "text-neutral-400 hover:text-white"

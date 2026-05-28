@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import { Link, useNavigate } from "react-router-dom";
-import { useTheme } from "../context/ThemeContext";
-import { useCategory } from "../context/CategoryContext";
-import ThemeToggle from "../components/ThemeToggle";
+import { useTheme } from "../../../context/ThemeContext";
+import { useCategory } from "../../../context/CategoryContext";
+import ThemeToggle from "../../../components/ThemeToggle";
 
 const FILTERS = ["ALL", "ACTIVE", "COMPLETED"];
 
@@ -205,7 +205,7 @@ const ListTasks = () => {
         style: { background: "#000000", color: "#ffffff" },
         action: {
           label: "View Logs",
-          onClick: () => navigate("/delete-history"),
+          onClick: () => navigate("/taskmanage/delete-history"),
         },
         actionButtonStyle: {
           border: "1px solid #ffffff",
@@ -245,7 +245,7 @@ const ListTasks = () => {
       style: { background: "#000000", color: "#ffffff" },
       action: {
         label: "View Logs",
-        onClick: () => navigate("/delete-history"),
+        onClick: () => navigate("/taskmanage/delete-history"),
       },
       actionButtonStyle: {
         backgroundColor: "transparent",
@@ -643,7 +643,7 @@ const ListTasks = () => {
         {/* Footer Navigation */}
         <div className="flex flex-col sm:flex-row gap-4 justify-between items-center mt-12 border-t border-neutral-100 dark:border-zinc-800 pt-6">
           <Link
-            to="/dashboard"
+            to="/taskmanage"
             className={`inline-flex items-center gap-2 text-xs sm:text-sm font-black uppercase tracking-widest transition-all duration-300 ${
               dark
                 ? "text-neutral-400 hover:text-white"
@@ -651,12 +651,12 @@ const ListTasks = () => {
             }`}
           >
             <span>←</span>
-            <span>Back to Dashboard</span>
+            <span>Back to Workspace</span>
           </Link>
 
           <div className="flex gap-4">
             <Link
-              to="/delete-history"
+              to="/taskmanage/delete-history"
               className={`inline-flex items-center gap-2 text-xs sm:text-sm font-black uppercase tracking-widest transition-all duration-300 ${
                 dark
                   ? "text-neutral-400 hover:text-white"
@@ -667,7 +667,7 @@ const ListTasks = () => {
             </Link>
             <span className={dark ? "text-zinc-700" : "text-neutral-300"}>|</span>
             <Link
-              to="/data-center"
+              to="/taskmanage/data-center"
               className={`inline-flex items-center gap-2 text-xs sm:text-sm font-black uppercase tracking-widest transition-all duration-300 ${
                 dark
                   ? "text-neutral-400 hover:text-white"

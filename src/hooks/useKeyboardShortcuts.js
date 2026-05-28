@@ -7,10 +7,13 @@ const TAG_BLACKLIST = new Set(["INPUT", "TEXTAREA", "SELECT"]);
 const SHORTCUTS = {
   KeyH: "/",
   KeyD: "/dashboard",
-  KeyA: "/add-tasks",
-  KeyL: "/list-tasks",
-  KeyC: "/data-center",
-  KeyR: "/delete-history",
+  KeyT: "/taskmanage",
+  KeyA: "/taskmanage/add-tasks",
+  KeyL: "/taskmanage/list-tasks",
+  KeyC: "/taskmanage/data-center",
+  KeyR: "/taskmanage/delete-history",
+  KeyV: "/snippetvault",
+  KeyS: "/snippetvault/list",
 };
 
 export default function useKeyboardShortcuts(onToggleHUD, hudVisible) {

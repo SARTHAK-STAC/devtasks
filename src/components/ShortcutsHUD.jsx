@@ -3,10 +3,13 @@ const shortcuts = [
   { keys: ["Esc"], desc: "Close HUD" },
   { keys: ["Alt", "H"], desc: "Go to Home" },
   { keys: ["Alt", "D"], desc: "Go to Dashboard" },
+  { keys: ["Alt", "T"], desc: "Go to Task Workspace" },
   { keys: ["Alt", "A"], desc: "Go to Add Tasks" },
   { keys: ["Alt", "L"], desc: "Go to List Tasks" },
   { keys: ["Alt", "C"], desc: "Go to Data Center" },
   { keys: ["Alt", "R"], desc: "Go to Delete History" },
+  { keys: ["Alt", "V"], desc: "Go to Snippet Workspace" },
+  { keys: ["Alt", "S"], desc: "Go to Snippet List" },
 ];
 
 export default function ShortcutsHUD({ visible }) {
