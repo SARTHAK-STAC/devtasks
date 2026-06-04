@@ -1,0 +1,166 @@
+name: Auto Assign Expire
+
+on:
+  issue_comment:
+    types:
+      - created
+
+  schedule:
+    - cron: "0 * * * *"
+
+  workflow_dispatch:
+
+permissions:
+  issues: write
+
+jobs:
+  assign:
+    if: github.event_name == 'issue_comment'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Assign commenter
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const comment = context.payload.comment.body
+              .trim()
+              .toLowerCase();
+
+            const triggers = [
+              "/assign",
+              "assign me",
+              "work on this",
+              "work on this issue",
+              "i want to work on this",
+              "can i take this",
+              "let me work on this"
+            ];
+
+            const shouldAssign = triggers.some(trigger =>
+              comment.includes(trigger)
+            );
+
+            if (!shouldAssign) {
+              return;
+            }
+
+            const issueNumber = context.payload.issue.number;
+            const username = context.payload.comment.user.login;
+
+            const issue = await github.rest.issues.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issueNumber
+            });
+
+            const alreadyAssigned = issue.data.assignees.some(
+              assignee => assignee.login === username
+            );
+
+            if (!alreadyAssigned) {
+              await github.rest.issues.addAssignees({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issueNumber,
+                assignees: [username]
+              });
+            }
+
+            const existingLabel = issue.data.labels.find(label => {
+              const name =
+                typeof label.name === "string"
+                  ? label.name
+                  : "";
+
+              return name.startsWith(
+                `assigned-${username}-`
+              );
+            });
+
+            if (!existingLabel) {
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issueNumber,
+                labels: [
+                  `assigned-${username}-${Date.now()}`
+                ]
+              });
+            }
+
+  expire:
+    if: github.event_name != 'issue_comment'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Remove expired assignees
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const EXPIRY_MS =
+              48 * 60 * 60 * 1000;
+
+            const issues = await github.paginate(
+              github.rest.issues.listForRepo,
+              {
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                state: "open",
+                per_page: 100
+              }
+            );
+
+            for (const issue of issues) {
+              const labels = issue.labels || [];
+
+              for (const label of labels) {
+                const labelName =
+                  typeof label.name === "string"
+                    ? label.name
+                    : "";
+
+                const match = labelName.match(
+                  /^assigned-(.+)-(\d+)$/
+                );
+
+                if (!match) {
+                  continue;
+                }
+
+                const username = match[1];
+                const assignedAt = Number(match[2]);
+
+                if (
+                  Date.now() - assignedAt <
+                  EXPIRY_MS
+                ) {
+                  continue;
+                }
+
+                const stillAssigned =
+                  issue.assignees.some(
+                    assignee =>
+                      assignee.login === username
+                  );
+
+                if (stillAssigned) {
+                  await github.rest.issues.removeAssignees({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    issue_number: issue.number,
+                    assignees: [username]
+                  });
+                }
+
+                try {
+                  await github.rest.issues.removeLabel({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    issue_number: issue.number,
+                    name: labelName
+                  });
+                } catch (error) {
+                }
+              }
+            }
