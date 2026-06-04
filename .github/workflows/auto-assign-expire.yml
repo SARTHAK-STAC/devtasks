@@ -110,15 +110,7 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: issueNumber,
-              body: `Hi @${username},
-
-Thank you for your interest in this issue and for contributing to the project!
-
-You have been successfully assigned. You may begin working on it immediately.
-
-Please note: To keep the repository active and ensure issues are addressed in a timely manner, assignments will automatically expire after 48 hours if the issue remains open. If you need an extension or have any questions, please leave a comment here to notify the maintainers.
-
-Happy coding!`
+              body: `Hi @${username},\n\nThank you for your interest in this issue and for contributing to the project!\n\nYou have been successfully assigned. You may begin working on it immediately.\n\nPlease note: To keep the repository active and ensure issues are addressed in a timely manner, assignments will automatically expire after 48 hours if the issue remains open. If you need an extension or have any questions, please leave a comment here to notify the maintainers.\n\nHappy coding!`
             });
 
   expire:
@@ -199,11 +191,7 @@ Happy coding!`
                     owner: context.repo.owner,
                     repo: context.repo.repo,
                     issue_number: issue.number,
-                    body: `Hi @${username},
-
-As this issue has been inactive and the 48-hour assignment period has expired, you have been unassigned to keep the issue available for other contributors.
-
-Thank you for your interest, and feel free to request reassignment if you are ready to work on it again!`
+                    body: `Hi @${username},\n\nAs this issue has been inactive and the 48-hour assignment period has expired, you have been unassigned to keep the issue available for other contributors.\n\nThank you for your interest, and feel free to request reassignment if you are ready to work on it again!`
                   });
                 }
               }
