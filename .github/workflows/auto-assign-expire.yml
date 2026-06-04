@@ -65,27 +65,20 @@ jobs:
                 issue_number: issueNumber,
                 assignees: [username]
               });
-            }
 
-            const existingLabel = issue.data.labels.find(label => {
-              const name =
-                typeof label.name === "string"
-                  ? label.name
-                  : "";
-
-              return name.startsWith(
-                `assigned-${username}-`
-              );
-            });
-
-            if (!existingLabel) {
-              await github.rest.issues.addLabels({
+              await github.rest.issues.createComment({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: issueNumber,
-                labels: [
-                  `assigned-${username}-${Date.now()}`
-                ]
+                body: `Hi @${username},
+
+Thank you for your interest in this issue and for contributing to the project!
+
+You have been successfully assigned. You may begin working on it immediately.
+
+Please note: To keep the repository active and ensure issues are addressed in a timely manner, assignments will automatically expire after 48 hours if the issue remains open. If you need an extension or have any questions, please leave a comment here to notify the maintainers.
+
+Happy coding!`
               });
             }
 
@@ -98,9 +91,9 @@ jobs:
         uses: actions/github-script@v8
         with:
           script: |
-            const EXPIRY_MS =
-              48 * 60 * 60 * 1000;
+            const EXPIRY_MS = 48 * 60 * 60 * 1000;
 
+            // Fetch all open issues in the repository
             const issues = await github.paginate(
               github.rest.issues.listForRepo,
               {
@@ -112,55 +105,69 @@ jobs:
             );
 
             for (const issue of issues) {
-              const labels = issue.labels || [];
+              // Skip pull requests
+              if (issue.pull_request) {
+                continue;
+              }
 
-              for (const label of labels) {
-                const labelName =
-                  typeof label.name === "string"
-                    ? label.name
-                    : "";
+              // Skip if there are no assignees
+              if (!issue.assignees || issue.assignees.length === 0) {
+                continue;
+              }
 
-                const match = labelName.match(
-                  /^assigned-(.+)-(\d+)$/
+              // Fetch the timeline/events for this issue to check when assignees were added
+              const events = await github.paginate(
+                github.rest.issues.listEvents,
+                {
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issue.number,
+                  per_page: 100
+                }
+              );
+
+              for (const assignee of issue.assignees) {
+                const username = assignee.login;
+
+                // Find the latest 'assigned' event for this user on this issue
+                const assignedEvents = events.filter(
+                  event => event.event === "assigned" && event.assignee && event.assignee.login === username
                 );
 
-                if (!match) {
+                if (assignedEvents.length === 0) {
                   continue;
                 }
 
-                const username = match[1];
-                const assignedAt = Number(match[2]);
+                // Get the timestamp and actor of the latest assignment
+                const latestAssignment = assignedEvents[assignedEvents.length - 1];
+                const assignedAt = new Date(latestAssignment.created_at).getTime();
+                const assignedBy = latestAssignment.actor ? latestAssignment.actor.login : "";
 
-                if (
-                  Date.now() - assignedAt <
-                  EXPIRY_MS
-                ) {
+                // Only auto-expire if the user was assigned by the actions bot
+                if (assignedBy !== "github-actions[bot]") {
                   continue;
                 }
 
-                const stillAssigned =
-                  issue.assignees.some(
-                    assignee =>
-                      assignee.login === username
-                  );
-
-                if (stillAssigned) {
+                if (Date.now() - assignedAt >= EXPIRY_MS) {
+                  // Remove assignee
                   await github.rest.issues.removeAssignees({
                     owner: context.repo.owner,
                     repo: context.repo.repo,
                     issue_number: issue.number,
                     assignees: [username]
                   });
-                }
 
-                try {
-                  await github.rest.issues.removeLabel({
+                  // Post an expiration notice comment
+                  await github.rest.issues.createComment({
                     owner: context.repo.owner,
                     repo: context.repo.repo,
                     issue_number: issue.number,
-                    name: labelName
+                    body: `Hi @${username},
+
+As this issue has been inactive and the 48-hour assignment period has expired, you have been unassigned to keep the issue available for other contributors.
+
+Thank you for your interest, and feel free to request reassignment if you are ready to work on it again!`
                   });
-                } catch (error) {
                 }
               }
             }
