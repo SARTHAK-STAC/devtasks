@@ -82,7 +82,7 @@ const DataCenter = () => {
           (s) =>
             typeof s.id !== "undefined" &&
             typeof s.title === "string" &&
-            typeof s.code === "string" &&
+            (typeof s.code === "string" || typeof s.cmd === "string") &&
             ["GIT", "DOCKER", "NPM", "OTHER"].includes(s.category)
         );
 
@@ -93,18 +93,22 @@ const DataCenter = () => {
           return;
         }
 
-        localStorage.setItem("dev_snippets", JSON.stringify(parsed.snippets));
+        const normalized = parsed.snippets.map((s) =>
+          s.code !== undefined ? s : { ...s, code: s.cmd, cmd: undefined }
+        );
+
+        localStorage.setItem("dev_snippets", JSON.stringify(normalized));
 
         setSnippetStats({
-          total: parsed.snippets.length,
-          git: parsed.snippets.filter((s) => s.category === "GIT").length,
-          docker: parsed.snippets.filter((s) => s.category === "DOCKER").length,
-          npm: parsed.snippets.filter((s) => s.category === "NPM").length,
-          other: parsed.snippets.filter((s) => s.category === "OTHER").length,
+          total: normalized.length,
+          git: normalized.filter((s) => s.category === "GIT").length,
+          docker: normalized.filter((s) => s.category === "DOCKER").length,
+          npm: normalized.filter((s) => s.category === "NPM").length,
+          other: normalized.filter((s) => s.category === "OTHER").length,
         });
 
         toast.success(
-          `Import completed! Loaded ${parsed.snippets.length} snippets.`,
+          `Import completed! Loaded ${normalized.length} snippets.`,
           { style: { background: "#000000", color: "#ffffff" } }
         );
       } catch {
