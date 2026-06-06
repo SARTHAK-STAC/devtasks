@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { useTheme } from "../../../context/ThemeContext";
 import ThemeToggle from "../../../components/ThemeToggle";
-import { toast } from "sonner";
 
 const ListSnippets = () => {
   const { dark } = useTheme();

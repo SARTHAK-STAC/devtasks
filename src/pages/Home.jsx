@@ -109,18 +109,6 @@ const Home = () => {
                     Get Started
                   </button>
                 </Link>
-
-                <Link to="/list-tasks">
-                  <button
-                    className={`w-full sm:w-auto px-8 py-4 rounded-2xl border font-black uppercase tracking-widest text-sm transition-all duration-300 cursor-pointer ${
-                      dark
-                        ? "border-zinc-700 text-zinc-300 hover:border-white hover:text-white hover:bg-zinc-900"
-                        : "border-neutral-300 text-neutral-600 hover:border-black hover:text-black hover:bg-white"
-                    }`}
-                  >
-                    View Tasks
-                  </button>
-                </Link>
               </div>
 
               {/* STATS */}
