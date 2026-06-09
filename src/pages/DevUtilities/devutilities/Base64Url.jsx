@@ -48,7 +48,7 @@ const Base64Url = () => {
                 </button>
               </div>
               <textarea
-                className={`w-full h-64 p-4 rounded-xl border resize-y focus:outline-none focus:ring-2 focus:ring-zinc-500 transition-colors ${
+                className={`w-full h-64 p-4 rounded-xl border resize-none focus:outline-none focus:ring-2 focus:ring-zinc-500 transition-colors ${
                   dark ? "bg-zinc-950 border-zinc-800 text-zinc-200" : "bg-neutral-50 border-neutral-200 text-zinc-800"
                 }`}
                 placeholder="Enter text or Base64 here"
