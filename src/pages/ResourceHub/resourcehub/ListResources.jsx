@@ -1,37 +1,43 @@
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useTheme } from "../../../context/ThemeContext";
 import ThemeToggle from "../../../components/ThemeToggle";
+import { toast } from "sonner";
 
 const sampleResources = [
   {
+    id: "sample-1",
     title: "React Documentation",
     category: "Frontend",
-    description:
-      "Official React docs for learning components, hooks, and modern React patterns.",
+    description: "Official React docs for learning components, hooks, and modern React patterns.",
+    url: "https://react.dev"
   },
   {
+    id: "sample-2",
     title: "Tailwind CSS Guide",
     category: "CSS",
-    description:
-      "A practical guide to building responsive and modern interfaces with Tailwind CSS.",
+    description: "A practical guide to building responsive and modern interfaces with Tailwind CSS.",
+    url: "https://tailwindcss.com"
   },
   {
+    id: "sample-3",
     title: "JavaScript Info",
     category: "JavaScript",
-    description:
-      "Beginner-friendly JavaScript tutorials covering fundamentals and advanced concepts.",
+    description: "Beginner-friendly JavaScript tutorials covering fundamentals and advanced concepts.",
+    url: "https://javascript.info"
   },
   {
+    id: "sample-4",
     title: "MDN Web Docs",
     category: "Web",
-    description:
-      "Reliable documentation for HTML, CSS, JavaScript, and browser APIs.",
-  },
+    description: "Reliable documentation for HTML, CSS, JavaScript, and browser APIs.",
+    url: "https://developer.mozilla.org"
+  }
 ];
 
 const filterTags = ["All", "Frontend", "Backend", "DSA", "Tools"];
 
-const ListResources = () => {
+export default function ListResources() {
   const { dark } = useTheme();
 
   const theme = {
@@ -40,74 +46,135 @@ const ListResources = () => {
       eyebrow: "text-zinc-500",
       subtitle: "text-zinc-600",
       panel: "bg-white border-zinc-200 shadow-sm",
-      input:
-        "bg-zinc-50 border-zinc-200 text-zinc-900 placeholder:text-zinc-400 focus:border-zinc-400 focus:bg-white focus:ring-zinc-200/70",
+      input: "bg-zinc-50 border-zinc-200 text-zinc-900 placeholder:text-zinc-400 focus:border-zinc-400 focus:bg-white",
       chipActive: "border-zinc-900 bg-zinc-900 text-white shadow-sm",
-      chip:
-        "border-zinc-200 bg-zinc-50 text-zinc-600 hover:border-zinc-400 hover:bg-white",
-      card:
-        "bg-white border-zinc-200 shadow-sm hover:border-zinc-400 hover:shadow-xl",
+      chip: "border-zinc-200 bg-zinc-50 text-zinc-600 hover:border-zinc-400 hover:bg-white",
+      card: "bg-white border-zinc-200 shadow-sm hover:border-zinc-400 hover:shadow-xl",
       badge: "bg-zinc-100 border-zinc-200 text-zinc-600",
       icon: "bg-zinc-900 text-white",
       heading: "text-zinc-950",
       body: "text-zinc-600",
       primaryButton: "bg-zinc-900 text-white hover:bg-zinc-700",
-      secondaryButton:
-        "border-zinc-200 text-zinc-700 hover:border-zinc-400 hover:bg-zinc-50",
-      backLink:
-        "border-zinc-300 text-zinc-700 hover:border-zinc-900 hover:bg-zinc-900 hover:text-white",
+      secondaryButton: "border-zinc-200 text-zinc-700 hover:border-zinc-400 hover:bg-zinc-50",
+      backLink: "border-zinc-300 text-zinc-700 hover:border-zinc-900 hover:bg-zinc-900 hover:text-white"
     },
     dark: {
       wrapper: "bg-[#090A0F] text-zinc-100",
       eyebrow: "text-zinc-400",
       subtitle: "text-zinc-400",
       panel: "bg-zinc-900/60 border-zinc-800 shadow-black/20",
-      input:
-        "bg-zinc-950/60 border-zinc-700 text-zinc-100 placeholder:text-zinc-500 focus:border-zinc-500 focus:bg-zinc-950 focus:ring-zinc-800",
+      input: "bg-zinc-950/60 border-zinc-700 text-zinc-100 placeholder:text-zinc-500 focus:border-zinc-500 focus:bg-zinc-950",
       chipActive: "border-white bg-white text-zinc-950 shadow-sm",
-      chip:
-        "border-zinc-700 bg-zinc-950/50 text-zinc-300 hover:border-zinc-500 hover:bg-zinc-900",
-      card:
-        "bg-zinc-900/60 border-zinc-800 shadow-black/20 hover:border-zinc-600 hover:shadow-black/30",
+      chip: "border-zinc-700 bg-zinc-950/50 text-zinc-300 hover:border-zinc-500 hover:bg-zinc-900",
+      card: "bg-zinc-900/60 border-zinc-800 shadow-black/20 hover:border-zinc-600 hover:shadow-black/30",
       badge: "bg-zinc-950 border-zinc-700 text-zinc-300",
       icon: "bg-white text-zinc-950",
       heading: "text-white",
       body: "text-zinc-400",
       primaryButton: "bg-white text-zinc-950 hover:bg-zinc-200",
-      secondaryButton:
-        "border-zinc-700 text-zinc-200 hover:border-zinc-500 hover:bg-zinc-800",
-      backLink:
-        "border-zinc-700 text-zinc-200 hover:border-white hover:bg-white hover:text-zinc-950",
-    },
+      secondaryButton: "border-zinc-700 text-zinc-200 hover:border-zinc-500 hover:bg-zinc-800",
+      backLink: "border-zinc-700 text-zinc-200 hover:border-white hover:bg-white hover:text-zinc-950"
+    }
   };
+
   const t = dark ? theme.dark : theme.light;
 
+  const [resources, setResources] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedTag, setSelectedTag] = useState("All");
+
+  useEffect(() => {
+    const stored = localStorage.getItem("dev_resources");
+    if (stored) {
+      try {
+        setResources(JSON.parse(stored));
+      } catch (e) {
+        setResources(sampleResources);
+      }
+    } else {
+      setResources(sampleResources);
+      localStorage.setItem("dev_resources", JSON.stringify(sampleResources));
+    }
+  }, []);
+
+  const syncStorage = (updated) => {
+    localStorage.setItem("dev_resources", JSON.stringify(updated));
+  };
+
+  const handleCopy = async (url) => {
+    try {
+      await navigator.clipboard.writeText(url || "");
+      toast.success("Link copied to clipboard!");
+    } catch (err) {
+      toast.error("Failed to copy link");
+    }
+  };
+
+  const handleDelete = (id, itemTitle) => {
+    const targetItem = resources.find(r => r.id === id);
+    if (!targetItem) return;
+
+    const filtered = resources.filter(r => r.id !== id);
+    setResources(filtered);
+    syncStorage(filtered);
+
+    const archivedDeletions = JSON.parse(localStorage.getItem("deleted_resources") || "[]");
+    const newArchivedItem = { ...targetItem, deletedAt: new Date().toISOString() };
+    localStorage.setItem("deleted_resources", JSON.stringify([...archivedDeletions, newArchivedItem]));
+
+    toast.warning(`Removed "${itemTitle}"`, {
+      action: {
+        label: "Undo",
+        onClick: () => {
+          const restored = [...filtered, targetItem];
+          setResources(restored);
+          syncStorage(restored);
+
+          const historicalLogs = JSON.parse(localStorage.getItem("deleted_resources") || "[]");
+          localStorage.setItem("deleted_resources", JSON.stringify(historicalLogs.filter(r => r.id !== id)));
+          toast.success("Restored successfully!");
+        }
+      }
+    });
+  };
+
+  const processedResources = resources.filter((res) => {
+    const query = searchQuery.toLowerCase();
+    const matchesSearch =
+      res.title?.toLowerCase().includes(query) ||
+      res.category?.toLowerCase().includes(query) ||
+      res.description?.toLowerCase().includes(query) ||
+      res.url?.toLowerCase().includes(query);
+
+    const matchesTag =
+      selectedTag === "All" ||
+      res.category?.toLowerCase() === selectedTag.toLowerCase();
+
+    return matchesSearch && matchesTag;
+  });
+
   return (
-    <div
-      className={`${t.wrapper} min-h-screen px-4 py-8 font-sans transition-colors duration-300 sm:px-6 lg:px-8`}
-    >
+    <div className={`${t.wrapper} min-h-screen px-4 py-8 font-sans transition-colors duration-300 sm:px-6 lg:px-8`}>
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-8">
+        
         <header className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div className="max-w-2xl">
-            <p
-              className={`${t.eyebrow} mb-3 text-xs font-black uppercase tracking-widest`}
-            >
+            <p className={`${t.eyebrow} mb-3 text-xs font-black uppercase tracking-widest`}>
               Saved developer references
             </p>
             <h1 className="text-4xl font-black uppercase tracking-tight sm:text-5xl">
               Resource Hub
             </h1>
             <p className={`${t.subtitle} mt-4 text-base font-medium leading-7`}>
-              Browse curated documentation, guides, and tools for building better
-              projects faster.
+              Browse curated documentation, guides, and tools for building better projects faster.
             </p>
           </div>
-
+          
           <div className="flex flex-wrap items-center gap-3">
             <ThemeToggle />
             <Link
               to="/resourcehub"
-              className={`${t.backLink} w-fit rounded-full border px-5 py-2 text-sm font-bold uppercase tracking-widest transition hover:-translate-y-0.5`}
+              className={`${t.backLink} w-fit rounded-full border px-5 py-2 text-sm font-bold uppercase tracking-wide transition-all`}
             >
               Back to Workspace
             </Link>
@@ -115,108 +182,99 @@ const ListResources = () => {
         </header>
 
         <section className={`${t.panel} rounded-[2rem] border p-4 sm:p-5`}>
-          <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-            <label className="relative block w-full lg:max-w-xl">
-              <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400">
-                <svg
-                  className="h-5 w-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="m21 21-4.35-4.35M11 18a7 7 0 1 1 0-14 7 7 0 0 1 0 14Z"
-                  />
-                </svg>
-              </span>
-              <input
-                type="text"
-                placeholder="Search resources..."
-                className={`${t.input} w-full rounded-2xl border py-3 pl-12 pr-4 text-sm font-medium outline-none transition focus:ring-4`}
-              />
-            </label>
+          <div className="relative block w-full lg:max-w-xl">
+            <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400">
+              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+            </span>
+            <input
+              type="text"
+              placeholder="Search resources..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className={`${t.input} w-full rounded-2xl border py-3 pl-12 pr-4 text-sm font-medium outline-none transition-all`}
+            />
+          </div>
 
-            <div className="flex flex-wrap gap-2">
-              {filterTags.map((tag, index) => (
-                <button
-                  key={tag}
-                  type="button"
-                  className={`rounded-full border px-4 py-2 text-xs font-black uppercase tracking-widest transition hover:-translate-y-0.5 ${
-                    index === 0 ? t.chipActive : t.chip
-                  }`}
-                >
-                  {tag}
-                </button>
-              ))}
-            </div>
+          <div className="mt-4 flex flex-wrap gap-2">
+            {filterTags.map((tag) => (
+              <button
+                key={tag}
+                type="button"
+                onClick={() => setSelectedTag(tag)}
+                className={`${
+                  selectedTag === tag ? t.chipActive : t.chip
+                } rounded-full border px-4 py-2 text-xs font-black uppercase tracking-widest transition-all`}
+              >
+                {tag}
+              </button>
+            ))}
           </div>
         </section>
 
         <main className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
-          {sampleResources.map((resource) => (
-            <article
-              key={resource.title}
-              className={`${t.card} group flex min-h-[280px] flex-col justify-between rounded-[1.75rem] border p-6 transition duration-300 hover:-translate-y-1 hover:scale-[1.01]`}
-            >
-              <div>
-                <div className="mb-5 flex items-center justify-between gap-4">
-                  <span
-                    className={`${t.badge} rounded-full border px-3 py-1 text-[11px] font-black uppercase tracking-widest`}
-                  >
-                    {resource.category}
-                  </span>
-                  <span
-                    className={`${t.icon} flex h-10 w-10 items-center justify-center rounded-2xl transition group-hover:-rotate-6 group-hover:scale-105`}
-                  >
-                    <svg
-                      className="h-5 w-5"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      aria-hidden="true"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M13.5 6H18m0 0v4.5M18 6l-7.5 7.5M6 8.25v9A1.75 1.75 0 0 0 7.75 19h8.5A1.75 1.75 0 0 0 18 17.25V15"
-                      />
-                    </svg>
-                  </span>
+          {processedResources.length === 0 ? (
+            <div className="col-span-full py-12 text-center text-zinc-500">
+              No structural references matched your filters.
+            </div>
+          ) : (
+            processedResources.map((resource, index) => (
+              <article
+                key={resource.id || index}
+                className={`${t.card} group flex min-h-[280px] flex-col justify-between rounded-[1.75rem] border p-5 transition-all duration-300`}
+              >
+                <div>
+                  <div className="mb-5 flex items-center justify-between gap-4">
+                    <span className={`${t.badge} rounded-full border px-3 py-1 text-[11px] font-black uppercase tracking-wider`}>
+                      {resource.category}
+                    </span>
+                    <span className={`${t.icon} flex h-10 w-10 items-center justify-center rounded-2xl transition-all group-hover:scale-110`}>
+                      <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 00-5.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                      </svg>
+                    </span>
+                  </div>
+
+                  <h2 className={`${t.heading} text-xl font-black tracking-tight`}>
+                    {resource.title}
+                  </h2>
+                  <p className={`${t.body} mt-3 text-sm font-medium leading-6 line-clamp-3`}>
+                    {resource.description}
+                  </p>
                 </div>
 
-                <h2 className={`${t.heading} text-xl font-black tracking-tight`}>
-                  {resource.title}
-                </h2>
-                <p className={`${t.body} mt-3 text-sm font-medium leading-6`}>
-                  {resource.description}
-                </p>
-              </div>
-
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <button
-                  type="button"
-                  className={`${t.primaryButton} rounded-2xl px-4 py-3 text-sm font-bold transition hover:-translate-y-0.5`}
-                >
-                  View Resource
-                </button>
-                <button
-                  type="button"
-                  className={`${t.secondaryButton} rounded-2xl border px-4 py-3 text-sm font-bold transition hover:-translate-y-0.5`}
-                >
-                  Save
-                </button>
-              </div>
-            </article>
-          ))}
+                <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                  <a
+                    href={resource.url || "#"}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={`${t.primaryButton} flex-1 rounded-2xl px-4 py-3 text-center text-sm font-bold transition-all`}
+                  >
+                    View Resource
+                  </a>
+                  <button
+                    type="button"
+                    onClick={() => handleCopy(resource.url)}
+                    className={`${t.secondaryButton} flex-1 rounded-2xl border px-4 py-3 text-sm font-bold transition-all`}
+                  >
+                    Copy URL
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => handleDelete(resource.id || index, resource.title)}
+                    className="rounded-2xl border border-red-500/20 bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white px-4 py-3 text-sm font-bold transition-all"
+                  >
+                    Delete
+                  </button>
+                </div>
+              </article>
+            ))
+          )}
         </main>
       </div>
     </div>
   );
-};
+}
 
 export default ListResources;
