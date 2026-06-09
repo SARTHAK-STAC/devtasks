@@ -11,8 +11,8 @@ const AddSnippet = () => {
   const [code, setCode] = useState("");
   const [category, setCategory] = useState("GIT");
 
-  const { snippetid } = useParams();
-  const isEdit = Boolean(snippetid);
+  const { id } = useParams();
+  const isEdit = Boolean(id);
 
   useEffect(() => {
     if (isEdit) {
@@ -44,10 +44,10 @@ const AddSnippet = () => {
         setCategory(snippet.category);
       };
 
-      getSnippetById(snippetid);
+      getSnippetById(id);
       document.title = "Edit Snippet — Dev Snippet Vault";
     }
-  }, [snippetid, isEdit]);
+  }, [id, isEdit]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -88,9 +88,9 @@ const AddSnippet = () => {
     const existing = raw ? JSON.parse(raw) : [];
     if (isEdit) {
       const updateSnippets = existing.map((existingSnippet) => {
-        if (existingSnippet.id === snippetid) {
+        if (existingSnippet.id === id) {
           return {
-            id: snippetid,
+            id,
             ...snippet,
             createdAt: existingSnippet.createdAt,
           };
