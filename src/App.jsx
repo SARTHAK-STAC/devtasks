@@ -79,6 +79,7 @@ function AppInner({ toggleHUD, hudVisible }) {
         {/* Resource Hub */}
         <Route path="/resourcehub" element={<ResourceHub />} />
         <Route path="/resourcehub/add" element={<AddResource />} />
+        <Route path="/resourcehub/edit/:id" element={<AddResource />} />
         <Route path="/resourcehub/list" element={<ListResources />} />
         <Route path="/resourcehub/delete-history" element={<DeleteHistoryResource />} />
         <Route path="/resourcehub/data-center" element={<DataCenterResource />} />
