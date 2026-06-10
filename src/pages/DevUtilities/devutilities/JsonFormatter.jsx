@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
 import { useTheme } from "../../../context/ThemeContext";
-import ThemeToggle from "../../../components/ThemeToggle";
 
 const JsonFormatter = () => {
   const { dark } = useTheme();
@@ -51,7 +50,7 @@ const JsonFormatter = () => {
   ];
   return (
     <div
-      className={`min-h-screen px-4 sm:px-6 py-8 flex items-center justify-center transition-colors duration-300 overflow-hidden relative ${
+      className={`min-h-screen px-4 sm:px-6 py-8 flex items-center justify-center transition-colors duration-300 overflow-y-auto overflow-x-hidden relative ${
         dark ? "bg-zinc-950" : "bg-[#F7F7F7]"
       }`}
     >
@@ -93,7 +92,6 @@ const JsonFormatter = () => {
               JSON Formatter
             </h1>
           </div>
-          <ThemeToggle />
         </div>
 
         <div className="w-full md:h-[464px] p-6 sm:p-10">

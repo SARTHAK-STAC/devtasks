@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { useTheme } from "../../../context/ThemeContext";
-import ThemeToggle from "../../../components/ThemeToggle";
 
 const FLAGS = ["g", "i", "m", "s"];
 
@@ -9,7 +8,7 @@ const RegexTester = () => {
 
   return (
     <div
-      className={`min-h-screen px-4 sm:px-6 py-8 flex items-center justify-center transition-colors duration-300 overflow-hidden relative ${
+      className={`min-h-screen px-4 sm:px-6 py-8 flex items-center justify-center transition-colors duration-300 overflow-y-auto overflow-x-hidden relative ${
         dark ? "bg-zinc-950" : "bg-[#F7F7F7]"
       }`}
     >
@@ -55,7 +54,6 @@ const RegexTester = () => {
               Regex Tester
             </h1>
           </div>
-          <ThemeToggle />
         </div>
 
         {/* Content area */}
