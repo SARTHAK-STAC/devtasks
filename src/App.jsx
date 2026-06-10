@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { Toaster } from "sonner";
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
@@ -28,10 +28,11 @@ import JsonFormatter from "./pages/DevUtilities/devutilities/JsonFormatter";
 import Base64Url from "./pages/DevUtilities/devutilities/Base64Url";
 import TimestampConverter from "./pages/DevUtilities/devutilities/TimestampConverter";
 
-import { ThemeProvider } from "./context/ThemeContext";
+import { ThemeProvider, useTheme } from "./context/ThemeContext";
 import { CategoryProvider } from "./context/CategoryContext";
 import ShortcutsHUD from "./components/ShortcutsHUD";
 import useKeyboardShortcuts from "./hooks/useKeyboardShortcuts";
+import Navbar from "./components/Navbar";
 import "./index.css";
 
 function App() {
@@ -52,11 +53,22 @@ function App() {
 
 function AppInner({ toggleHUD, hudVisible }) {
   useKeyboardShortcuts(toggleHUD, hudVisible);
+  const location = useLocation();
+  const showNavbar = location.pathname !== "/";
+  const { dark } = useTheme();
 
   return (
-    <>
+    <div
+      className={`w-full ${
+        showNavbar ? "h-screen overflow-hidden flex flex-col" : "min-h-screen"
+      } transition-colors duration-300 ${
+        dark ? "bg-zinc-950 text-white" : "bg-[#FDFDFD] text-black"
+      }`}
+    >
       <Toaster position="bottom-right" />
-      <Routes>
+      {showNavbar && <Navbar />}
+      <div className={showNavbar ? "flex-1 overflow-y-auto navbar-layout-content flex flex-col" : "w-full"}>
+        <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/dashboard" element={<Dashboard />} />
         
@@ -91,7 +103,8 @@ function AppInner({ toggleHUD, hudVisible }) {
         <Route path="/devutilities/base64" element={<Base64Url />} />
         <Route path="/devutilities/timestamp" element={<TimestampConverter />} />
       </Routes>
-    </>
+      </div>
+    </div>
   );
 }
 

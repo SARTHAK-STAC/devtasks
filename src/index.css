@@ -1,1 +1,12 @@
 @import "tailwindcss";
+
+/* Override 100vh height constraints for inner pages to fit within navbar space and avoid duplicate scrollbars */
+.navbar-layout-content .min-h-screen {
+  min-height: 100% !important;
+}
+
+@media (min-width: 768px) {
+  .navbar-layout-content .md\:h-screen {
+    height: 100% !important;
+  }
+}

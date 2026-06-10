@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useTheme } from "../context/ThemeContext";
-import ThemeToggle from "../components/ThemeToggle";
 
 const Dashboard = () => {
   const { dark } = useTheme();
@@ -114,7 +113,6 @@ const Dashboard = () => {
           </div>
 
           <div className="flex items-center gap-4">
-            <ThemeToggle />
             <Link
               to="/"
               className="text-xs font-bold uppercase tracking-widest hover:underline pb-1"

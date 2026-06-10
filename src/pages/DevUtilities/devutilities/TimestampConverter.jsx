@@ -53,6 +53,7 @@ const TimestampConverter = () => {
         fontFamily: "sans-serif",
         background: "#0f172a",
         color: "#f8fafc",
+        overflowX: "hidden",
       }}
     >
       <div

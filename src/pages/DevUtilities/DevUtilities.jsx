@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { useTheme } from "../../context/ThemeContext";
-import ThemeToggle from "../../components/ThemeToggle";
 
 const DevUtilities = () => {
   const { dark } = useTheme();
@@ -64,7 +63,7 @@ const DevUtilities = () => {
 
   return (
     <div
-      className={`${t.wrapper} min-h-screen md:h-screen w-full font-sans overflow-y-auto md:overflow-hidden flex flex-col p-4 md:p-8 transition-colors duration-300`}
+      className={`${t.wrapper} min-h-screen md:h-screen w-full font-sans overflow-y-auto md:overflow-hidden overflow-x-hidden flex flex-col p-4 md:p-8 transition-colors duration-300`}
     >
       <title>Dev Utilities — Custom Tools Sandbox</title>
       <meta
@@ -93,7 +92,6 @@ const DevUtilities = () => {
           </div>
 
           <div className="flex items-center gap-4">
-            <ThemeToggle />
             <Link
               to="/dashboard"
               className="text-xs font-bold uppercase tracking-widest hover:underline pb-1"

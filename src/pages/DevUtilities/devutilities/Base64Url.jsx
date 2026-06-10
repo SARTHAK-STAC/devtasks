@@ -1,13 +1,12 @@
 import { Link } from "react-router-dom";
 import { useTheme } from "../../../context/ThemeContext";
-import ThemeToggle from "../../../components/ThemeToggle";
 
 const Base64Url = () => {
   const { dark } = useTheme();
 
   return (
     <div
-      className={`min-h-screen p-4 sm:p-6 font-sans antialiased transition-colors duration-300 ${
+      className={`min-h-screen p-4 sm:p-6 font-sans antialiased transition-colors duration-300 overflow-x-hidden ${
         dark ? "bg-zinc-950" : "bg-[#FDFDFD]"
       }`}
     >
@@ -28,7 +27,6 @@ const Base64Url = () => {
           >
             Base64 Encoder & Decoder
           </h1>
-          <ThemeToggle />
         </div>
 
         {/* Content Area */}
