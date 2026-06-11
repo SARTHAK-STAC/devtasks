@@ -4,12 +4,21 @@ import { toast } from "sonner";
 import { useTheme } from "../../../context/ThemeContext";
 import ThemeToggle from "../../../components/ThemeToggle";
 
+const DEFAULT_CATEGORIES = ["GIT", "DOCKER", "NPM", "OTHER"];
+
 const AddSnippet = () => {
   const { dark } = useTheme();
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [code, setCode] = useState("");
   const [category, setCategory] = useState("GIT");
+
+  const [categories, setCategories] = useState(() => {
+    const saved = localStorage.getItem("snippet_categories");
+    return saved ? JSON.parse(saved) : DEFAULT_CATEGORIES;
+  });
+  const [showAddInput, setShowAddInput] = useState(false);
+  const [newCategoryInput, setNewCategoryInput] = useState("");
 
   const { id } = useParams();
   const isEdit = Boolean(id);
@@ -108,10 +117,47 @@ const AddSnippet = () => {
     // 5. Reset Form
     setTitle("");
     setCode("");
-    setCategory("GIT");
+    setCategory(categories[0] || "GIT");
 
     // 6. Redirect
     navigate("/snippetvault/list");
+  };
+
+  const handleAddCategory = () => {
+    const normalized = newCategoryInput.trim().toUpperCase();
+    if (!normalized) return;
+    if (categories.includes(normalized)) {
+      toast.error(`"${normalized}" already exists.`);
+      return;
+    }
+    const updated = [...categories, normalized];
+    setCategories(updated);
+    localStorage.setItem("snippet_categories", JSON.stringify(updated));
+    setCategory(normalized);
+    setNewCategoryInput("");
+    setShowAddInput(false);
+    toast.success(`Category "${normalized}" added.`);
+  };
+
+  const handleDeleteCategory = (cat) => {
+    if (categories.length === 1) {
+      toast.error("At least one category is required.");
+      return;
+    }
+    const raw = localStorage.getItem("dev_snippets");
+    const snippets = raw ? JSON.parse(raw) : [];
+    const inUse = snippets.some((s) => s.category === cat);
+    if (inUse) {
+      toast.error(`Cannot remove "${cat}" — it's used by existing snippets.`);
+      return;
+    }
+    const updated = categories.filter((c) => c !== cat);
+    setCategories(updated);
+    localStorage.setItem("snippet_categories", JSON.stringify(updated));
+    if (category === cat) {
+      setCategory(updated[0] || "GIT");
+    }
+    toast.success(`Category "${cat}" removed.`);
   };
 
   // Category Icons & Badges mapping for rich aesthetics
@@ -209,11 +255,11 @@ const AddSnippet = () => {
 
         {/* Form and Preview Layout (Dual-Column grid on larger screens) */}
         <div className="p-6 sm:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10">
-          
+
           {/* Main Form */}
           <form onSubmit={handleSubmit} className="lg:col-span-7 space-y-6 flex flex-col justify-between">
             <div className="space-y-5">
-              
+
               {/* Title Field */}
               <div className="group flex flex-col space-y-2">
                 <label
@@ -236,35 +282,107 @@ const AddSnippet = () => {
                 />
               </div>
 
-              {/* Category selector */}
-              <div className="group flex flex-col space-y-2 relative">
+              {/* Category pill selector */}
+              <div className="flex flex-col space-y-2">
                 <label
                   className={`text-xs font-black uppercase tracking-widest transition-colors duration-300 ${
-                    dark ? "text-zinc-400 group-focus-within:text-white" : "text-neutral-500 group-focus-within:text-black"
+                    dark ? "text-zinc-400" : "text-neutral-500"
                   }`}
                 >
                   Category
                 </label>
-                <div className="relative">
-                  <select
-                    value={category}
-                    onChange={(e) => setCategory(e.target.value)}
-                    className={`w-full px-4 py-3 rounded-2xl border text-sm font-semibold outline-none appearance-none transition-all duration-300 cursor-pointer ${
-                      dark
-                        ? "bg-zinc-950 border-zinc-800 text-white focus:border-white focus:ring-1 focus:ring-white"
-                        : "bg-neutral-50 border-neutral-300 text-black focus:border-black focus:ring-1 focus:ring-black"
-                    }`}
-                  >
-                    <option value="GIT">GIT</option>
-                    <option value="DOCKER">DOCKER</option>
-                    <option value="NPM">NPM</option>
-                    <option value="OTHER">OTHER</option>
-                  </select>
-                  <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none text-neutral-400">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </div>
+                <div className="flex flex-wrap gap-2 items-center">
+                  {categories.map((cat) => (
+                    <div key={cat} className="relative flex items-center">
+                      <button
+                        type="button"
+                        onClick={() => setCategory(cat)}
+                        className={`pl-4 pr-7 py-1.5 rounded-full text-xs font-black uppercase tracking-widest border transition-all duration-200 ${
+                          category === cat
+                            ? dark
+                              ? "bg-white text-black border-white"
+                              : "bg-black text-white border-black"
+                            : dark
+                              ? "bg-transparent text-neutral-400 border-zinc-700 hover:border-zinc-500 hover:text-white"
+                              : "bg-transparent text-neutral-500 border-neutral-300 hover:border-neutral-400 hover:text-black"
+                        }`}
+                      >
+                        {cat}
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => handleDeleteCategory(cat)}
+                        aria-label={`Remove ${cat}`}
+                        className={`absolute right-2 text-xs leading-none transition-colors ${
+                          category === cat
+                            ? dark
+                              ? "text-black/50 hover:text-black"
+                              : "text-white/50 hover:text-white"
+                            : dark
+                              ? "text-zinc-600 hover:text-zinc-300"
+                              : "text-neutral-400 hover:text-neutral-700"
+                        }`}
+                      >
+                        ×
+                      </button>
+                    </div>
+                  ))}
+
+                  {/* Inline add-category control */}
+                  {showAddInput ? (
+                    <div className="flex items-center gap-1.5 flex-wrap">
+                      <input
+                        type="text"
+                        value={newCategoryInput}
+                        onChange={(e) => setNewCategoryInput(e.target.value)}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") { e.preventDefault(); handleAddCategory(); }
+                          if (e.key === "Escape") { setShowAddInput(false); setNewCategoryInput(""); }
+                        }}
+                        placeholder="NAME"
+                        autoFocus
+                        className={`w-24 px-3 py-1.5 rounded-full text-xs font-black uppercase tracking-widest border outline-none transition-all ${
+                          dark
+                            ? "bg-zinc-950 border-zinc-600 text-white placeholder-zinc-600 focus:border-white"
+                            : "bg-neutral-50 border-neutral-300 text-black placeholder-neutral-400 focus:border-black"
+                        }`}
+                      />
+                      <button
+                        type="button"
+                        onClick={handleAddCategory}
+                        className={`px-3 py-1.5 rounded-full text-xs font-black uppercase tracking-widest border transition-all ${
+                          dark
+                            ? "bg-white text-black border-white hover:bg-neutral-200"
+                            : "bg-black text-white border-black hover:bg-neutral-800"
+                        }`}
+                      >
+                        Add
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => { setShowAddInput(false); setNewCategoryInput(""); }}
+                        className={`px-3 py-1.5 rounded-full text-xs font-black uppercase tracking-widest border transition-all ${
+                          dark
+                            ? "border-zinc-700 text-zinc-400 hover:border-zinc-500 hover:text-white"
+                            : "border-neutral-300 text-neutral-500 hover:border-neutral-400 hover:text-black"
+                        }`}
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => setShowAddInput(true)}
+                      className={`px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest border border-dashed transition-all duration-200 ${
+                        dark
+                          ? "border-zinc-700 text-zinc-500 hover:border-zinc-500 hover:text-zinc-300"
+                          : "border-neutral-300 text-neutral-400 hover:border-neutral-400 hover:text-neutral-600"
+                      }`}
+                    >
+                      + Add
+                    </button>
+                  )}
                 </div>
               </div>
 
