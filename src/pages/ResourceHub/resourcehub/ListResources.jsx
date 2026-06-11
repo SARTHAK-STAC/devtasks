@@ -285,8 +285,8 @@ function ListResources() {
     <div
       className={`${t.wrapper} h-[calc(100vh-76px)] px-4 sm:px-6 py-6 transition-colors duration-300 overflow-hidden relative flex flex-col justify-center font-sans`}
     >
-      <title>Resource Hub | DevTasks</title>
-      <meta name="description" content="Browse curated documentation, guides, and tools for building better projects faster." />
+      <title>Curated Developer Resources & Guides | DevTasks</title>
+      <meta name="description" content="Browse and manage local server listings, Figma designs, documentation hubs, and staging environments. Keep your workspace references in one place." />
 
       {/* AMBIENT GLOWS */}
       <div

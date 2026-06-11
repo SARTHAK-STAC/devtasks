@@ -125,8 +125,8 @@ const ListSnippets = () => {
         dark ? "bg-zinc-950" : "bg-[#FDFDFD]"
       }`}
     >
-      <title>Snippet Registry | DevTasks</title>
-      <meta name="description" content="Browse, search, and manage your saved snippets" />
+      <title>Secure Code Snippet Registry | DevTasks</title>
+      <meta name="description" content="Browse, search, edit, and organize your reusable code templates, docker commands, and shell snippets. Keep your code recipes accessible." />
 
       {/* AMBIENT GLOWS */}
       <div

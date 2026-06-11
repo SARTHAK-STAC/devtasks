@@ -47,10 +47,10 @@ const DataCenter = () => {
         dark ? "bg-zinc-950" : "bg-[#F7F7F7]"
       }`}
     >
-      <title>Resource Data Center — Resource Hub</title>
+      <title>Backup & Restore Data Center | DevTasks</title>
       <meta
         name="description"
-        content="Backup and restore your resource hub bookmarks and links."
+        content="Export, backup, and restore your DevTasks resources database. Sync your bookmarks, developer links, and guides seamlessly."
       />
 
       {/* AMBIENT GLOWS */}
