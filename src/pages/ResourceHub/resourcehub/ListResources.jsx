@@ -8,34 +8,144 @@ const sampleResources = [
   {
     id: "sample-1",
     title: "React Documentation",
-    category: "Frontend",
-    description: "Official React docs for learning components, hooks, and modern React patterns.",
-    url: "https://react.dev"
+    category: "DOCUMENTATION",
+    description:
+      "Official React docs for learning components, hooks, and modern React patterns.",
+    url: "https://react.dev",
   },
   {
     id: "sample-2",
     title: "Tailwind CSS Guide",
-    category: "CSS",
-    description: "A practical guide to building responsive and modern interfaces with Tailwind CSS.",
-    url: "https://tailwindcss.com"
+    category: "DOCUMENTATION",
+    description:
+      "A practical guide to building responsive interfaces with Tailwind CSS.",
+    url: "https://tailwindcss.com",
   },
   {
     id: "sample-3",
-    title: "JavaScript Info",
-    category: "JavaScript",
-    description: "Beginner-friendly JavaScript tutorials covering fundamentals and advanced concepts.",
-    url: "https://javascript.info"
+    title: "Local Dev Server",
+    category: "LOCALHOST",
+    description: "Local development environment running on port 3000.",
+    url: "http://localhost:3000",
   },
   {
     id: "sample-4",
-    title: "MDN Web Docs",
-    category: "Web",
-    description: "Reliable documentation for HTML, CSS, JavaScript, and browser APIs.",
-    url: "https://developer.mozilla.org"
-  }
+    title: "Figma Design File",
+    category: "FIGMA",
+    description: "Main product design system and component library.",
+    url: "https://figma.com/file/example",
+  },
 ];
 
-const filterTags = ["All", "Frontend", "Backend", "DSA", "Tools"];
+const filterTags = [
+  "All",
+  "GENERAL",
+  "LOCALHOST",
+  "STAGING",
+  "FIGMA",
+  "DOCUMENTATION",
+];
+
+const getCategoryIcon = (category) => {
+  switch (category) {
+    case "FIGMA":
+      return (
+        <svg
+          className="h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"
+          />
+        </svg>
+      );
+    case "API":
+      return (
+        <svg
+          className="h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+          />
+        </svg>
+      );
+    case "DOCUMENTATION":
+      return (
+        <svg
+          className="h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+          />
+        </svg>
+      );
+    case "STAGING":
+      return (
+        <svg
+          className="h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"
+          />
+        </svg>
+      );
+    case "LOCALHOST":
+      return (
+        <svg
+          className="h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+          />
+        </svg>
+      );
+    default:
+      return (
+        <svg
+          className="h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+          />
+        </svg>
+      );
+  }
+};
 
 function ListResources() {
   const { dark } = useTheme();
@@ -46,7 +156,8 @@ function ListResources() {
       eyebrow: "text-zinc-500",
       subtitle: "text-zinc-600",
       panel: "bg-white border-zinc-200 shadow-sm",
-      input: "bg-zinc-50 border-zinc-200 text-zinc-900 placeholder:text-zinc-400 focus:border-zinc-400 focus:bg-white",
+      input:
+        "bg-zinc-50 border-zinc-200 text-zinc-900 placeholder:text-zinc-400 focus:border-zinc-400 focus:bg-white",
       chipActive: "border-zinc-900 bg-zinc-900 text-white shadow-sm",
       chip: "border-zinc-200 bg-zinc-50 text-zinc-600 hover:border-zinc-400 hover:bg-white",
       card: "bg-white border-zinc-200 shadow-sm hover:border-zinc-400 hover:shadow-xl",
@@ -55,15 +166,18 @@ function ListResources() {
       heading: "text-zinc-950",
       body: "text-zinc-600",
       primaryButton: "bg-zinc-900 text-white hover:bg-zinc-700",
-      secondaryButton: "border-zinc-200 text-zinc-700 hover:border-zinc-400 hover:bg-zinc-50",
-      backLink: "border-zinc-300 text-zinc-700 hover:border-zinc-900 hover:bg-zinc-900 hover:text-white"
+      secondaryButton:
+        "border-zinc-200 text-zinc-700 hover:border-zinc-400 hover:bg-zinc-50",
+      backLink:
+        "border-zinc-300 text-zinc-700 hover:border-zinc-900 hover:bg-zinc-900 hover:text-white",
     },
     dark: {
       wrapper: "bg-[#090A0F] text-zinc-100",
       eyebrow: "text-zinc-400",
       subtitle: "text-zinc-400",
       panel: "bg-zinc-900/60 border-zinc-800 shadow-black/20",
-      input: "bg-zinc-950/60 border-zinc-700 text-zinc-100 placeholder:text-zinc-500 focus:border-zinc-500 focus:bg-zinc-950",
+      input:
+        "bg-zinc-950/60 border-zinc-700 text-zinc-100 placeholder:text-zinc-500 focus:border-zinc-500 focus:bg-zinc-950",
       chipActive: "border-white bg-white text-zinc-950 shadow-sm",
       chip: "border-zinc-700 bg-zinc-950/50 text-zinc-300 hover:border-zinc-500 hover:bg-zinc-900",
       card: "bg-zinc-900/60 border-zinc-800 shadow-black/20 hover:border-zinc-600 hover:shadow-black/30",
@@ -72,9 +186,11 @@ function ListResources() {
       heading: "text-white",
       body: "text-zinc-400",
       primaryButton: "bg-white text-zinc-950 hover:bg-zinc-200",
-      secondaryButton: "border-zinc-700 text-zinc-200 hover:border-zinc-500 hover:bg-zinc-800",
-      backLink: "border-zinc-700 text-zinc-200 hover:border-white hover:bg-white hover:text-zinc-950"
-    }
+      secondaryButton:
+        "border-zinc-700 text-zinc-200 hover:border-zinc-500 hover:bg-zinc-800",
+      backLink:
+        "border-zinc-700 text-zinc-200 hover:border-white hover:bg-white hover:text-zinc-950",
+    },
   };
 
   const t = dark ? theme.dark : theme.light;
@@ -111,16 +227,24 @@ function ListResources() {
   };
 
   const handleDelete = (id, itemTitle) => {
-    const targetItem = resources.find(r => r.id === id);
+    const targetItem = resources.find((r) => r.id === id);
     if (!targetItem) return;
 
-    const filtered = resources.filter(r => r.id !== id);
+    const filtered = resources.filter((r) => r.id !== id);
     setResources(filtered);
     syncStorage(filtered);
 
-    const archivedDeletions = JSON.parse(localStorage.getItem("deleted_resources") || "[]");
-    const newArchivedItem = { ...targetItem, deletedAt: new Date().toISOString() };
-    localStorage.setItem("deleted_resources", JSON.stringify([...archivedDeletions, newArchivedItem]));
+    const archivedDeletions = JSON.parse(
+      localStorage.getItem("deleted_resources") || "[]",
+    );
+    const newArchivedItem = {
+      ...targetItem,
+      deletedAt: new Date().toISOString(),
+    };
+    localStorage.setItem(
+      "deleted_resources",
+      JSON.stringify([...archivedDeletions, newArchivedItem]),
+    );
 
     toast.warning(`Removed "${itemTitle}"`, {
       action: {
@@ -130,11 +254,16 @@ function ListResources() {
           setResources(restored);
           syncStorage(restored);
 
-          const historicalLogs = JSON.parse(localStorage.getItem("deleted_resources") || "[]");
-          localStorage.setItem("deleted_resources", JSON.stringify(historicalLogs.filter(r => r.id !== id)));
+          const historicalLogs = JSON.parse(
+            localStorage.getItem("deleted_resources") || "[]",
+          );
+          localStorage.setItem(
+            "deleted_resources",
+            JSON.stringify(historicalLogs.filter((r) => r.id !== id)),
+          );
           toast.success("Restored successfully!");
-        }
-      }
+        },
+      },
     });
   };
 
@@ -154,22 +283,26 @@ function ListResources() {
   });
 
   return (
-    <div className={`${t.wrapper} min-h-screen px-4 py-8 font-sans transition-colors duration-300 sm:px-6 lg:px-8`}>
+    <div
+      className={`${t.wrapper} min-h-screen px-4 py-8 font-sans transition-colors duration-300 sm:px-6 lg:px-8`}
+    >
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-8">
-        
         <header className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div className="max-w-2xl">
-            <p className={`${t.eyebrow} mb-3 text-xs font-black uppercase tracking-widest`}>
+            <p
+              className={`${t.eyebrow} mb-3 text-xs font-black uppercase tracking-widest`}
+            >
               Saved developer references
             </p>
             <h1 className="text-4xl font-black uppercase tracking-tight sm:text-5xl">
               Resource Hub
             </h1>
             <p className={`${t.subtitle} mt-4 text-base font-medium leading-7`}>
-              Browse curated documentation, guides, and tools for building better projects faster.
+              Browse curated documentation, guides, and tools for building
+              better projects faster.
             </p>
           </div>
-          
+
           <div className="flex flex-wrap items-center gap-3">
             <ThemeToggle />
             <Link
@@ -184,8 +317,19 @@ function ListResources() {
         <section className={`${t.panel} rounded-[2rem] border p-4 sm:p-5`}>
           <div className="relative block w-full lg:max-w-xl">
             <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400">
-              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              <svg
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
               </svg>
             </span>
             <input
@@ -226,20 +370,26 @@ function ListResources() {
               >
                 <div>
                   <div className="mb-5 flex items-center justify-between gap-4">
-                    <span className={`${t.badge} rounded-full border px-3 py-1 text-[11px] font-black uppercase tracking-wider`}>
+                    <span
+                      className={`${t.badge} rounded-full border px-3 py-1 text-[11px] font-black uppercase tracking-wider`}
+                    >
                       {resource.category}
                     </span>
-                    <span className={`${t.icon} flex h-10 w-10 items-center justify-center rounded-2xl transition-all group-hover:scale-110`}>
-                      <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 00-5.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
-                      </svg>
+                    <span
+                      className={`${t.icon} flex h-10 w-10 items-center justify-center rounded-2xl transition-all group-hover:scale-110`}
+                    >
+                      {getCategoryIcon(resource.category)}
                     </span>
                   </div>
 
-                  <h2 className={`${t.heading} text-xl font-black tracking-tight`}>
+                  <h2
+                    className={`${t.heading} text-xl font-black tracking-tight`}
+                  >
                     {resource.title}
                   </h2>
-                  <p className={`${t.body} mt-3 text-sm font-medium leading-6 line-clamp-3`}>
+                  <p
+                    className={`${t.body} mt-3 text-sm font-medium leading-6 line-clamp-3`}
+                  >
                     {resource.description}
                   </p>
                 </div>
@@ -262,7 +412,9 @@ function ListResources() {
                   </button>
                   <button
                     type="button"
-                    onClick={() => handleDelete(resource.id || index, resource.title)}
+                    onClick={() =>
+                      handleDelete(resource.id || index, resource.title)
+                    }
                     className="rounded-2xl border border-red-500/20 bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white px-4 py-3 text-sm font-bold transition-all"
                   >
                     Delete
