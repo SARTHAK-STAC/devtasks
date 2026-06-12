@@ -1,29 +1,7 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useTheme } from "../../../context/ThemeContext";
-
-const sampleDeletedResources = [
-  {
-    id: "del-1",
-    title: "React Documentation",
-    category: "Frontend",
-    url: "https://react.dev",
-    deletedAt: "2025-06-08T10:30:00Z",
-  },
-  {
-    id: "del-2",
-    title: "Tailwind CSS Guide",
-    category: "CSS",
-    url: "https://tailwindcss.com",
-    deletedAt: "2025-06-07T15:45:00Z",
-  },
-  {
-    id: "del-3",
-    title: "MDN Web Docs",
-    category: "Web",
-    url: "https://developer.mozilla.org",
-    deletedAt: "2025-06-05T09:20:00Z",
-  },
-];
+import { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 const formatDate = (isoString) => {
   const date = new Date(isoString);
@@ -34,8 +12,32 @@ const formatDate = (isoString) => {
   });
 };
 
+const isWithinDays = (deletedAt, days) => {
+  const today = new Date();
+  const cutoffDate = today.setDate(today.getDate() - days);
+  return new Date(deletedAt).getTime() >= cutoffDate;
+};
+
+const getUniqueCategories = (resources) => {
+  return [...new Set(resources.map((resource) => resource.category))];
+};
+
 const DeleteHistory = () => {
   const { dark } = useTheme();
+  const navigate = useNavigate();
+  const [ deletedResources, setDeletedResources ] = useState(() => {
+    const storedDeletedResources = localStorage.getItem("deleted_resources");
+    if (!storedDeletedResources) return [];
+    try {
+      return JSON.parse(storedDeletedResources);
+    } catch {
+      return [];
+    }
+  });
+
+  useEffect(() => {
+    localStorage.setItem("deleted_resources", JSON.stringify(deletedResources));
+  }, [deletedResources]);
 
   const theme = {
     light: {
@@ -74,14 +76,77 @@ const DeleteHistory = () => {
 
   const t = dark ? theme.dark : theme.light;
 
+  const handleRestore = (resource) => {
+    try {
+      const activeResources = JSON.parse(localStorage.getItem("dev_resources") || "[]");
+      localStorage.setItem(
+        "dev_resources",
+        JSON.stringify([...activeResources, {...resource, deletedAt: null}])
+      );
+      setDeletedResources((prev) => prev.filter((r) => r.id !== resource.id));
+      
+      toast("Resource restored successfully", {
+        description: "Moved back to active resources",
+        action: {
+          label: "View Resources",
+          onClick: () => navigate("/resourcehub/list"),
+        },
+        cancel: {
+          label: "Undo",
+          onClick: () => {
+            const current = JSON.parse(localStorage.getItem("dev_resources") || "[]");
+            const currentDeleted = JSON.parse(localStorage.getItem("deleted_resources") || "[]");
+            localStorage.setItem(
+              "dev_resources",
+              JSON.stringify(current.filter((r) => r.id !== resource.id))
+            );
+            localStorage.setItem(
+              "deleted_resources",
+              JSON.stringify([...currentDeleted, resource])
+            );
+            setDeletedResources((prev) => [...prev, resource]);
+          },
+        },
+      });
+    } catch(error) {
+      console.error("Failed to restore resource: " + error);
+      toast("Failed to restore resource");
+    }
+  };
+
+  const handlePermanentDelete = (id) => {
+    toast("This action cannot be undone.", {
+      action: {
+        label: "Delete",
+        onClick: () => {
+          try {
+            setDeletedResources((prev) => prev.filter((r) => r.id !== id));
+            toast("Resource permanently deleted");
+          } catch(error) {
+            console.error("Failed to delete resource: " + error);
+            toast("Failed to delete resource");
+          }
+        }
+      },
+      cancel: {
+        label: "Cancel"
+      }
+    });
+  };
+
   const stats = [
-    { label: "Total Deleted", value: sampleDeletedResources.length },
-    { label: "This Week", value: 2 },
-    { label: "Categories", value: 3 },
+    { label: "Total Deleted", value: deletedResources.length },
+    { label: "This Week", value: deletedResources.filter((resource) => isWithinDays(resource.deletedAt, 7)).length },
+    { label: "Categories", value: getUniqueCategories(deletedResources).length },
   ];
 
   return (
     <div className={`min-h-screen ${t.wrapper} px-6 py-10`}>
+      <title>Delete History | DevTasks</title>
+      <meta
+        name="description"
+        content="View and restore deleted resources."
+      />
       <div className="max-w-3xl mx-auto">
         {/* Back link */}
         <Link
@@ -146,58 +211,66 @@ const DeleteHistory = () => {
                 Deleted Resources
               </p>
               <span className={`text-xs ${t.subtext}`}>
-                {sampleDeletedResources.length} entries
+                {deletedResources.length} entries
               </span>
             </div>
 
             {/* Entries */}
-            <div className={`divide-y ${t.divider}`}>
-              {sampleDeletedResources.map((resource) => (
-                <div key={resource.id} className="px-6 py-4">
-                  <div className="flex items-start justify-between gap-4">
-                    {/* Resource info */}
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 flex-wrap mb-1.5">
-                        <span
-                          className={`text-xs px-2.5 py-0.5 rounded-full font-medium ${t.tag}`}
-                        >
-                          {resource.category}
-                        </span>
-                        <span className={`text-xs ${t.subtext}`}>
-                          {formatDate(resource.deletedAt)}
-                        </span>
-                      </div>
-                      <p
-                        className={`text-sm font-medium truncate ${t.heading}`}
-                      >
-                        {resource.title}
-                      </p>
-                      <p className={`text-xs truncate mt-0.5 ${t.url}`}>
-                        {resource.url}
-                      </p>
-                    </div>
-
-                    {/* Visual-only action buttons */}
-                    <div className="flex items-center gap-2 shrink-0 mt-0.5">
-                      <button
-                        className={`text-xs px-3 py-1.5 rounded-xl ${t.restoreBtn}`}
-                        disabled
-                        aria-label="Restore resource (not yet implemented)"
-                      >
-                        Restore
-                      </button>
-                      <button
-                        className={`text-xs px-3 py-1.5 rounded-xl ${t.deleteBtn}`}
-                        disabled
-                        aria-label="Permanently delete resource (not yet implemented)"
-                      >
-                        Delete
-                      </button>
-                    </div>
-                  </div>
+            {deletedResources.length === 0
+              ? (
+                <div className="col-span-full py-12 text-center text-zinc-500">
+                  Deleted resources will appear here.
                 </div>
-              ))}
-            </div>
+              ) : (
+                <div className={`divide-y ${t.divider}`}>
+                  {deletedResources.map((resource) => (
+                    <div key={resource.id} className="px-6 py-4">
+                      <div className="flex items-start justify-between gap-4">
+                        {/* Resource info */}
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2 flex-wrap mb-1.5">
+                            <span
+                              className={`text-xs px-2.5 py-0.5 rounded-full font-medium ${t.tag}`}
+                            >
+                              {resource.category}
+                            </span>
+                            <span className={`text-xs ${t.subtext}`}>
+                              {formatDate(resource.deletedAt)}
+                            </span>
+                          </div>
+                          <p
+                            className={`text-sm font-medium truncate ${t.heading}`}
+                          >
+                            {resource.title}
+                          </p>
+                          <p className={`text-xs truncate mt-0.5 ${t.url}`}>
+                            {resource.url}
+                          </p>
+                        </div>
+
+                        {/* Visual-only action buttons */}
+                        <div className="flex items-center gap-2 shrink-0 mt-0.5">
+                          <button
+                            className={`text-xs px-3 py-1.5 rounded-xl ${t.restoreBtn}`}
+                            aria-label="Restore resource"
+                            onClick={() => handleRestore(resource)}
+                          >
+                            Restore
+                          </button>
+                          <button
+                            className={`text-xs px-3 py-1.5 rounded-xl ${t.deleteBtn}`}
+                            aria-label="Permanently delete resource (not yet implemented)"
+                            onClick={() => handlePermanentDelete(resource.id)}
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )
+            }
           </div>
         </div>
       </div>
