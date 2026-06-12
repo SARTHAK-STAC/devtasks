@@ -13,45 +13,29 @@ const StorageGauge = () => {
       const storage = window.localStorage;
       let totalBytes = 0;
       const databaseBreakdown = {};
-
       for (let i = 0; i < storage.length; i++) {
         const key = storage.key(i);
         const value = storage.getItem(key);
         const bytes = (key.length + value.length) * 2;
-
         if (key.startsWith('tasks') || key.startsWith('snippets') || key.startsWith('resources')) {
           const database = key.split('_')[0];
           databaseBreakdown[database] = (databaseBreakdown[database] || 0) + bytes;
         }
-
         totalBytes += bytes;
       }
-
       setStorageUsage(totalBytes);
       setDatabaseBreakdown(databaseBreakdown);
     };
-
     calculateStorageUsage();
-
     window.addEventListener('storage', calculateStorageUsage);
-
     return () => {
       window.removeEventListener('storage', calculateStorageUsage);
     };
   }, []);
 
-  const handleMouseEnter = () => {
-    setIsHovered(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-  };
-
-  const handleFocus = () => {
-    setIsFocused(true);
-  };
-
+  const handleMouseEnter = () => setIsHovered(true);
+  const handleMouseLeave = () => setIsHovered(false);
+  const handleFocus = () => setIsFocused(true);
   const handleBlur = (e) => {
     if (!e.relatedTarget || !e.relatedTarget.classList.contains('popover')) {
       setIsFocused(false);
@@ -59,9 +43,9 @@ const StorageGauge = () => {
   };
 
   const showPopover = isHovered || isFocused;
-
-  const storageQuota = 5 * 1024 * 1024; // 5MB
+  const storageQuota = 5 * 1024 * 1024;
   const percentageUsage = (storageUsage / storageQuota) * 100;
+  const sortedBreakdown = Object.entries(databaseBreakdown).sort(([, a], [, b]) => b - a);
 
   return (
     <div className="relative">
@@ -79,40 +63,99 @@ const StorageGauge = () => {
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-5 w-5"
-          viewBox="0 0 20 20"
-          fill="currentColor"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.75"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         >
-          <path d="M2 6a2 2 0 012-2h12a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 4.726l1.414 1.414L17.85 6.5H20l-3.447-3.447z" />
+          <ellipse cx="12" cy="5" rx="9" ry="3" />
+          <path d="M3 5v14c0 1.657 4.03 3 9 3s9-1.343 9-3V5" />
+          <path d="M3 12c0 1.657 4.03 3 9 3s9-1.343 9-3" />
         </svg>
       </button>
 
       {showPopover && (
         <div
-          className={`absolute top-full right-0 z-10 mt-2 w-64 rounded-lg shadow-lg bg-white dark:bg-zinc-900 text-black dark:text-white ${
-            dark ? 'border border-zinc-800' : 'border border-neutral-200'
+          className={`absolute top-full right-0 z-10 mt-2 w-64 rounded-xl shadow-sm ${
+            dark
+              ? 'bg-zinc-900 border border-zinc-800 text-white'
+              : 'bg-white border border-neutral-200 text-black'
           }`}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
         >
           <div className="p-4">
-            <h2 className="text-sm font-bold mb-2">Storage Usage</h2>
-            <p className="text-xs mb-2">
-              {((storageUsage / 1024).toFixed(2))} KB / {((storageQuota / 1024).toFixed(2))} KB
-            </p>
-            <div className="w-full h-2 bg-gray-200 rounded-lg dark:bg-zinc-700">
+
+            {/* Header */}
+            <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center gap-1.5">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className={`h-3.5 w-3.5 ${dark ? 'text-zinc-300' : 'text-neutral-600'}`}
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.75"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <ellipse cx="12" cy="5" rx="9" ry="3" />
+                  <path d="M3 5v14c0 1.657 4.03 3 9 3s9-1.343 9-3V5" />
+                  <path d="M3 12c0 1.657 4.03 3 9 3s9-1.343 9-3" />
+                </svg>
+                <span className={`text-[11px] font-bold tracking-widest uppercase ${dark ? 'text-zinc-300' : 'text-neutral-600'}`}>
+                  Storage registry
+                </span>
+              </div>
+              <span className={`text-[11px] font-bold ${dark ? 'text-zinc-300' : 'text-neutral-600'}`}>
+                {percentageUsage.toFixed(2)}%
+              </span>
+            </div>
+
+            {/* Divider below header */}
+            <div className={`w-full h-px mb-3 ${dark ? 'bg-zinc-800' : 'bg-neutral-100'}`} />
+
+            {/* Size labels — now ABOVE the bar */}
+            <div className={`flex justify-between text-[11px] mb-1.5 ${dark ? 'text-zinc-500' : 'text-neutral-400'}`}>
+              <span>{(storageUsage / 1024).toFixed(2)} KB</span>
+              <span>{(storageQuota / 1024).toFixed(2)} KB</span>
+            </div>
+
+            {/* Main progress bar */}
+            <div className={`w-full h-[3px] rounded-full mb-4 ${dark ? 'bg-zinc-700' : 'bg-neutral-200'}`}>
               <div
-                className={`h-2 bg-blue-500 rounded-lg ${
-                  dark ? 'dark:bg-blue-300' : ''
-                }`}
-                style={{ width: `${percentageUsage}%` }}
+                className={`h-[3px] rounded-full ${dark ? 'bg-zinc-300' : 'bg-neutral-500'}`}
+                style={{ width: `${Math.min(percentageUsage, 100)}%` }}
               />
             </div>
-            <h2 className="text-sm font-bold mt-4 mb-2">Database Breakdown</h2>
-            <ul>
-              {Object.keys(databaseBreakdown).map((database) => (
-                <li key={database} className="text-xs mb-1">
-                  {database}: {((databaseBreakdown[database] / 1024).toFixed(2))} KB
-                </li>
-              ))}
-            </ul>
+
+            {/* Breakdown rows — sub bars relative to 5MB quota */}
+            <div className={`divide-y ${dark ? 'divide-zinc-800' : 'divide-neutral-100'}`}>
+              {sortedBreakdown.map(([database, bytes]) => {
+                const rowPct = (bytes / storageQuota) * 100;
+                return (
+                  <div key={database} className="py-2">
+                    <div className="flex justify-between items-center mb-1.5">
+                      <span className={`text-[11px] font-bold tracking-wider uppercase ${dark ? 'text-zinc-300' : 'text-neutral-600'}`}>
+                        {database}
+                      </span>
+                      <span className={`text-[11px] font-semibold ${dark ? 'text-zinc-300' : 'text-neutral-600'}`}>
+                        {(bytes / 1024).toFixed(2)} KB
+                      </span>
+                    </div>
+                    <div className={`w-full h-[2px] rounded-full ${dark ? 'bg-zinc-700' : 'bg-neutral-200'}`}>
+                      <div
+                        className={`h-[2px] rounded-full ${dark ? 'bg-zinc-400' : 'bg-neutral-400'}`}
+                        style={{ width: `${Math.min(rowPct, 100)}%` }}
+                      />
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
           </div>
         </div>
       )}
