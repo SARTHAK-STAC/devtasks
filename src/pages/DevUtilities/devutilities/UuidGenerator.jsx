@@ -14,11 +14,14 @@ const UuidGenerator = () => {
     if (crypto && crypto.randomUUID) {
       return crypto.randomUUID();
     }
-    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
-      const r = (Math.random() * 16) | 0;
-      const v = c === "x" ? r : (r & 0x3) | 0x8;
-      return v.toString(16);
-    });
+    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
+      /[xy]/g,
+      function (c) {
+        const r = (Math.random() * 16) | 0;
+        const v = c === "x" ? r : (r & 0x3) | 0x8;
+        return v.toString(16);
+      },
+    );
   };
 
   const handleGenerate = () => {
@@ -41,6 +44,13 @@ const UuidGenerator = () => {
     setOutput("");
   };
 
+  const handleSample = () => {
+    setQuantity(5);
+    setUppercase(true);
+    setNoHyphens(false);
+    setOutput("");
+  };
+
   const handleCopy = async () => {
     try {
       if (!output) return;
@@ -57,7 +67,7 @@ const UuidGenerator = () => {
         dark ? "bg-zinc-950" : "bg-[#F7F7F7]"
       }`}
     >
-      <title>UUID Generator — Dev Utilities</title>
+      <title>UUID Generator — DevTasks</title>
       <meta
         name="description"
         content="Generate valid v4 UUIDs offline quickly and easily."
@@ -122,15 +132,29 @@ const UuidGenerator = () => {
           <div className="w-full h-full flex flex-col md:flex-row gap-4">
             <div className="group w-full flex flex-col space-y-4">
               <div className="flex flex-col space-y-2">
-                <label
-                  className={`text-xs font-black uppercase tracking-widest transition-colors duration-300 ${
-                    dark
-                      ? "text-zinc-400 group-focus-within:text-white"
-                      : "text-neutral-500 group-focus-within:text-black"
-                  }`}
-                >
-                  Quantity (Max 1000)
-                </label>
+                <div className="flex justify-between items-center">
+                  <label
+                    className={`text-xs font-black uppercase tracking-widest transition-colors duration-300 ${
+                      dark
+                        ? "text-zinc-400 group-focus-within:text-white"
+                        : "text-neutral-500 group-focus-within:text-black"
+                    }`}
+                  >
+                    Quantity (Max 1000)
+                  </label>
+
+                  <button
+                    type="button"
+                    onClick={handleSample}
+                    className={`px-4 py-2 rounded-xl border font-black text-xs uppercase tracking-widest transition-all duration-300 hover:scale-105 active:scale-95 ${
+                        dark
+                          ? "bg-white text-black border-white hover:bg-zinc-200"
+                          : "bg-black text-white border-black hover:bg-zinc-800"
+                     }`}
+                  >
+                    Sample
+                  </button>
+                </div>
                 <input
                   type="number"
                   min="1"
@@ -155,7 +179,9 @@ const UuidGenerator = () => {
                   />
                   <span
                     className={`text-sm font-bold transition-colors ${
-                      dark ? "text-zinc-300 group-hover/label:text-white" : "text-neutral-600 group-hover/label:text-black"
+                      dark
+                        ? "text-zinc-300 group-hover/label:text-white"
+                        : "text-neutral-600 group-hover/label:text-black"
                     }`}
                   >
                     Uppercase Output
@@ -170,7 +196,9 @@ const UuidGenerator = () => {
                   />
                   <span
                     className={`text-sm font-bold transition-colors ${
-                      dark ? "text-zinc-300 group-hover/label:text-white" : "text-neutral-600 group-hover/label:text-black"
+                      dark
+                        ? "text-zinc-300 group-hover/label:text-white"
+                        : "text-neutral-600 group-hover/label:text-black"
                     }`}
                   >
                     Remove Hyphens
