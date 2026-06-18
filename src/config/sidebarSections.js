@@ -65,6 +65,7 @@ const SIDEBAR_SECTIONS = [
       { label: "Utilities Home", description: "Tool overview", path: "/devutilities", exact: true },
       { label: "Regex Tester", description: "Test expressions", path: "/devutilities/regex" },
       { label: "JSON Formatter", description: "Format and validate JSON", path: "/devutilities/json" },
+      { label: "JSON YAML Converter", description: "Convert JSON and YAML", path: "/devutilities/json-yaml" },
       { label: "Base64", description: "Encode and decode", path: "/devutilities/base64" },
       { label: "Timestamp", description: "Convert timestamps", path: "/devutilities/timestamp" },
       { label: "UUID", description: "Generate UUIDs", path: "/devutilities/uuid" },

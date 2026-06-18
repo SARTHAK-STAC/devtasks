@@ -40,6 +40,16 @@ const DevUtilities = () => {
       ),
     },
     {
+      title: "JSON YAML Converter",
+      description: "Convert JSON to YAML and YAML to JSON in real time with syntax validation.",
+      path: "/devutilities/json-yaml",
+      icon: (
+        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h10M7 12h6m-6 5h10M4 4v16m16-16v16" />
+        </svg>
+      ),
+    },
+    {
       title: "Base64 / URL",
       description: "Encode and decode binary string fragments, escape special URL query variables, and test strings.",
       path: "/devutilities/base64",
@@ -172,6 +182,7 @@ const DevUtilities = () => {
                   .map((card) => {
                     const t = card.title.toUpperCase();
                     if (t.includes("REGEX")) return "REGEXP";
+                    if (t.includes("YAML")) return "JSON/YAML";
                     if (t.includes("JSON")) return "JSON";
                     if (t.includes("BASE64")) return "BASE64/URL";
                     if (t.includes("TIMESTAMP")) return "TIMESTAMP";
