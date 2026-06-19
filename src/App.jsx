@@ -25,6 +25,8 @@ import DataCenterResource from "./pages/ResourceHub/resourcehub/DataCenter";
 import DevUtilities from "./pages/DevUtilities/DevUtilities";
 import RegexTester from "./pages/DevUtilities/devutilities/RegexTester";
 import JsonFormatter from "./pages/DevUtilities/devutilities/JsonFormatter";
+import JsonYamlConverter from "./pages/DevUtilities/devutilities/JsonYamlConverter";
+import MarkdownPreviewer from "./pages/DevUtilities/devutilities/MarkdownPreviewer";
 import Base64Url from "./pages/DevUtilities/devutilities/Base64Url";
 import TimestampConverter from "./pages/DevUtilities/devutilities/TimestampConverter";
 import UuidGenerator from "./pages/DevUtilities/devutilities/UuidGenerator";
@@ -44,6 +46,8 @@ import useKeyboardShortcuts from "./hooks/useKeyboardShortcuts";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 import "./index.css";
+import MockJsonGenerator from "./pages/DevUtilities/devutilities/MockJsonDataGenerator";
+import MarkdownTableGenerator from "./pages/DevUtilities/devutilities/MarkdownTableGenerator";
 
 function App() {
   const [hudVisible, setHudVisible] = useState(false);
@@ -126,6 +130,8 @@ function AppInner({ toggleHUD, hudVisible }) {
             <Route path="/devutilities" element={<DevUtilities />} />
             <Route path="/devutilities/regex" element={<RegexTester />} />
             <Route path="/devutilities/json" element={<JsonFormatter />} />
+            <Route path="/devutilities/json-yaml" element={<JsonYamlConverter />} />
+            <Route path="/devutilities/markdown" element = {<MarkdownPreviewer/>} />
             <Route path="/devutilities/base64" element={<Base64Url />} />
             <Route path="/devutilities/timestamp" element={<TimestampConverter />} />
             <Route path="/devutilities/uuid" element={<UuidGenerator />} />
@@ -135,8 +141,11 @@ function AppInner({ toggleHUD, hudVisible }) {
             <Route path="/devutilities/color" element={<ColorConverter />} />
             <Route path="/devutilities/code" element={<CodeSandbox />} />
             <Route path="/devutilities/qrcode" element={<QrCodeGenerator />} />
-            <Route path="/devutilities/url-parser" element={<UrlParserBuilder />} />
-            <Route path="/devutilities/text-case" element={<TextCaseConverter />} />
+          <Route path="/devutilities/text-case" element={<TextCaseConverter />} />
+<Route path="/devutilities/mock-json" element={<MockJsonGenerator />} />
+<Route path="/devutilities/markdown-table" element={<MarkdownTableGenerator />} />
+<Route path="/devutilities/url-parser" element={<UrlParserBuilder />} />
+
           </Routes>
         </div>
       </div>
