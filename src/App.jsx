@@ -21,7 +21,6 @@ import DataCenterSnippet from "./pages/SnippetVault/snippetvault/DataCenter";
 import HtmlEntityConverter from "./pages/DevUtilities/devutilities/HtmlEntityConverter";
 
 import TextCaseConverter from "./pages/DevUtilities/devutilities/TextCaseConverter";
-import HtmlEntityConverter from "./pages/DevUtilities/devutilities/HtmlEntityConverter";
 
 // Resource Hub Imports
 import ResourceHub from "./pages/ResourceHub/ResourceHub";
@@ -184,17 +183,18 @@ function AppInner({ toggleHUD, hudVisible }) {
             />
             <Route path="/devutilities/uuid" element={<UuidGenerator />} />
             <Route path="/devutilities/jwt" element={<JwtDecoder />} />
+            <Route path="/devutilities/jwt-encode" element={<JwtEncoder />} />
             <Route path="/devutilities/diff" element={<DiffChecker />} />
             <Route path="/devutilities/hash" element={<HashGenerator />} />
             <Route path="/devutilities/color" element={<ColorConverter />} />
             <Route path="/devutilities/code" element={<CodeSandbox />} />
             <Route path="/devutilities/qrcode" element={<QrCodeGenerator />} />
-            <Route path="/devutilities/text-case-converter" element={<TextCaseConverter />} />
+            <Route path="/devutilities/text-case" element={<TextCaseConverter />} />
             <Route path="/devutilities/mock-json-generator" element={<MockJsonGenerator />} />
             <Route path="/devutilities/flexbox-grid-generator" element={<FlexboxGridGenerator />} />
             <Route path="/devutilities/markdown-table-genertaor" element={<MarkdownTableGenerator />} />
             <Route path="/devutilities/url-parser" element={<UrlParserBuilder />} />
-            <Route path="/devutilities/sql-formatter" element={<SqlFormatter />} />
+            <Route path="/devutilities/sql" element={<SqlFormatter />} />
 
           </Routes>
         </div>

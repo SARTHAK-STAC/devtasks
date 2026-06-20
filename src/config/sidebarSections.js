@@ -164,7 +164,7 @@ const SIDEBAR_SECTIONS = [
       {
         label: "Text Case Converter",
         description: "Convert text into different cases",
-        path: "/devutilities/text-case-converter",
+        path: "/devutilities/text-case",
       },
       {
         label: "Base64 / URL",
