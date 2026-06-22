@@ -186,7 +186,7 @@ const SIDEBAR_SECTIONS = [
         description: "Inspect tokens",
         path: "/devutilities/jwt",
       },
-     
+
       {
         label: "Diff Checker",
         description: "Compare text differences",
@@ -249,8 +249,14 @@ const SIDEBAR_SECTIONS = [
       },
       {
         label: "User Agent Parser",
-        description: "Parse browser user-agent strings and inspect client environment",
+        description:
+          "Parse browser user-agent strings and inspect client environment",
         path: "/devutilities/user-agent",
+      },
+      {
+        label: "CRON Expression Generator & Descriptor",
+        description: "Generate and inspect CRON expressions. Fully offline.",
+        path: "/devutilities/cron",
       },
     ],
   },
