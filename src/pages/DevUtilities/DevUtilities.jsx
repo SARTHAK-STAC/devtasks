@@ -130,34 +130,86 @@ const DevUtilities = () => {
             strokeWidth={2}
             d="M13.828 10.172a4 4 0 00-5.656 0l-2 2a4 4 0 105.656 5.656l2-2m-3.656-7.656l2-2a4 4 0 115.656 5.656l-2 2"
           />
+ 
+          <svg
+            className="w-6 h-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+=======
+ 
         </svg>
       ),
     },
     {
       title: "UUID Generator",
-      description: "Generate RFC4122-compliant v4 UUIDs offline with formatting options.",
+      description:
+        "Generate RFC4122-compliant v4 UUIDs offline with formatting options.",
       path: "/devutilities/uuid",
       icon: (
-        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
+        <svg
+          className="w-6 h-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"
+          />
         </svg>
       ),
     },
     {
       title: "JWT Decoder",
-      description: "Decode and inspect JSON Web Token header and payload data directly in the browser, completely offline.",
+      description:
+        "Decode and inspect JSON Web Token header and payload data directly in the browser, completely offline.",
       path: "/devutilities/jwt",
       icon: (
-        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+        <svg
+          className="w-6 h-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+          />
         </svg>
       ),
     },
     {
       title: "JWT Encoder",
-      description: "Encode and inspect JSON Web Token header and payload data directly in the browser, completely offline.",
+      description:
+        "Encode and inspect JSON Web Token header and payload data directly in the browser, completely offline.",
       path: "/devutilities/jwt-encode",
       icon: (
+        <svg
+          className="w-6 h-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+          />
+=======
         <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
         </svg>
@@ -165,51 +217,110 @@ const DevUtilities = () => {
     },
     {
       title: "Diff Checker",
-      description: "Compare two text blocks and highlight added, removed, and unchanged lines in split or inline view.",
+      description:
+        "Compare two text blocks and highlight added, removed, and unchanged lines in split or inline view.",
       path: "/devutilities/diff",
       icon: (
-        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+        <svg
+          className="w-6 h-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"
+          />
         </svg>
       ),
     },
     {
       title: "Code Sandbox",
-      description: "Instantly test raw HTML/CSS/JS with a live preview. No local environment required.",
+      description:
+        "Instantly test raw HTML/CSS/JS with a live preview. No local environment required.",
       path: "/devutilities/code",
       icon: (
-        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="m16 18 6-6-6-6M8 6l-6 6 6 6" />
+        <svg
+          className="w-6 h-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="m16 18 6-6-6-6M8 6l-6 6 6 6"
+          />
         </svg>
       ),
     },
     {
       title: "Hash Generator",
-      description: "Generate MD5, SHA-1, SHA-256, and SHA-512 cryptographic hashes directly in the browser.",
+      description:
+        "Generate MD5, SHA-1, SHA-256, and SHA-512 cryptographic hashes directly in the browser.",
       path: "/devutilities/hash",
       icon: (
-        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4" />
+        <svg
+          className="w-6 h-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4"
+          />
         </svg>
       ),
     },
     {
       title: "Color Converter & Contrast Checker",
-      description: "Convert HEX, RGB, HSL, and CMYK colors, generate palettes, and verify WCAG contrast offline.",
+      description:
+        "Convert HEX, RGB, HSL, and CMYK colors, generate palettes, and verify WCAG contrast offline.",
       path: "/devutilities/color",
-      icon: (
+      icon:(
+        <svg
+          className="w-6 h-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M12 3a9 9 0 100 18 9 9 0 000-18zm0 0c1.5 2 2 4 2 6s-.5 4-2 6c-1.5-2-2-4-2-6s.5-4 2-6zm-6.36 4.64c2.08.83 3.8 2.55 4.64 4.64-2.09-.83-3.81-2.55-4.64-4.64zm12.72 0c-.83 2.09-2.55 3.81-4.64 4.64.83-2.09 2.55-3.81 4.64-4.64z"
+          />
+=======
         <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-3M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+
         </svg>
       ),
     },
     {
       title: "QR Code Generator",
-      description: "Create customizable QR codes from text or URLs with color and size options. Fully offline.",
+      description:
+        "Create customizable QR codes from text or URLs with color and size options. Fully offline.",
       path: "/devutilities/qrcode",
       icon: (
-        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h7v7H3V3zm11 0h7v7h-7V3zM3 14h7v7H3v-7zm13 0h1v1h-1v-1zm-3 0h1v1h-1v-1zm3 3h1v1h-1v-1zm-3 0h1v1h-1v-1zm3 3h1v1h-1v-1zm-3 0h1v1h-1v-1zm3-6h1v1h-1v-1z" />
+        <svg
+          className="w-6 h-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M3 3h7v7H3V3zm11 0h7v7h-7V3zM3 14h7v7H3v-7zm13 0h1v1h-1v-1zm-3 0h1v1h-1v-1zm3 3h1v1h-1v-1zm-3 0h1v1h-1v-1zm3 3h1v1h-1v-1zm-3 0h1v1h-1v-1zm3-6h1v1h-1v-1z"
+          />
         </svg>
       ),
     },
@@ -276,7 +387,7 @@ const DevUtilities = () => {
         </svg>
       ),
     },
-   
+
     {
       title: "Markdown Previewer",
       description:
@@ -404,9 +515,23 @@ const DevUtilities = () => {
     },
     {
       title: "Flexbox & Grid Generator",
-      description: "Generate flexbox and grid layouts for responsive design. Fully offline.",
+      description:
+        "Generate flexbox and grid layouts for responsive design. Fully offline.",
       path: "/devutilities/flexbox-grid-generator",
       icon: (
+        <svg
+          className="w-6 h-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M3 3h7v7H3V3zm11 0h7v7h-7V3zM3 14h7v7H3v-7zm13 0h1v1h-1v-1zm-3 0h1v1h-1v-1zm3 3h1v1h-1v-1zm-3 0h1v1h-1v-1zm3 3h1v1h-1v-1zm-3 0h1v1h-1v-1zm3-6h1v1h-1v-1z"
+          />
+=======
         <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h3a1 1 0 011 1v6a1 1 0 01-1 1h-3a1 1 0 01-1-1v-6z" />
         </svg>
@@ -415,7 +540,7 @@ const DevUtilities = () => {
     {
       title: "User Agent Parser",
       description:
-      "Parse browser user-agent strings and inspect client environment information.",
+        "Parse browser user-agent strings and inspect client environment information.",
       path: "/devutilities/user-agent",
       icon: (
         <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -428,8 +553,44 @@ const DevUtilities = () => {
       description: "Generate and inspect CRON expressions. Fully offline.",
       path: "/devutilities/cron",
       icon: (
+ 
+        <svg
+          className="w-6 h-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M3 3h7v7H3V3zm11 0h7v7h-7V3zM3 14h7v7H3v-7zm13 0h1v1h-1v-1zm-3 0h1v1h-1v-1zm3 3h1v1h-1v-1zm-3 0h1v1h-1v-1zm3 3h1v1h-1v-1zm-3 0h1v1h-1v-1zm3-6h1v1h-1v-1z"
+          />
+        </svg>
+      ),
+    },
+    {
+      title: "CSS Gradient Generator",
+      description:
+        "Create beautiful CSS gradients with live preview and copy-ready code.",
+      path: "/devutilities/css-gradient",
+      icon: (
+        <svg
+          className="w-6 h-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M4 4h16v16H4V4zm0 0l16 16"
+          />
+=======
         <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+ 
         </svg>
       ),
     },
@@ -437,7 +598,7 @@ const DevUtilities = () => {
 
   // There are some duplicate cards, so I'm just leaving this here.
   const uniqueCards = Array.from(
-    new Map(cards.map((card) => [card.path, card])).values()
+    new Map(cards.map((card) => [card.path, card])).values(),
   );
 
   const matchedCards = uniqueCards.filter(
@@ -452,16 +613,20 @@ const DevUtilities = () => {
 
   // Splitting both favourite and other cards
   const favoriteSet = new Set(favoritePaths);
+ 
+  const favoriteCards = uniqueCards.filter((card) =>
+    favoriteSet.has(card.path),
+  );
+  const otherCards = uniqueCards.filter((card) => !favoriteSet.has(card.path));
+=======
   const favoriteCards = filteredUniqueCards.filter((card) => favoriteSet.has(card.path));
   const otherCards = filteredUniqueCards.filter((card) => !favoriteSet.has(card.path));
+ 
   const hasFavorites = favoriteCards.length > 0;
 
   // Mirror favorites back to localStorage whenever the list changes.
   useEffect(() => {
-    localStorage.setItem(
-      FAVORITES_STORAGE_KEY,
-      JSON.stringify(favoritePaths)
-    );
+    localStorage.setItem(FAVORITES_STORAGE_KEY, JSON.stringify(favoritePaths));
   }, [favoritePaths]);
 
   // Toggle a card between favorite and non-favorite states.
@@ -469,7 +634,7 @@ const DevUtilities = () => {
     setFavoritePaths((currentFavorites) =>
       currentFavorites.includes(path)
         ? currentFavorites.filter((item) => item !== path)
-        : [...currentFavorites, path]
+        : [...currentFavorites, path],
     );
   };
 
@@ -488,10 +653,11 @@ const DevUtilities = () => {
           {/* Back navigation and page title area. */}
           <Link
             to="/dashboard"
-            className={`inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest transition-all duration-300 w-fit ${dark
+            className={`inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest transition-all duration-300 w-fit ${
+              dark
                 ? "text-neutral-400 hover:text-white"
                 : "text-neutral-500 hover:text-black"
-              }`}
+            }`}
           >
             <span>← Back to Dashboard</span>
           </Link>
@@ -583,6 +749,20 @@ const DevUtilities = () => {
                 }`}
               >
                 <div>
+ 
+                  <h2 className="text-2xl font-black uppercase tracking-tight">
+                    Favourite Tools
+                  </h2>
+                  <p className="mt-1 text-sm font-medium text-zinc-500">
+                    Your saved tools appear here first.
+                  </p>
+                </div>
+                <div className="text-xs font-black uppercase tracking-widest text-zinc-500">
+                  {favoriteCards.length} item
+                  {favoriteCards.length === 1 ? "" : "s"}
+                </div>
+              </div>
+=======
                   <div className="mb-5 flex items-end justify-between gap-4">
                     <div>
                       <h2 className="text-2xl font-black uppercase tracking-tight">
@@ -596,6 +776,7 @@ const DevUtilities = () => {
                       {favoriteCards.length} item{favoriteCards.length === 1 ? "" : "s"}
                     </div>
                   </div>
+ 
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full">
                     {favoriteCards.map((card) => {
