@@ -54,6 +54,7 @@ import JwtEncoder from "./pages/DevUtilities/devutilities/JwtEncoder";
 import CssGradientGenerator from "./pages/DevUtilities/devutilities/CssGradientGenerator";
 import CssGlassmorphismPlayground from "./pages/DevUtilities/devutilities/CssGlassmorphismPlayground";
 import BcryptGenerator from "./pages/DevUtilities/devutilities/BcryptGenerator";
+import PasswordGenerator from "./pages/DevUtilities/devutilities/PasswordGenerator";
 
 import { ThemeProvider, useTheme } from "./context/ThemeContext";
 import { CategoryProvider } from "./context/CategoryContext";
@@ -106,7 +107,6 @@ function AppInner({ toggleHUD, hudVisible }) {
   // Flag to block scroll saving during route shifts and scroll restoration
   const isRestoringRef = useRef(false);
 
-
   // Scroll restoration logic for inner scrollable content wrapper
   useEffect(() => {
     isRestoringRef.current = true;
@@ -121,11 +121,26 @@ function AppInner({ toggleHUD, hudVisible }) {
 
       scrollContainer.scrollTop = targetScroll;
 
-      timers.push(setTimeout(() => { scrollContainer.scrollTop = targetScroll; }, 50));
-      timers.push(setTimeout(() => { scrollContainer.scrollTop = targetScroll; }, 150));
-      timers.push(setTimeout(() => { scrollContainer.scrollTop = targetScroll; }, 300));
-      timers.push(setTimeout(() => { scrollContainer.scrollTop = targetScroll; }, 500));
-
+      timers.push(
+        setTimeout(() => {
+          scrollContainer.scrollTop = targetScroll;
+        }, 50),
+      );
+      timers.push(
+        setTimeout(() => {
+          scrollContainer.scrollTop = targetScroll;
+        }, 150),
+      );
+      timers.push(
+        setTimeout(() => {
+          scrollContainer.scrollTop = targetScroll;
+        }, 300),
+      );
+      timers.push(
+        setTimeout(() => {
+          scrollContainer.scrollTop = targetScroll;
+        }, 500),
+      );
     } else {
       scrollContainer.scrollTop = 0;
     }
@@ -216,110 +231,151 @@ function AppInner({ toggleHUD, hudVisible }) {
         >
           <div className="flex-1">
             <Routes>
+              <Route
+                path="/devutilities/user-agent"
+                element={<UserAgentParser />}
+              />
 
-            <Route path="/devutilities/user-agent" element={<UserAgentParser />} />
+              <Route path="/" element={<Home />} />
+              <Route path="/dashboard" element={<Dashboard />} />
 
-            <Route path="/" element={<Home />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+              {/* Task Management */}
+              <Route path="/taskmanage" element={<TaskManage />} />
+              <Route path="/taskmanage/add-tasks" element={<AddTasks />} />
+              <Route path="/taskmanage/list-tasks" element={<ListTasks />} />
+              <Route
+                path="/taskmanage/delete-history"
+                element={<DeleteHistory />}
+              />
+              <Route path="/taskmanage/data-center" element={<DataCenter />} />
 
-            {/* Task Management */}
-            <Route path="/taskmanage" element={<TaskManage />} />
-            <Route path="/taskmanage/add-tasks" element={<AddTasks />} />
-            <Route path="/taskmanage/list-tasks" element={<ListTasks />} />
-            <Route path="/taskmanage/delete-history" element={<DeleteHistory />} />
-            <Route path="/taskmanage/data-center" element={<DataCenter />} />
+              {/* Snippet Vault */}
+              <Route path="/snippetvault" element={<SnippetVault />} />
+              <Route path="/snippetvault/add" element={<AddSnippet />} />
+              <Route path="/snippetvault/edit/:id" element={<AddSnippet />} />
+              <Route path="/snippetvault/list" element={<ListSnippets />} />
+              <Route
+                path="/snippetvault/delete-history"
+                element={<DeleteHistorySnippet />}
+              />
+              <Route
+                path="/snippetvault/data-center"
+                element={<DataCenterSnippet />}
+              />
 
-            {/* Snippet Vault */}
-            <Route path="/snippetvault" element={<SnippetVault />} />
-            <Route path="/snippetvault/add" element={<AddSnippet />} />
-            <Route path="/snippetvault/edit/:id" element={<AddSnippet />} />
-            <Route path="/snippetvault/list" element={<ListSnippets />} />
-            <Route path="/snippetvault/delete-history" element={<DeleteHistorySnippet />} />
-            <Route path="/snippetvault/data-center" element={<DataCenterSnippet />} />
+              {/* Resource Hub */}
+              <Route path="/resourcehub" element={<ResourceHub />} />
+              <Route path="/resourcehub/add" element={<AddResource />} />
+              <Route path="/resourcehub/edit/:id" element={<AddResource />} />
+              <Route path="/resourcehub/list" element={<ListResources />} />
+              <Route
+                path="/resourcehub/delete-history"
+                element={<DeleteHistoryResource />}
+              />
+              <Route
+                path="/resourcehub/data-center"
+                element={<DataCenterResource />}
+              />
 
-            {/* Resource Hub */}
-            <Route path="/resourcehub" element={<ResourceHub />} />
-            <Route path="/resourcehub/add" element={<AddResource />} />
-            <Route path="/resourcehub/edit/:id" element={<AddResource />} />
-            <Route path="/resourcehub/list" element={<ListResources />} />
-            <Route path="/resourcehub/delete-history" element={<DeleteHistoryResource />} />
-            <Route path="/resourcehub/data-center" element={<DataCenterResource />} />
+              {/* Dev Utilities */}
+              <Route path="/devutilities" element={<DevUtilities />} />
+              <Route path="/devutilities/regex" element={<RegexTester />} />
+              <Route path="/devutilities/json" element={<JsonFormatter />} />
+              <Route
+                path="/devutilities/json-csv-yaml"
+                element={<JsonYamlCsvConverter />}
+              />
+              <Route
+                path="/devutilities/markdown"
+                element={<MarkdownPreviewer />}
+              />
+              <Route
+                path="/devutilities/html-entity"
+                element={<HtmlEntityConverter />}
+              />
+              <Route path="/devutilities/base64" element={<Base64Url />} />
+              <Route
+                path="/devutilities/timestamp"
+                element={<TimestampConverter />}
+              />
+              <Route path="/devutilities/uuid" element={<UuidGenerator />} />
+              <Route path="/devutilities/jwt" element={<JwtDecoder />} />
+              <Route path="/devutilities/jwt-encode" element={<JwtEncoder />} />
+              <Route path="/devutilities/diff" element={<DiffChecker />} />
+              <Route path="/devutilities/hash" element={<HashGenerator />} />
+              <Route path="/devutilities/color" element={<ColorConverter />} />
+              <Route path="/devutilities/code" element={<CodeSandbox />} />
+              <Route
+                path="/devutilities/qrcode"
+                element={<QrCodeGenerator />}
+              />
+              <Route
+                path="/devutilities/text-case"
+                element={<TextCaseConverter />}
+              />
+              <Route path="/devutilities/chmod" element={<ChmodCalculator />} />
+              <Route
+                path="/devutilities/mock-json-generator"
+                element={<MockJsonGenerator />}
+              />
+              <Route
+                path="/devutilities/flexbox-grid-generator"
+                element={<FlexboxGridGenerator />}
+              />
+              <Route
+                path="/devutilities/markdown-table-genertaor"
+                element={<MarkdownTableGenerator />}
+              />
+              <Route
+                path="/devutilities/url-parser"
+                element={<UrlParserBuilder />}
+              />
+              <Route
+                path="/devutilities/bcrypt"
+                element={<BcryptGenerator />}
+              />
+              <Route path="/devutilities/sql" element={<SqlFormatter />} />
+              <Route
+                path="/devutilities/json-schema-validator"
+                element={<JsonSchemaValidator />}
+              />
+              <Route path="/devutilities/cron" element={<CronExpression />} />
+              <Route
+                path="/devutilities/string-inspector"
+                element={<StringInspector />}
+              />
+              <Route
+                path="/devutilities/number-base-converter"
+                element={<NumberBaseConverter />}
+              />
+              <Route
+                path="/devutilities/subnet"
+                element={<SubnetCalculator />}
+              />
 
-            {/* Dev Utilities */}
-            <Route path="/devutilities" element={<DevUtilities />} />
-            <Route path="/devutilities/regex" element={<RegexTester />} />
-            <Route path="/devutilities/json" element={<JsonFormatter />} />
-            <Route
-              path="/devutilities/json-csv-yaml"
-              element={<JsonYamlCsvConverter />}
+              <Route
+                path="/devutilities/css-gradient"
+                element={<CssGradientGenerator />}
+              />
+              <Route
+                path="/devutilities/glassmorphism"
+                element={<CssGlassmorphismPlayground />}
+              />
+              <Route path="*" element={<Navigate to="/" replace />} />
+              <Route
+                path="/devutilities/lorem-ipsum"
+                element={<LoremIpsumGenerator />}
+              />
+              <Route
+                path="/devutilities/svg-optimizer"
+                element={<SvgOptimizer />}
+              />
+              <Route
+              path="/devutilities/password-generator"
+              element={<PasswordGenerator />}
             />
-            <Route
-              path="/devutilities/markdown"
-              element={<MarkdownPreviewer />}
-            />
-            <Route
-              path="/devutilities/html-entity"
-              element={<HtmlEntityConverter />}
-            />
-            <Route path="/devutilities/base64" element={<Base64Url />} />
-            <Route
-              path="/devutilities/timestamp"
-              element={<TimestampConverter />}
-            />
-            <Route path="/devutilities/uuid" element={<UuidGenerator />} />
-            <Route path="/devutilities/jwt" element={<JwtDecoder />} />
-            <Route path="/devutilities/jwt-encode" element={<JwtEncoder />} />
-            <Route path="/devutilities/diff" element={<DiffChecker />} />
-            <Route path="/devutilities/hash" element={<HashGenerator />} />
-            <Route path="/devutilities/color" element={<ColorConverter />} />
-            <Route path="/devutilities/code" element={<CodeSandbox />} />
-            <Route path="/devutilities/qrcode" element={<QrCodeGenerator />} />
-            <Route
-              path="/devutilities/text-case"
-              element={<TextCaseConverter />}
-            />
-            <Route path="/devutilities/chmod" element={<ChmodCalculator />} />
-            <Route
-              path="/devutilities/mock-json-generator"
-              element={<MockJsonGenerator />}
-            />
-            <Route
-              path="/devutilities/flexbox-grid-generator"
-              element={<FlexboxGridGenerator />}
-            />
-            <Route
-              path="/devutilities/markdown-table-genertaor"
-              element={<MarkdownTableGenerator />}
-            />
-            <Route
-              path="/devutilities/url-parser"
-              element={<UrlParserBuilder />}
-            />
-            <Route
-              path="/devutilities/bcrypt"
-              element={<BcryptGenerator />}
-            />
-            <Route path="/devutilities/sql" element={<SqlFormatter />} />
-            <Route path="/devutilities/json-schema-validator" element={<JsonSchemaValidator />} />
-            <Route path="/devutilities/cron" element={<CronExpression />} />
-            <Route path="/devutilities/string-inspector" element={<StringInspector />} />
-            <Route path="/devutilities/number-base-converter" element={<NumberBaseConverter />} />
-            <Route path="/devutilities/subnet" element={<SubnetCalculator />} />
-
-            <Route
-              path="/devutilities/css-gradient"
-              element={<CssGradientGenerator />}
-            />
-            <Route
-              path="/devutilities/glassmorphism"
-              element={<CssGlassmorphismPlayground />}
-            />
-            <Route path="*" element={<Navigate to="/" replace />} />
-            <Route path="/devutilities/lorem-ipsum" element={<LoremIpsumGenerator />} />
-            <Route path="/devutilities/svg-optimizer" element={<SvgOptimizer />} />
-
-          </Routes>
-          
+            </Routes>
+            
           </div>
           {showNavbar && <Footer />}
         </div>
