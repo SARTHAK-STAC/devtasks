@@ -23,9 +23,6 @@ const Footer = () => {
             >
               &copy; {new Date().getFullYear()} DevTasks. Open Source License.
             </div>
-            <span className={`hidden sm:inline text-xs ${dark ? "text-zinc-800" : "text-zinc-300"}`}>
-              &bull;
-            </span>
           </div>
 
           {/* Right Github and Portfolio links */}

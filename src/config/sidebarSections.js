@@ -299,6 +299,12 @@ const SIDEBAR_SECTIONS = [
         path: "/devutilities/svg-optimizer",
       },
       {
+        label: "Password Generator",
+        description:
+          "Generate secure passwords and analyze entropy, strength, and crack times.",
+        path: "/devutilities/password-generator",
+      },
+      {
         label: "Lorem Ipsum Generator",
         description: "Generate dummy placeholder text offline",
         path: "/devutilities/lorem-ipsum",

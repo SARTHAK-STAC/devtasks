@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useTheme } from "../context/ThemeContext";
 import useSidebar from "../hooks/useSidebar";
 import useSidebarSection from "../hooks/useSidebarSection";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 
 const Sidebar = () => {
   const location = useLocation();
@@ -13,20 +13,20 @@ const Sidebar = () => {
     setIsSidebarOpen,
   } = useSidebar();
 
-  const activeLinkRef = useRef(null);
-
-  const activeLinkCallback = (el) => {
-    if (el && el.offsetParent !== null) {
-      activeLinkRef.current = el;
-    }
-  };
-
   useEffect(() => {
-    if (isSidebarOpen && activeLinkRef.current) {
-      activeLinkRef.current.scrollIntoView({
-        behavior: "smooth",
-        block: "nearest",
-      });
+    if (isSidebarOpen) {
+      const timer = setTimeout(() => {
+        const activeElements = document.querySelectorAll('[data-active="true"]');
+        activeElements.forEach((el) => {
+          if (el.offsetParent !== null) {
+            el.scrollIntoView({
+              behavior: "smooth",
+              block: "nearest",
+            });
+          }
+        });
+      }, 100);
+      return () => clearTimeout(timer);
     }
   }, [location.pathname, isSidebarOpen]);
   const { activeSection, hasSidebarSection } = useSidebarSection();
@@ -112,7 +112,7 @@ const Sidebar = () => {
                 <Link
                   key={item.path}
                   to={item.path}
-                  ref={isActive ? activeLinkCallback : null}
+                  data-active={isActive}
                   onClick={() => setIsSidebarOpen(false)}
                   className={`group relative flex items-start gap-3 rounded-lg border pl-5 pr-4 py-3 transition-all duration-300 ${
                     isActive
@@ -236,7 +236,7 @@ const Sidebar = () => {
                   <Link
                     key={item.path}
                     to={item.path}
-                    ref={isActive ? activeLinkCallback : null}
+                    data-active={isActive}
                     className={`group relative flex items-start gap-3 rounded-lg border pl-5 pr-4 py-3 transition-all duration-300 ${
                       isActive
                         ? dark
