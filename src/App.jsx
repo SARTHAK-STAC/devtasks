@@ -38,6 +38,7 @@ import RegexTester from "./pages/DevUtilities/devutilities/RegexTester";
 import JsonFormatter from "./pages/DevUtilities/devutilities/JsonFormatter";
 import JsonYamlCsvConverter from "./pages/DevUtilities/devutilities/JsonYamlCsvConverter";
 import MarkdownPreviewer from "./pages/DevUtilities/devutilities/MarkdownPreviewer";
+import Base64ImageConverter from "./pages/DevUtilities/devutilities/Base64ImageConverter";
 import Base64Url from "./pages/DevUtilities/devutilities/Base64Url";
 import TimestampConverter from "./pages/DevUtilities/devutilities/TimestampConverter";
 import UuidGenerator from "./pages/DevUtilities/devutilities/UuidGenerator";
@@ -294,6 +295,10 @@ function AppInner({ toggleHUD, hudVisible }) {
                 element={<HtmlEntityConverter />}
               />
               <Route path="/devutilities/base64" element={<Base64Url />} />
+              <Route
+                    path="/devutilities/base64-image"
+                    element={<Base64ImageConverter />}
+                  />
               <Route
                 path="/devutilities/timestamp"
                 element={<TimestampConverter />}
