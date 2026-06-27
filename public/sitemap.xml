@@ -2,38 +2,336 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://devtasks.example.com/</loc>
-    <lastmod>2026-05-19</lastmod>
+    <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://devtasks.example.com/dashboard</loc>
-    <lastmod>2026-05-19</lastmod>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Task Management -->
+  <url>
+    <loc>https://devtasks.example.com/taskmanage</loc>
+    <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://devtasks.example.com/add-tasks</loc>
-    <lastmod>2026-05-19</lastmod>
+    <loc>https://devtasks.example.com/taskmanage/add-tasks</loc>
+    <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://devtasks.example.com/list-tasks</loc>
-    <lastmod>2026-05-19</lastmod>
+    <loc>https://devtasks.example.com/taskmanage/list-tasks</loc>
+    <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://devtasks.example.com/delete-history</loc>
-    <lastmod>2026-05-19</lastmod>
+    <loc>https://devtasks.example.com/taskmanage/delete-history</loc>
+    <lastmod>2026-06-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://devtasks.example.com/data-center</loc>
-    <lastmod>2026-05-19</lastmod>
+    <loc>https://devtasks.example.com/taskmanage/data-center</loc>
+    <lastmod>2026-06-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
+  </url>
+
+  <!-- Snippet Vault -->
+  <url>
+    <loc>https://devtasks.example.com/snippetvault</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://devtasks.example.com/snippetvault/add</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://devtasks.example.com/snippetvault/list</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://devtasks.example.com/snippetvault/delete-history</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://devtasks.example.com/snippetvault/data-center</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- Resource Hub -->
+  <url>
+    <loc>https://devtasks.example.com/resourcehub</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://devtasks.example.com/resourcehub/add</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://devtasks.example.com/resourcehub/list</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://devtasks.example.com/resourcehub/delete-history</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://devtasks.example.com/resourcehub/data-center</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- Dev Utilities Overview -->
+  <url>
+    <loc>https://devtasks.example.com/devutilities</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Dev Utilities Individual Tools -->
+  <url>
+    <loc>https://devtasks.example.com/devutilities/regex</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://devtasks.example.com/devutilities/css-unit-converter</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://devtasks.example.com/devutilities/json</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://devtasks.example.com/devutilities/json-csv-yaml</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://devtasks.example.com/devutilities/xml-json</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://devtasks.example.com/devutilities/markdown</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://devtasks.example.com/devutilities/html-entity</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://devtasks.example.com/devutilities/base64</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://devtasks.example.com/devutilities/timestamp</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://devtasks.example.com/devutilities/uuid</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://devtasks.example.com/devutilities/jwt</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://devtasks.example.com/devutilities/jwt-encode</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://devtasks.example.com/devutilities/diff</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://devtasks.example.com/devutilities/hash</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://devtasks.example.com/devutilities/color</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://devtasks.example.com/devutilities/code</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://devtasks.example.com/devutilities/qrcode</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://devtasks.example.com/devutilities/text-case</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://devtasks.example.com/devutilities/chmod</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://devtasks.example.com/devutilities/mock-json-generator</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://devtasks.example.com/devutilities/flexbox-grid-generator</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://devtasks.example.com/devutilities/markdown-table-genertaor</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://devtasks.example.com/devutilities/url-parser</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://devtasks.example.com/devutilities/bcrypt</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://devtasks.example.com/devutilities/sql</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://devtasks.example.com/devutilities/json-schema-validator</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://devtasks.example.com/devutilities/cron</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://devtasks.example.com/devutilities/string-inspector</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://devtasks.example.com/devutilities/number-base-converter</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://devtasks.example.com/devutilities/subnet</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://devtasks.example.com/devutilities/css-gradient</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://devtasks.example.com/devutilities/glassmorphism</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://devtasks.example.com/devutilities/lorem-ipsum</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://devtasks.example.com/devutilities/svg-optimizer</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://devtasks.example.com/devutilities/password-generator</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://devtasks.example.com/devutilities/user-agent</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
 </urlset>

@@ -78,6 +78,7 @@ import StringInspector from "./pages/DevUtilities/devutilities/StringInspector";
 import NumberBaseConverter from "./pages/DevUtilities/devutilities/NumberBaseConverter";
 import LoremIpsumGenerator from "./pages/DevUtilities/devutilities/LoremIpsumGenerator";
 import SvgOptimizer from "./pages/DevUtilities/devutilities/SvgOptimizer";
+import SIDEBAR_SECTIONS from "./config/sidebarSections";
 
 function App() {
   const [hudVisible, setHudVisible] = useState(false);
@@ -105,6 +106,78 @@ function AppInner({ toggleHUD, hudVisible }) {
 
   const showNavbar = location.pathname !== "/";
   const { dark } = useTheme();
+
+  // Central SEO Metadata dynamic updating
+  useEffect(() => {
+    // Find active section and item
+    const activeSection = SIDEBAR_SECTIONS.find((section) =>
+      section.match(location.pathname)
+    );
+    let title = "DevTasks — Developer Workspace: Tasks, Snippets, Resources & DevUtilities";
+    let description = "DevTasks is a unified developer workspace. Manage engineering task roadmaps, vault secure code snippets, reference curated bookmark links, and run offline dev utilities with ease.";
+    let keywords = "devtasks, dev tasks, developer todo workspace, engineer task manager, roadmap builder, bug tracking checklist, code snippet manager, bookmarks manager, dev workflow optimizer";
+
+    if (activeSection) {
+      const activeItem = activeSection.items.find((item) => {
+        if (item.exact) {
+          return item.path === location.pathname;
+        }
+        return (
+          location.pathname === item.path ||
+          location.pathname.startsWith(`${item.path}/`)
+        );
+      });
+
+      if (activeItem) {
+        title = `${activeItem.label} — DevTasks`;
+        description = `${activeItem.description}. Complete developer utility page.`;
+        keywords = `${activeItem.label.toLowerCase()}, ${activeSection.title.toLowerCase()}, devtasks, developer tools, developer workspace`;
+      } else if (activeSection.title) {
+        title = `${activeSection.title} — DevTasks`;
+        description = `${activeSection.description}. Manage tasks, snippets, resources, and dev utilities.`;
+        keywords = `${activeSection.title.toLowerCase()}, devtasks, developer workspace`;
+      }
+    }
+
+    // Apply metadata
+    document.title = title;
+
+    let descMeta = document.querySelector('meta[name="description"]');
+    if (!descMeta) {
+      descMeta = document.createElement("meta");
+      descMeta.setAttribute("name", "description");
+      document.head.appendChild(descMeta);
+    }
+    descMeta.setAttribute("content", description);
+
+    let keysMeta = document.querySelector('meta[name="keywords"]');
+    if (!keysMeta) {
+      keysMeta = document.createElement("meta");
+      keysMeta.setAttribute("name", "keywords");
+      document.head.appendChild(keysMeta);
+    }
+    keysMeta.setAttribute("content", keywords);
+
+    // Open Graph & Twitter Titles & Descriptions
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    if (ogTitle) ogTitle.setAttribute("content", title);
+
+    const twitterTitle = document.querySelector('meta[property="twitter:title"]');
+    if (twitterTitle) twitterTitle.setAttribute("content", title);
+
+    const ogDesc = document.querySelector('meta[property="og:description"]');
+    if (ogDesc) ogDesc.setAttribute("content", description);
+
+    const twitterDesc = document.querySelector('meta[property="twitter:description"]');
+    if (twitterDesc) twitterDesc.setAttribute("content", description);
+
+    // Canonical link
+    const canonical = document.querySelector('link[rel="canonical"]');
+    if (canonical) {
+      const currentUrl = window.location.origin + location.pathname;
+      canonical.setAttribute("href", currentUrl);
+    }
+  }, [location.pathname]);
 
   // Flag to block scroll saving during route shifts and scroll restoration
   const isRestoringRef = useRef(false);
