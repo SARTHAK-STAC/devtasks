@@ -274,6 +274,11 @@ const SIDEBAR_SECTIONS = [
         path: "/devutilities/glassmorphism",
       },
       {
+        label: "CSS Unit Converter",
+        description: "Convert CSS units and generate fluid typography clamp function",
+        path: "/devutilities/css-unit-converter",
+      },
+      {
         label: "Flexbox & Grid Generator",
         description: "Generate CSS flexbox and grid completely offline",
         path: "/devutilities/flexbox-grid-generator",

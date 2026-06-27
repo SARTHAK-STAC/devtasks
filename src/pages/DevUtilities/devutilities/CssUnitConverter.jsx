@@ -10,81 +10,136 @@ const CssUnitConverter = () => {
   const [activeTab, setActiveTab] = useState("converter"); // "converter" | "fluid"
 
   // Converter State
-  const [baseFontSize, setBaseFontSize] = useState(16);
+  const [baseFontSize, setBaseFontSize] = useState("16");
   const [pxValue, setPxValue] = useState(16);
+  const [inputs, setInputs] = useState({
+    px: "16.00",
+    rem: "1.0000",
+    em: "1.0000",
+    percent: "100.00",
+  });
 
   // Fluid Typography State
   const [fluidParams, setFluidParams] = useState({
-    minFont: 16,
-    maxFont: 48,
-    minVw: 320,
-    maxVw: 1200,
+    minFont: "16",
+    maxFont: "48",
+    minVw: "320",
+    maxVw: "1200",
   });
   const [previewVw, setPreviewVw] = useState(768);
 
   // --- Handlers for Unit Converter ---
-  const handleUnitChange = (unit, value) => {
-    const val = parseFloat(value);
-    if (isNaN(val)) {
-      setPxValue(0);
-      return;
-    }
-    switch (unit) {
-      case "px":
-        setPxValue(val);
-        break;
-      case "rem":
-      case "em":
-        setPxValue(val * baseFontSize);
-        break;
-      case "%":
-        setPxValue((val / 100) * baseFontSize);
-        break;
-      case "vw":
-      case "vh":
-        // Approximate conversion using a standard 1080p screen for generic testing
-        setPxValue(val * 19.2); // Just for placeholder interaction
-        break;
-      default:
-        break;
-    }
+  const handleUnitChange = (unit, valStr) => {
+    setInputs((prev) => {
+      const nextInputs = { ...prev, [unit]: valStr };
+      const val = parseFloat(valStr);
+      const base = parseFloat(baseFontSize) || 16;
+      
+      if (isNaN(val)) {
+        Object.keys(nextInputs).forEach((key) => {
+          if (key !== unit) {
+            nextInputs[key] = "";
+          }
+        });
+        setPxValue(0);
+        return nextInputs;
+      }
+
+      let px;
+      switch (unit) {
+        case "px":
+          px = val;
+          break;
+        case "rem":
+        case "em":
+          px = val * base;
+          break;
+        case "percent":
+          px = (val / 100) * base;
+          break;
+        default:
+          px = 0;
+      }
+      setPxValue(px);
+
+      // Recalculate other fields
+      if (unit !== "px") {
+        nextInputs.px = px.toFixed(2);
+      }
+      if (unit !== "rem") {
+        nextInputs.rem = (px / base).toFixed(4);
+      }
+      if (unit !== "em") {
+        nextInputs.em = (px / base).toFixed(4);
+      }
+      if (unit !== "percent") {
+        nextInputs.percent = ((px / base) * 100).toFixed(2);
+      }
+
+      return nextInputs;
+    });
   };
 
-  const getConvertedValues = () => {
-    return {
-      px: pxValue.toFixed(2),
-      rem: (pxValue / baseFontSize).toFixed(4),
-      em: (pxValue / baseFontSize).toFixed(4),
-      percent: ((pxValue / baseFontSize) * 100).toFixed(2),
-    };
+  const handleBaseFontSizeChange = (valStr) => {
+    setBaseFontSize(valStr);
+    const parsedBase = parseFloat(valStr);
+    if (!isNaN(parsedBase) && parsedBase > 0) {
+      setInputs((prev) => ({
+        ...prev,
+        rem: (pxValue / parsedBase).toFixed(4),
+        em: (pxValue / parsedBase).toFixed(4),
+        percent: ((pxValue / parsedBase) * 100).toFixed(2),
+      }));
+    }
   };
-  const conversions = getConvertedValues();
 
   // --- Handlers for Fluid Typography ---
   const handleFluidChange = (e) => {
     const { name, value } = e.target;
-    setFluidParams((prev) => ({ ...prev, [name]: parseFloat(value) || 0 }));
+    setFluidParams((prev) => ({ ...prev, [name]: value }));
   };
 
-  const generateClamp = () => {
-    const { minFont, maxFont, minVw, maxVw } = fluidParams;
-    const minRem = minFont / baseFontSize;
-    const maxRem = maxFont / baseFontSize;
+  const clampValue = useMemo(() => {
+    const minFont = parseFloat(fluidParams.minFont) || 0;
+    const maxFont = parseFloat(fluidParams.maxFont) || 0;
+    const minVw = parseFloat(fluidParams.minVw) || 0;
+    const maxVw = parseFloat(fluidParams.maxVw) || 0;
+    const base = parseFloat(baseFontSize) || 16;
     
-    // slope = (maxFontSize - minFontSize) / (maxViewport - minViewport)
+    if (!minFont || !maxFont || !minVw || !maxVw || maxVw <= minVw || maxFont <= minFont || base <= 0) {
+      return "clamp(0rem, 0rem, 0rem)";
+    }
+    
+    const minRem = minFont / base;
+    const maxRem = maxFont / base;
+    
     const slope = (maxFont - minFont) / (maxVw - minVw);
     const slopeVw = slope * 100;
     
-    // intersection = -1 * minViewport * slope + minFontSize
-    const intersection = (-1 * minVw * slope + minFont) / baseFontSize;
+    const intersection = (-1 * minVw * slope + minFont) / base;
     
-    return `clamp(${minRem.toFixed(4)}rem, ${intersection.toFixed(4)}rem + ${slopeVw.toFixed(4)}vw, ${maxRem.toFixed(4)}rem);`;
-  };
+    return `clamp(${minRem.toFixed(4)}rem, ${intersection.toFixed(4)}rem + ${slopeVw.toFixed(4)}vw, ${maxRem.toFixed(4)}rem)`;
+  }, [fluidParams, baseFontSize]);
 
-  const clampValue = generateClamp();
+  const getSimulatedFontSize = useCallback(() => {
+    const minFont = parseFloat(fluidParams.minFont) || 0;
+    const maxFont = parseFloat(fluidParams.maxFont) || 0;
+    const minVw = parseFloat(fluidParams.minVw) || 0;
+    const maxVw = parseFloat(fluidParams.maxVw) || 0;
+    
+    if (minVw === maxVw || maxVw <= minVw) return `${minFont}px`;
+    
+    const slope = (maxFont - minFont) / (maxVw - minVw);
+    const intersection = -1 * minVw * slope + minFont;
+    
+    const currentVal = intersection + slope * previewVw;
+    const clampedVal = Math.max(minFont, Math.min(maxFont, currentVal));
+    
+    return `${clampedVal.toFixed(2)}px`;
+  }, [fluidParams, previewVw]);
 
   const handleCopyClamp = () => {
-    navigator.clipboard.writeText(`font-size: ${clampValue}`)
+    navigator.clipboard.writeText(`font-size: ${clampValue};`)
       .then(() => toast.success("Clamp function copied!"))
       .catch(() => toast.error("Failed to copy."));
   };
@@ -184,7 +239,7 @@ const CssUnitConverter = () => {
               <input
                 type="number"
                 value={baseFontSize}
-                onChange={(e) => setBaseFontSize(parseFloat(e.target.value) || 16)}
+                onChange={(e) => handleBaseFontSizeChange(e.target.value)}
                 className={inputClass}
               />
             </div>
@@ -194,19 +249,19 @@ const CssUnitConverter = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                  <div>
                     <label className={`text-xs font-black uppercase tracking-widest ${dark ? "text-zinc-400" : "text-neutral-500"} mb-2 block`}>Pixels (px)</label>
-                    <input type="number" value={conversions.px} onChange={(e) => handleUnitChange("px", e.target.value)} className={inputClass} />
+                    <input type="number" value={inputs.px} onChange={(e) => handleUnitChange("px", e.target.value)} className={inputClass} />
                  </div>
                  <div>
                     <label className={`text-xs font-black uppercase tracking-widest ${dark ? "text-zinc-400" : "text-neutral-500"} mb-2 block`}>REM (rem)</label>
-                    <input type="number" value={conversions.rem} onChange={(e) => handleUnitChange("rem", e.target.value)} className={inputClass} />
+                    <input type="number" value={inputs.rem} onChange={(e) => handleUnitChange("rem", e.target.value)} className={inputClass} />
                  </div>
                  <div>
                     <label className={`text-xs font-black uppercase tracking-widest ${dark ? "text-zinc-400" : "text-neutral-500"} mb-2 block`}>EM (em)</label>
-                    <input type="number" value={conversions.em} onChange={(e) => handleUnitChange("em", e.target.value)} className={inputClass} />
+                    <input type="number" value={inputs.em} onChange={(e) => handleUnitChange("em", e.target.value)} className={inputClass} />
                  </div>
                  <div>
                     <label className={`text-xs font-black uppercase tracking-widest ${dark ? "text-zinc-400" : "text-neutral-500"} mb-2 block`}>Percent (%)</label>
-                    <input type="number" value={conversions.percent} onChange={(e) => handleUnitChange("%", e.target.value)} className={inputClass} />
+                    <input type="number" value={inputs.percent} onChange={(e) => handleUnitChange("percent", e.target.value)} className={inputClass} />
                  </div>
               </div>
             )}
@@ -246,14 +301,14 @@ const CssUnitConverter = () => {
                 {/* Output Clamp Code */}
                 <div className={`p-6 rounded-2xl border ${dark ? "bg-zinc-950/50 border-zinc-800" : "bg-neutral-100 border-neutral-200"}`}>
                    <div className="flex justify-between items-center mb-4">
-                      <span className={`text-xs font-black uppercase tracking-widest ${dark ? "text-zinc-400" : "text-neutral-500"}`}>Generated CSS</span>
-                      <button onClick={handleCopyClamp} className={`px-4 py-2 rounded-xl text-xs font-bold uppercase transition-all ${dark ? "bg-zinc-800 text-white hover:bg-zinc-700" : "bg-white border text-black hover:bg-neutral-50"}`}>
-                        Copy Clamp
-                      </button>
-                   </div>
-                   <code className={`block font-mono text-sm p-4 rounded-xl ${dark ? "bg-black text-neon-blue" : "bg-white border"}`}>
-                      font-size: {clampValue}
-                   </code>
+                       <span className={`text-xs font-black uppercase tracking-widest ${dark ? "text-zinc-400" : "text-neutral-500"}`}>Generated CSS</span>
+                       <button onClick={handleCopyClamp} className={`px-4 py-2 rounded-xl text-xs font-bold uppercase transition-all ${dark ? "bg-zinc-800 text-white hover:bg-zinc-700" : "bg-white border text-black hover:bg-neutral-50"}`}>
+                         Copy Clamp
+                       </button>
+                    </div>
+                    <code className={`block font-mono text-sm p-4 rounded-xl ${dark ? "bg-black text-neon-blue" : "bg-white border"}`}>
+                       font-size: {clampValue};
+                    </code>
                 </div>
 
                 {/* Live Preview Slider */}
@@ -261,17 +316,19 @@ const CssUnitConverter = () => {
                    <label className={`text-xs font-black uppercase tracking-widest ${dark ? "text-zinc-400" : "text-neutral-500"}`}>Live Preview (Drag Slider)</label>
                    <input
                      type="range"
-                     min={fluidParams.minVw - 200}
-                     max={fluidParams.maxVw + 200}
+                     min={(parseFloat(fluidParams.minVw) || 320) - 200}
+                     max={(parseFloat(fluidParams.maxVw) || 1200) + 200}
                      value={previewVw}
-                     onChange={(e) => setPreviewVw(e.target.value)}
+                     onChange={(e) => setPreviewVw(parseFloat(e.target.value) || 0)}
                      className="w-full"
                    />
                    <div className="mt-4 border-t pt-4 border-dashed" style={{ borderColor: dark ? "#3f3f46" : "#d4d4d8" }}>
-                     <p className={`mb-2 text-sm font-mono ${dark ? "text-zinc-500" : "text-zinc-400"}`}>Simulated Viewport: {previewVw}px</p>
+                     <p className={`mb-2 text-sm font-mono ${dark ? "text-zinc-500" : "text-zinc-400"}`}>
+                       Simulated Viewport: {previewVw}px (Calculated Font Size: {getSimulatedFontSize()})
+                     </p>
                      <div 
                         className={`transition-all duration-75 font-semibold ${dark ? "text-white" : "text-black"}`}
-                        style={{ fontSize: `clamp(${fluidParams.minFont/baseFontSize}rem, ${(-1 * fluidParams.minVw * ((fluidParams.maxFont - fluidParams.minFont) / (fluidParams.maxVw - fluidParams.minVw)) + fluidParams.minFont)/baseFontSize}rem + ${((fluidParams.maxFont - fluidParams.minFont) / (fluidParams.maxVw - fluidParams.minVw))*100}vw, ${fluidParams.maxFont/baseFontSize}rem)` }}
+                        style={{ fontSize: getSimulatedFontSize() }}
                      >
                        The quick brown fox jumps over the lazy dog.
                      </div>
