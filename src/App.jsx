@@ -20,6 +20,7 @@ import ListSnippets from "./pages/SnippetVault/snippetvault/ListSnippets";
 import DeleteHistorySnippet from "./pages/SnippetVault/snippetvault/DeleteHistory";
 import DataCenterSnippet from "./pages/SnippetVault/snippetvault/DataCenter";
 import HtmlEntityConverter from "./pages/DevUtilities/devutilities/HtmlEntityConverter";
+import HtmlMultiConverter from "./pages/DevUtilities/devutilities/HtmlMultiConverter";
 
 import TextCaseConverter from "./pages/DevUtilities/devutilities/TextCaseConverter";
 //extra added
@@ -459,7 +460,11 @@ function AppInner({ toggleHUD, hudVisible }) {
               <Route
               path="/devutilities/password-generator"
               element={<PasswordGenerator />}
-            />
+              />
+              <Route
+                path="/devutilities/html-multi-converter"
+                element={<HtmlMultiConverter />}
+              />
             </Routes>
             
           </div>

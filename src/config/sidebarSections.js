@@ -314,6 +314,11 @@ const SIDEBAR_SECTIONS = [
         description: "Generate dummy placeholder text offline",
         path: "/devutilities/lorem-ipsum",
       },
+      {
+        label: "HTML Multi Converter",
+        description: "HTML to JSX, Markdown & Text",
+        path: "/devutilities/html-multi-converter",
+      },
     ],
   },
 ];
