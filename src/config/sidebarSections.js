@@ -245,7 +245,8 @@ const SIDEBAR_SECTIONS = [
       },
       {
         label: "Bcrypt Generator",
-        description: "Generate and verify bcrypt password hashes entirely offline.",
+        description:
+          "Generate and verify bcrypt password hashes entirely offline.",
         path: "/devutilities/bcrypt",
       },
       {
@@ -270,7 +271,8 @@ const SIDEBAR_SECTIONS = [
       },
       {
         label: "CSS Unit Converter",
-        description: "Convert CSS units and generate fluid typography clamp function",
+        description:
+          "Convert CSS units and generate fluid typography clamp function",
         path: "/devutilities/css-unit-converter",
       },
       {
@@ -318,6 +320,11 @@ const SIDEBAR_SECTIONS = [
         label: "HTML Multi Converter",
         description: "HTML to JSX, Markdown & Text",
         path: "/devutilities/html-multi-converter",
+      },
+      {
+        label: "JSON Path & JSON Query Playground",
+        description: "JSON Path and JSON Query Playground. Fully offline.",
+        path: "/devutilities/jsonpath-playground",
       },
     ],
   },

@@ -798,6 +798,27 @@ const DevUtilities = () => {
         </svg>
       ),
     },
+    {
+      title: "JSON Path & JSON Query Playground",
+      description:
+        "JSON Path and JSON Query Playground. Fully offline.",
+      path: "/devutilities/jsonpath-playground",
+      icon: (
+        <svg
+          className="w-6 h-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M8 9l-3 3 3 3m8-6l3 3-3 3M13 5l-2 14"
+          />
+        </svg>
+      ),
+    },
   ];
 
   const devUtilsSection = SIDEBAR_SECTIONS.find(
