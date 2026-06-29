@@ -777,6 +777,27 @@ const DevUtilities = () => {
         </svg>
       ),
     },
+    {
+      title: "HTML Multi Converter",
+      description:
+        "Convert HTML into JSX, Markdown, or Plain Text instantly. Fully offline.",
+      path: "/devutilities/html-multi-converter",
+      icon: (
+        <svg
+          className="w-6 h-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M8 9l-3 3 3 3m8-6l3 3-3 3M13 5l-2 14"
+          />
+        </svg>
+      ),
+    },
   ];
 
   const devUtilsSection = SIDEBAR_SECTIONS.find(
