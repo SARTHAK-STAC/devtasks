@@ -756,7 +756,7 @@ const DevUtilities = () => {
         </svg>
       ),
     },
-     {
+    {
       title: "Lorem Ipsum Generator",
       description:
         "Generate dummy placeholder text in various formats and lengths entirely offline for layouts and testing.",
@@ -803,6 +803,23 @@ const DevUtilities = () => {
       description:
         "JSON Path and JSON Query Playground. Fully offline.",
       path: "/devutilities/jsonpath-playground",
+      icon: (
+        <svg
+          className="w-6 h-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+          />
+        </svg>
+      ),
+    },
+    {
       title: "Design Token Generator",
       description:
         "Generate design system tokens for colors, typography, and spacing. Export as CSS variables, Tailwind config, or Sass. Fully offline.",
@@ -897,11 +914,10 @@ const DevUtilities = () => {
           {/* Back navigation and page title area. */}
           <Link
             to="/dashboard"
-            className={`inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest transition-all duration-300 w-fit ${
-              dark
+            className={`inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest transition-all duration-300 w-fit ${dark
                 ? "text-neutral-400 hover:text-white"
                 : "text-neutral-500 hover:text-black"
-            }`}
+              }`}
           >
             <span>← Back to Dashboard</span>
           </Link>
@@ -937,11 +953,10 @@ const DevUtilities = () => {
                   placeholder="Search utilities..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className={`w-full rounded-2xl border py-2.5 pl-11 pr-4 text-xs font-semibold outline-none transition-all duration-300 ${
-                    dark
+                  className={`w-full rounded-2xl border py-2.5 pl-11 pr-4 text-xs font-semibold outline-none transition-all duration-300 ${dark
                       ? "bg-zinc-950/60 border-zinc-800 text-white placeholder-zinc-600 focus:border-white"
                       : "bg-white border-neutral-250 text-black placeholder-neutral-400 focus:border-black"
-                  }`}
+                    }`}
                 />
               </div>
               {searchQuery.trim() && matchedCards.length === 0 && (
@@ -958,11 +973,15 @@ const DevUtilities = () => {
                     const t = card.title.toUpperCase();
                     if (t.includes("REGEX")) return "REGEXP";
                     if (t.includes("YAML")) return "JSON/YAML";
+                    if (t.includes("JSON SCHEMA")) return "JSON SCHEMA";
+                    if (t.includes("MOCK JSON")) return "MOCK JSON";
+                    if (t.includes("JSON PATH")) return "JSON PATH";
                     if (t.includes("JSON")) return "JSON";
                     if (t.includes("BASE64")) return "BASE64/URL";
                     if (t.includes("TIMESTAMP")) return "TIMESTAMP";
                     if (t.includes("UUID")) return "UUID";
-                    if (t.includes("JWT")) return "JWT";
+                    if (t.includes("JWT ENCODE")) return "JWT ENCODE";
+                    if (t.includes("JWT DECODE") || t === "JWT DECODER" || (t.includes("JWT") && !t.includes("ENCODE"))) return "JWT DECODE";
                     if (t.includes("DIFF")) return "DIFF";
                     if (t.includes("HASH")) return "HASH";
                     if (t.includes("COLOR")) return "COLOR";
@@ -970,8 +989,24 @@ const DevUtilities = () => {
                     if (t.includes("QR")) return "QR";
                     if (t.includes("SUBNET")) return "SUBNET";
                     if (t.includes("SQL")) return "SQL";
+                    if (t.includes("URL")) return "URL";
+                    if (t.includes("HTML MULTI")) return "HTML CONVERTER";
+                    if (t.includes("HTML")) return "HTML ENTITY";
+                    if (t.includes("TEXT CASE")) return "TEXT CASE";
+                    if (t.includes("MARKDOWN TABLE")) return "MD TABLE";
+                    if (t.includes("MARKDOWN")) return "MARKDOWN";
+                    if (t.includes("FLEXBOX")) return "FLEX/GRID";
+                    if (t.includes("AGENT")) return "USER AGENT";
                     if (t.includes("CHMOD")) return "CHMOD";
-                    if (t.includes("GRADIENT")) return "GRADIENT";
+                    if (t.includes("CRON")) return "CRON";
+                    if (t.includes("GLASSMORPHISM")) return "GLASSMORPHISM";
+                    if (t.includes("GRADIENT")) return "CSS GRADIENT";
+                    if (t.includes("CSS UNIT")) return "CSS UNITS";
+                    if (t.includes("BCRYPT")) return "BCRYPT";
+                    if (t.includes("PASSWORD")) return "PASSWORD";
+                    if (t.includes("LOREM")) return "LOREM IPSUM";
+                    if (t.includes("SVG")) return "SVG";
+                    if (t.includes("DESIGN TOKEN")) return "DESIGN TOKENS";
                     return t;
                   })
                   .join(" • ")}
@@ -989,11 +1024,10 @@ const DevUtilities = () => {
             <>
               <section
                 aria-hidden={!hasFavorites}
-                className={`overflow-hidden transition-all duration-500 ease-out ${
-                  hasFavorites
+                className={`overflow-hidden transition-all duration-500 ease-out ${hasFavorites
                     ? "mb-12 max-h-[3000px] opacity-100 translate-y-0"
                     : "max-h-0 opacity-0 -translate-y-4 pointer-events-none"
-                }`}
+                  }`}
               >
                 <div className="mb-5 flex items-end justify-between gap-4">
                   <div>
@@ -1035,13 +1069,12 @@ const DevUtilities = () => {
                             event.stopPropagation();
                             toggleFavorite(card.path);
                           }}
-                          className={`absolute right-4 top-4 z-10 inline-flex h-10 w-10 items-center justify-center rounded-full border transition-all duration-300 ${
-                            isFavorite
+                          className={`absolute right-4 top-4 z-10 inline-flex h-10 w-10 items-center justify-center rounded-full border transition-all duration-300 ${isFavorite
                               ? "border-amber-400/40 bg-amber-400/15 text-amber-400"
                               : dark
                                 ? "border-zinc-800 bg-zinc-950/70 text-zinc-500 hover:border-amber-400/40 hover:text-amber-300"
                                 : "border-zinc-200 bg-white/90 text-zinc-400 hover:border-amber-400/40 hover:text-amber-500"
-                          }`}
+                            }`}
                         >
                           <svg
                             className="h-5 w-5"
@@ -1087,22 +1120,22 @@ const DevUtilities = () => {
                     <>
                       <div>
                         <h2 className="text-2xl font-black uppercase tracking-tight">
-                          All Other Tools
+                          All Tools
                         </h2>
                         <p className="mt-1 text-sm font-medium text-zinc-500">
                           The full utility list lives below your favorites.
                         </p>
                       </div>
                       <div className="text-xs font-black uppercase tracking-widest text-zinc-500">
-                        {otherCards.length} item
-                        {otherCards.length === 1 ? "" : "s"}
+                        {filteredUniqueCards.length} item
+                        {filteredUniqueCards.length === 1 ? "" : "s"}
                       </div>
                     </>
                   )}
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full">
-                  {otherCards.map((card) => {
+                  {filteredUniqueCards.map((card) => {
                     const isFavorite = favoriteSet.has(card.path);
 
                     return (
@@ -1126,13 +1159,12 @@ const DevUtilities = () => {
                             event.stopPropagation();
                             toggleFavorite(card.path);
                           }}
-                          className={`absolute right-4 top-4 z-10 inline-flex h-10 w-10 items-center justify-center rounded-full border transition-all duration-300 ${
-                            isFavorite
+                          className={`absolute right-4 top-4 z-10 inline-flex h-10 w-10 items-center justify-center rounded-full border transition-all duration-300 ${isFavorite
                               ? "border-amber-400/40 bg-amber-400/15 text-amber-400"
                               : dark
                                 ? "border-zinc-800 bg-zinc-950/70 text-zinc-500 hover:border-amber-400/40 hover:text-amber-300"
                                 : "border-zinc-200 bg-white/90 text-zinc-400 hover:border-amber-400/40 hover:text-amber-500"
-                          }`}
+                            }`}
                         >
                           <svg
                             className="h-5 w-5"

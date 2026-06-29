@@ -28,11 +28,13 @@ const Dashboard = () => {
           if (t.includes("YAML")) return "JSON/YAML";
           if (t.includes("JSON SCHEMA")) return "JSON SCHEMA";
           if (t.includes("MOCK JSON")) return "MOCK JSON";
+          if (t.includes("JSON PATH")) return "JSON PATH";
           if (t.includes("JSON")) return "JSON";
           if (t.includes("BASE64")) return "BASE64/URL";
           if (t.includes("TIMESTAMP")) return "TIMESTAMP";
           if (t.includes("UUID")) return "UUID";
-          if (t.includes("JWT")) return "JWT";
+          if (t.includes("JWT ENCODE")) return "JWT ENCODE";
+          if (t.includes("JWT DECODE") || t === "JWT DECODER" || (t.includes("JWT") && !t.includes("ENCODE"))) return "JWT DECODE";
           if (t.includes("DIFF")) return "DIFF";
           if (t.includes("HASH")) return "HASH";
           if (t.includes("COLOR")) return "COLOR";
@@ -41,16 +43,27 @@ const Dashboard = () => {
           if (t.includes("SUBNET")) return "SUBNET";
           if (t.includes("SQL")) return "SQL";
           if (t.includes("URL")) return "URL";
+          if (t.includes("HTML MULTI")) return "HTML CONVERTER";
           if (t.includes("HTML")) return "HTML ENTITY";
           if (t.includes("TEXT CASE")) return "TEXT CASE";
           if (t.includes("MARKDOWN TABLE")) return "MD TABLE";
           if (t.includes("MARKDOWN")) return "MARKDOWN";
           if (t.includes("FLEXBOX")) return "FLEX/GRID";
           if (t.includes("AGENT")) return "USER AGENT";
+          if (t.includes("CHMOD")) return "CHMOD";
+          if (t.includes("CRON")) return "CRON";
+          if (t.includes("GLASSMORPHISM")) return "GLASSMORPHISM";
+          if (t.includes("GRADIENT")) return "CSS GRADIENT";
+          if (t.includes("CSS UNIT")) return "CSS UNITS";
+          if (t.includes("BCRYPT")) return "BCRYPT";
+          if (t.includes("PASSWORD")) return "PASSWORD";
+          if (t.includes("LOREM")) return "LOREM IPSUM";
+          if (t.includes("SVG")) return "SVG";
+          if (t.includes("DESIGN TOKEN")) return "DESIGN TOKENS";
           return t;
         })
         .join(" • ")
-    : "REGEXP • JSON • BASE64/URL • TIMESTAMP • UUID • JWT • DIFF • CODE • HASH • COLOR • QR • SQL";
+    : "REGEXP • JSON • BASE64/URL • TIMESTAMP • UUID • JWT DECODE • JWT ENCODE • DIFF • CODE • HASH • COLOR • QR • SQL";
   
   // --- STATE FOR TASK PROGRESS ---
   const [taskStats, setTaskStats] = useState({ total: 0, completed: 0, percentage: 0 });

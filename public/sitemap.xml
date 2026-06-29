@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://devtasks.example.com/</loc>
+    <loc>https://dev-tasks-beta.vercel.app/</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://devtasks.example.com/dashboard</loc>
+    <loc>https://dev-tasks-beta.vercel.app/dashboard</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -15,31 +15,31 @@
 
   <!-- Task Management -->
   <url>
-    <loc>https://devtasks.example.com/taskmanage</loc>
+    <loc>https://dev-tasks-beta.vercel.app/taskmanage</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://devtasks.example.com/taskmanage/add-tasks</loc>
+    <loc>https://dev-tasks-beta.vercel.app/taskmanage/add-tasks</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://devtasks.example.com/taskmanage/list-tasks</loc>
+    <loc>https://dev-tasks-beta.vercel.app/taskmanage/list-tasks</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://devtasks.example.com/taskmanage/delete-history</loc>
+    <loc>https://dev-tasks-beta.vercel.app/taskmanage/delete-history</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://devtasks.example.com/taskmanage/data-center</loc>
+    <loc>https://dev-tasks-beta.vercel.app/taskmanage/data-center</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -47,31 +47,31 @@
 
   <!-- Snippet Vault -->
   <url>
-    <loc>https://devtasks.example.com/snippetvault</loc>
+    <loc>https://dev-tasks-beta.vercel.app/snippetvault</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://devtasks.example.com/snippetvault/add</loc>
+    <loc>https://dev-tasks-beta.vercel.app/snippetvault/add</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://devtasks.example.com/snippetvault/list</loc>
+    <loc>https://dev-tasks-beta.vercel.app/snippetvault/list</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://devtasks.example.com/snippetvault/delete-history</loc>
+    <loc>https://dev-tasks-beta.vercel.app/snippetvault/delete-history</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://devtasks.example.com/snippetvault/data-center</loc>
+    <loc>https://dev-tasks-beta.vercel.app/snippetvault/data-center</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -79,31 +79,31 @@
 
   <!-- Resource Hub -->
   <url>
-    <loc>https://devtasks.example.com/resourcehub</loc>
+    <loc>https://dev-tasks-beta.vercel.app/resourcehub</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://devtasks.example.com/resourcehub/add</loc>
+    <loc>https://dev-tasks-beta.vercel.app/resourcehub/add</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://devtasks.example.com/resourcehub/list</loc>
+    <loc>https://dev-tasks-beta.vercel.app/resourcehub/list</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://devtasks.example.com/resourcehub/delete-history</loc>
+    <loc>https://dev-tasks-beta.vercel.app/resourcehub/delete-history</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://devtasks.example.com/resourcehub/data-center</loc>
+    <loc>https://dev-tasks-beta.vercel.app/resourcehub/data-center</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -111,7 +111,7 @@
 
   <!-- Dev Utilities Overview -->
   <url>
-    <loc>https://devtasks.example.com/devutilities</loc>
+    <loc>https://dev-tasks-beta.vercel.app/devutilities</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -119,218 +119,230 @@
 
   <!-- Dev Utilities Individual Tools -->
   <url>
-    <loc>https://devtasks.example.com/devutilities/regex</loc>
+    <loc>https://dev-tasks-beta.vercel.app/devutilities/regex</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://devtasks.example.com/devutilities/css-unit-converter</loc>
+    <loc>https://dev-tasks-beta.vercel.app/devutilities/css-unit-converter</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://devtasks.example.com/devutilities/json</loc>
+    <loc>https://dev-tasks-beta.vercel.app/devutilities/json</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://devtasks.example.com/devutilities/json-yaml-csv-xml</loc>
+    <loc>https://dev-tasks-beta.vercel.app/devutilities/json-yaml-csv-xml</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://devtasks.example.com/devutilities/markdown</loc>
+    <loc>https://dev-tasks-beta.vercel.app/devutilities/markdown</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://devtasks.example.com/devutilities/html-entity</loc>
+    <loc>https://dev-tasks-beta.vercel.app/devutilities/html-entity</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://devtasks.example.com/devutilities/base64</loc>
+    <loc>https://dev-tasks-beta.vercel.app/devutilities/base64</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://devtasks.example.com/devutilities/timestamp</loc>
+    <loc>https://dev-tasks-beta.vercel.app/devutilities/timestamp</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://devtasks.example.com/devutilities/uuid</loc>
+    <loc>https://dev-tasks-beta.vercel.app/devutilities/uuid</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://devtasks.example.com/devutilities/jwt</loc>
+    <loc>https://dev-tasks-beta.vercel.app/devutilities/jwt</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://devtasks.example.com/devutilities/jwt-encode</loc>
+    <loc>https://dev-tasks-beta.vercel.app/devutilities/jwt-encode</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://devtasks.example.com/devutilities/diff</loc>
+    <loc>https://dev-tasks-beta.vercel.app/devutilities/diff</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://devtasks.example.com/devutilities/hash</loc>
+    <loc>https://dev-tasks-beta.vercel.app/devutilities/hash</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://devtasks.example.com/devutilities/color</loc>
+    <loc>https://dev-tasks-beta.vercel.app/devutilities/color</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://devtasks.example.com/devutilities/code</loc>
+    <loc>https://dev-tasks-beta.vercel.app/devutilities/code</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://devtasks.example.com/devutilities/qrcode</loc>
+    <loc>https://dev-tasks-beta.vercel.app/devutilities/qrcode</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://devtasks.example.com/devutilities/text-case</loc>
+    <loc>https://dev-tasks-beta.vercel.app/devutilities/text-case</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://devtasks.example.com/devutilities/chmod</loc>
+    <loc>https://dev-tasks-beta.vercel.app/devutilities/chmod</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://devtasks.example.com/devutilities/mock-json-generator</loc>
+    <loc>https://dev-tasks-beta.vercel.app/devutilities/mock-json-generator</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://devtasks.example.com/devutilities/flexbox-grid-generator</loc>
+    <loc>https://dev-tasks-beta.vercel.app/devutilities/flexbox-grid-generator</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://devtasks.example.com/devutilities/markdown-table-genertaor</loc>
+    <loc>https://dev-tasks-beta.vercel.app/devutilities/markdown-table-genertaor</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://devtasks.example.com/devutilities/url-parser</loc>
+    <loc>https://dev-tasks-beta.vercel.app/devutilities/url-parser</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://devtasks.example.com/devutilities/bcrypt</loc>
+    <loc>https://dev-tasks-beta.vercel.app/devutilities/bcrypt</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://devtasks.example.com/devutilities/sql</loc>
+    <loc>https://dev-tasks-beta.vercel.app/devutilities/sql</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://devtasks.example.com/devutilities/json-schema-validator</loc>
+    <loc>https://dev-tasks-beta.vercel.app/devutilities/json-schema-validator</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://devtasks.example.com/devutilities/cron</loc>
+    <loc>https://dev-tasks-beta.vercel.app/devutilities/cron</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://devtasks.example.com/devutilities/string-inspector</loc>
+    <loc>https://dev-tasks-beta.vercel.app/devutilities/string-inspector</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://devtasks.example.com/devutilities/number-base-converter</loc>
+    <loc>https://dev-tasks-beta.vercel.app/devutilities/number-base-converter</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://devtasks.example.com/devutilities/subnet</loc>
+    <loc>https://dev-tasks-beta.vercel.app/devutilities/subnet</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://devtasks.example.com/devutilities/css-gradient</loc>
+    <loc>https://dev-tasks-beta.vercel.app/devutilities/css-gradient</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://devtasks.example.com/devutilities/glassmorphism</loc>
+    <loc>https://dev-tasks-beta.vercel.app/devutilities/glassmorphism</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://devtasks.example.com/devutilities/lorem-ipsum</loc>
+    <loc>https://dev-tasks-beta.vercel.app/devutilities/lorem-ipsum</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://devtasks.example.com/devutilities/svg-optimizer</loc>
+    <loc>https://dev-tasks-beta.vercel.app/devutilities/svg-optimizer</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://devtasks.example.com/devutilities/password-generator</loc>
+    <loc>https://dev-tasks-beta.vercel.app/devutilities/password-generator</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://devtasks.example.com/devutilities/user-agent</loc>
+    <loc>https://dev-tasks-beta.vercel.app/devutilities/user-agent</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://devtasks.example.com/devutilities/html-multi-converter</loc>
+    <loc>https://dev-tasks-beta.vercel.app/devutilities/html-multi-converter</loc>
     <lastmod>2026-06-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://dev-tasks-beta.vercel.app/devutilities/jsonpath-playground</loc>
+    <lastmod>2026-06-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://dev-tasks-beta.vercel.app/devutilities/design-tokens</loc>
+    <lastmod>2026-06-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
