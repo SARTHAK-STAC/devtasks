@@ -322,6 +322,9 @@ const SIDEBAR_SECTIONS = [
         path: "/devutilities/html-multi-converter",
       },
       {
+        label: "JSON Path & JSON Query Playground",
+        description: "JSON Path and JSON Query Playground. Fully offline.",
+        path: "/devutilities/jsonpath-playground",
         label: "Design Token Generator",
         description:
           "Generate design system tokens for colors, typography, and spacing. Export as CSS variables, Tailwind config, or Sass. Fully offline.",

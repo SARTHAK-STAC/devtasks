@@ -79,6 +79,7 @@ import NumberBaseConverter from "./pages/DevUtilities/devutilities/NumberBaseCon
 import LoremIpsumGenerator from "./pages/DevUtilities/devutilities/LoremIpsumGenerator";
 import SvgOptimizer from "./pages/DevUtilities/devutilities/SvgOptimizer";
 import SIDEBAR_SECTIONS from "./config/sidebarSections";
+import JsonPathEvaluator from "./pages/DevUtilities/devutilities/JsonPathEvaluator";
 import TokenGenerator from "./pages/DevUtilities/devutilities/TokenGenerator";
 
 function App() {
@@ -466,6 +467,7 @@ function AppInner({ toggleHUD, hudVisible }) {
                 path="/devutilities/html-multi-converter"
                 element={<HtmlMultiConverter />}
               />
+              <Route path="/devutilities/jsonpath-playground" element={<JsonPathEvaluator />} />
               <Route
                 path="/devutilities/design-tokens"
                 element={<TokenGenerator />}
