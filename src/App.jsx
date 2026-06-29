@@ -1,3 +1,4 @@
+import Base64ImageConverter from "./pages/DevUtilities/devutilities/Base64ImageConverter";
 import { useState, useCallback, useEffect, useRef } from "react";
 import {
   BrowserRouter as Router,
@@ -81,7 +82,6 @@ import SvgOptimizer from "./pages/DevUtilities/devutilities/SvgOptimizer";
 import SIDEBAR_SECTIONS from "./config/sidebarSections";
 import JsonPathEvaluator from "./pages/DevUtilities/devutilities/JsonPathEvaluator";
 import TokenGenerator from "./pages/DevUtilities/devutilities/TokenGenerator";
-
 function App() {
   const [hudVisible, setHudVisible] = useState(false);
   const toggleHUD = useCallback(() => setHudVisible((v) => !v), []);
@@ -383,6 +383,10 @@ function AppInner({ toggleHUD, hudVisible }) {
                 element={<HtmlEntityConverter />}
               />
               <Route path="/devutilities/base64" element={<Base64Url />} />
+              <Route
+  path="/devutilities/base64-image"
+  element={<Base64ImageConverter />}
+/>
               <Route
                 path="/devutilities/timestamp"
                 element={<TimestampConverter />}

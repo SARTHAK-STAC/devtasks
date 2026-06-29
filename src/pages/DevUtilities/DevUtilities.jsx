@@ -59,6 +59,7 @@ const DevUtilities = () => {
 
   const cards = [
     {
+      
       title: "SVG Optimizer",
       description: "Optimize, clean and preview SVG code instantly",
       path: "/devutilities/svg-optimizer",
@@ -119,6 +120,27 @@ const DevUtilities = () => {
         </svg>
       ),
     },
+    {
+  title: "Base64 Image Encoder & Decoder",
+  description:
+    "Convert images to Base64 Data URIs and decode Base64 back into downloadable images. Works completely offline.",
+  path: "/devutilities/base64-image",
+  icon: (
+    <svg
+      className="w-6 h-6"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M4 5h16v14H4V5zm4 8l2-2 3 3 2-2 3 3"
+      />
+    </svg>
+  ),
+},
     {
       title: "JSON Formatter",
       description:

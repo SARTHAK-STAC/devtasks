@@ -137,6 +137,11 @@ const SIDEBAR_SECTIONS = [
         exact: true,
       },
       {
+    label: "Base64 Image",
+    path: "/devutilities/base64-image",
+    description: "Offline Base64 Image Encoder & Decoder",
+},
+      {
         label: "JSON Formatter",
         description: "Format and validate JSON",
         path: "/devutilities/json",
