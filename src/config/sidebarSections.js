@@ -197,6 +197,11 @@ const SIDEBAR_SECTIONS = [
         path: "/devutilities/base64",
       },
       {
+        label: "Base64 Image",
+        description: "Encode/decode images with Base64",
+        path: "/devutilities/base64-image",
+      },
+      {
         label: "HTML Entity Converter",
         description: "Encode/decode HTML entities",
         path: "/devutilities/html-entity",
