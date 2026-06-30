@@ -187,13 +187,24 @@ const Dashboard = () => {
           >
             <span>← Exit to Site</span>
           </Link>
-          <div>
-            <h1 className="text-4xl font-black uppercase tracking-tighter mb-2">
-              Dashboard
-            </h1>
-            <p className="text-gray-400 font-medium">
-              Manage your engineering command center
-            </p>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 w-full">
+            <div>
+              <h1 className="text-4xl font-black uppercase tracking-tighter mb-2">
+                Dashboard
+              </h1>
+              <p className="text-gray-400 font-medium">
+                Manage your engineering command center
+              </p>
+            </div>
+            <div className={`flex items-center gap-2 px-3.5 py-2 rounded-2xl border text-xs font-semibold w-fit ${
+              dark ? "bg-zinc-900/30 border-zinc-800 text-zinc-400" : "bg-neutral-50 border-neutral-200 text-neutral-500"
+            }`}>
+              <span>Tip: Press</span>
+              <kbd className={`px-1.5 py-0.5 rounded text-[10px] font-black font-mono border shadow-sm ${
+                dark ? "bg-zinc-800 border-zinc-750 text-zinc-200" : "bg-white border-zinc-250 text-black"
+              }`}>?</kbd>
+              <span>to view keyboard shortcuts</span>
+            </div>
           </div>
         </header>
 

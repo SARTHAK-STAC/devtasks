@@ -48,14 +48,7 @@ const DevUtilities = () => {
     }
   });
 
-  const [searchQuery, setSearchQuery] = useState(() => {
-    if (typeof window === "undefined") return "";
-    return sessionStorage.getItem("devutilities_search_query") || "";
-  });
-
-  useEffect(() => {
-    sessionStorage.setItem("devutilities_search_query", searchQuery);
-  }, [searchQuery]);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const cards = [
     {
@@ -353,7 +346,7 @@ const DevUtilities = () => {
     {
       title: "Color Converter & Contrast Checker",
       description:
-        "Convert HEX, RGB, HSL, and CMYK colors, generate palettes, and verify WCAG contrast offline.",
+        "Convert CSS colors (HEX, RGB, HSL, CMYK), generate palettes, and verify WCAG contrast offline.",
       path: "/devutilities/color",
       icon: (
         <svg
@@ -995,11 +988,37 @@ const DevUtilities = () => {
                   placeholder="Search utilities..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className={`w-full rounded-2xl border py-2.5 pl-11 pr-4 text-xs font-semibold outline-none transition-all duration-300 ${dark
+                  className={`w-full rounded-2xl border py-2.5 pl-11 pr-10 text-xs font-semibold outline-none transition-all duration-300 ${dark
                       ? "bg-zinc-950/60 border-zinc-800 text-white placeholder-zinc-600 focus:border-white"
                       : "bg-white border-neutral-250 text-black placeholder-neutral-400 focus:border-black"
                     }`}
                 />
+                {searchQuery && (
+                  <button
+                    type="button"
+                    onClick={() => setSearchQuery("")}
+                    className={`absolute right-3 top-1/2 -translate-y-1/2 p-1.5 rounded-xl transition-all duration-200 active:scale-95 cursor-pointer ${
+                      dark
+                        ? "text-zinc-400 hover:text-white hover:bg-zinc-800/80"
+                        : "text-black hover:text-black hover:bg-neutral-150"
+                    }`}
+                    aria-label="Clear search query"
+                  >
+                    <svg
+                      className="h-3.5 w-3.5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2.5}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </button>
+                )}
               </div>
               {searchQuery.trim() && matchedCards.length === 0 && (
                 <div className="text-[10px] font-black uppercase tracking-widest text-amber-500 mb-2">

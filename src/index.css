@@ -113,4 +113,9 @@
 html, body, #root {
   max-width: 100%;
   overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+.navbar-layout-content {
+  scroll-behavior: smooth;
 }

@@ -8,12 +8,9 @@ const SHORTCUTS = {
   KeyH: "/",
   KeyD: "/dashboard",
   KeyT: "/taskmanage",
-  KeyA: "/taskmanage/add-tasks",
-  KeyL: "/taskmanage/list-tasks",
-  KeyC: "/taskmanage/data-center",
-  KeyR: "/taskmanage/delete-history",
   KeyV: "/snippetvault",
-  KeyS: "/snippetvault/list",
+  KeyB: "/resourcehub",
+  KeyU: "/devutilities",
 };
 
 export default function useKeyboardShortcuts(onToggleHUD, hudVisible) {
@@ -26,8 +23,8 @@ export default function useKeyboardShortcuts(onToggleHUD, hudVisible) {
 
       const isModifierPressed = e.ctrlKey || e.metaKey || e.shiftKey;
 
-      // ❓ Toggle HUD
-      if (e.code === "Slash" && !isModifierPressed && e.altKey === false) {
+      // ❓ Toggle HUD (matches '?' or '/')
+      if ((e.key === "?" || e.code === "Slash") && !e.ctrlKey && !e.metaKey && !e.altKey) {
         e.preventDefault();
         onToggleHUD();
         return;

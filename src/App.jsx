@@ -92,7 +92,7 @@ function App() {
     <ThemeProvider>
       <CategoryProvider>
         <SidebarProvider>
-          <ShortcutsHUD visible={hudVisible} />
+          <ShortcutsHUD visible={hudVisible} onClose={toggleHUD} />
           <Router>
             <AppInner toggleHUD={toggleHUD} hudVisible={hudVisible} />
           </Router>
