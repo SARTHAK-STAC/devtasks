@@ -536,7 +536,7 @@ const DevUtilities = () => {
       title: "Markdown Table Generator",
       description:
         "Build markdown tables visually or convert CSV and TSV data instantly.",
-      path: "/devutilities/markdown-table-genertaor",
+      path: "/devutilities/markdown-table-generator",
       icon: (
         <svg
           className="w-6 h-6"
@@ -746,6 +746,33 @@ const DevUtilities = () => {
             strokeLinejoin="round"
             strokeWidth={2}
             d="M4 6h16M4 6v12a1 1 0 001 1h14a1 1 0 001-1V6M8 10h.01M8 14h.01M12 10h.01M12 14h.01M16 10h.01M16 14h.01"
+          />
+        </svg>
+      ),
+    },
+    {
+      title: "CSS Animation Generator",
+      description:
+        "Create custom keyframe animations, customize duration and timing functions, and copy generated CSS.",
+      path: "/devutilities/css-animation",
+      icon: (
+        <svg
+          className="w-6 h-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
+          />
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
           />
         </svg>
       ),

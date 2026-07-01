@@ -8,9 +8,6 @@ import {
 } from "react-router-dom";
 import { Toaster } from "sonner";
 import Dashboard from "./pages/Dashboard";
-import HtmlEntityConverter from "./pages/DevUtilities/devutilities/HtmlEntityConverter";
-import HtmlMultiConverter from "./pages/DevUtilities/devutilities/HtmlMultiConverter";
-import KeycodeInspector from "./pages/DevUtilities/devutilities/KeycodeInspector";
 import Home from "./pages/Home";
 import SnippetVault from "./pages/SnippetVault/SnippetVault";
 import AddSnippet from "./pages/SnippetVault/snippetvault/AddSnippet";
@@ -23,10 +20,6 @@ import DataCenter from "./pages/TaskManagement/taskmanage/DataCenter";
 import DeleteHistory from "./pages/TaskManagement/taskmanage/DeleteHistory";
 import ListTasks from "./pages/TaskManagement/taskmanage/ListTasks";
 
-import TextCaseConverter from "./pages/DevUtilities/devutilities/TextCaseConverter";
-//extra added
-import UserAgentParser from "./pages/DevUtilities/devutilities/UserAgentParser";
-
 // Resource Hub Imports
 import ResourceHub from "./pages/ResourceHub/ResourceHub";
 import AddResource from "./pages/ResourceHub/resourcehub/AddResource";
@@ -35,29 +28,47 @@ import DeleteHistoryResource from "./pages/ResourceHub/resourcehub/DeleteHistory
 import ListResources from "./pages/ResourceHub/resourcehub/ListResources";
 
 // Dev Utilities Imports
-import DevUtilities from "./pages/DevUtilities/DevUtilities";
 import Base64Image from "./pages/DevUtilities/devutilities/Base64Image";
 import Base64Url from "./pages/DevUtilities/devutilities/Base64Url";
 import BcryptGenerator from "./pages/DevUtilities/devutilities/BcryptGenerator";
+import ChmodCalculator from "./pages/DevUtilities/devutilities/ChmodCalculator";
 import CodeSandbox from "./pages/DevUtilities/devutilities/CodeSandbox";
 import ColorConverter from "./pages/DevUtilities/devutilities/ColorConverter";
+import CronExpression from "./pages/DevUtilities/devutilities/CronExpression";
+import CssAnimationGenerator from "./pages/DevUtilities/devutilities/CssAnimationGenerator";
 import CssGlassmorphismPlayground from "./pages/DevUtilities/devutilities/CssGlassmorphismPlayground";
 import CssGradientGenerator from "./pages/DevUtilities/devutilities/CssGradientGenerator";
 import CssUnitConverter from "./pages/DevUtilities/devutilities/CssUnitConverter";
+import DevUtilities from "./pages/DevUtilities/DevUtilities";
 import DiffChecker from "./pages/DevUtilities/devutilities/DiffChecker";
+import FlexboxGridGenerator from "./pages/DevUtilities/devutilities/FlexboxGridGenerator";
 import HashGenerator from "./pages/DevUtilities/devutilities/HashGenerator";
+import HtmlEntityConverter from "./pages/DevUtilities/devutilities/HtmlEntityConverter";
+import HtmlMultiConverter from "./pages/DevUtilities/devutilities/HtmlMultiConverter";
 import JsonFormatter from "./pages/DevUtilities/devutilities/JsonFormatter";
+import JsonPathEvaluator from "./pages/DevUtilities/devutilities/JsonPathEvaluator";
+import JsonSchemaValidator from "./pages/DevUtilities/devutilities/JsonSchemaValidator";
 import JsonYamlCsvXmlConverter from "./pages/DevUtilities/devutilities/JsonYamlCsvXmlConverter";
 import JwtDecoder from "./pages/DevUtilities/devutilities/JwtDecoder";
 import JwtEncoder from "./pages/DevUtilities/devutilities/JwtEncoder";
+import KeycodeInspector from "./pages/DevUtilities/devutilities/KeycodeInspector";
+import LoremIpsumGenerator from "./pages/DevUtilities/devutilities/LoremIpsumGenerator";
 import MarkdownPreviewer from "./pages/DevUtilities/devutilities/MarkdownPreviewer";
+import MarkdownTableGenerator from "./pages/DevUtilities/devutilities/MarkdownTableGenerator";
+import MockJsonGenerator from "./pages/DevUtilities/devutilities/MockJsonDataGenerator";
+import NumberBaseConverter from "./pages/DevUtilities/devutilities/NumberBaseConverter";
 import PasswordGenerator from "./pages/DevUtilities/devutilities/PasswordGenerator";
 import QrCodeGenerator from "./pages/DevUtilities/devutilities/QrCodeGenerator";
 import RegexTester from "./pages/DevUtilities/devutilities/RegexTester";
 import SqlFormatter from "./pages/DevUtilities/devutilities/SqlFormatter";
+import StringInspector from "./pages/DevUtilities/devutilities/StringInspector";
 import SubnetCalculator from "./pages/DevUtilities/devutilities/SubnetCalculator";
+import SvgOptimizer from "./pages/DevUtilities/devutilities/SvgOptimizer";
+import TextCaseConverter from "./pages/DevUtilities/devutilities/TextCaseConverter";
 import TimestampConverter from "./pages/DevUtilities/devutilities/TimestampConverter";
+import TokenGenerator from "./pages/DevUtilities/devutilities/TokenGenerator";
 import UrlParserBuilder from "./pages/DevUtilities/devutilities/UrlParserBuilder";
+import UserAgentParser from "./pages/DevUtilities/devutilities/UserAgentParser";
 import UuidGenerator from "./pages/DevUtilities/devutilities/UuidGenerator";
 
 import Footer from "./components/Footer";
@@ -71,19 +82,6 @@ import { SidebarProvider } from "./context/SidebarContext";
 import { ThemeProvider, useTheme } from "./context/ThemeContext";
 import useKeyboardShortcuts from "./hooks/useKeyboardShortcuts";
 import "./index.css";
-import ChmodCalculator from "./pages/DevUtilities/devutilities/ChmodCalculator";
-import CronExpression from "./pages/DevUtilities/devutilities/CronExpression";
-import CssAnimationGenerator from "./pages/DevUtilities/devutilities/CssAnimationGenerator";
-import FlexboxGridGenerator from "./pages/DevUtilities/devutilities/FlexboxGridGenerator";
-import JsonPathEvaluator from "./pages/DevUtilities/devutilities/JsonPathEvaluator";
-import JsonSchemaValidator from "./pages/DevUtilities/devutilities/JsonSchemaValidator";
-import LoremIpsumGenerator from "./pages/DevUtilities/devutilities/LoremIpsumGenerator";
-import MarkdownTableGenerator from "./pages/DevUtilities/devutilities/MarkdownTableGenerator";
-import MockJsonGenerator from "./pages/DevUtilities/devutilities/MockJsonDataGenerator";
-import NumberBaseConverter from "./pages/DevUtilities/devutilities/NumberBaseConverter";
-import StringInspector from "./pages/DevUtilities/devutilities/StringInspector";
-import SvgOptimizer from "./pages/DevUtilities/devutilities/SvgOptimizer";
-import TokenGenerator from "./pages/DevUtilities/devutilities/TokenGenerator";
 
 function App() {
   const [hudVisible, setHudVisible] = useState(false);
@@ -310,11 +308,6 @@ function AppInner({ toggleHUD, hudVisible }) {
         >
           <div className="flex-1">
             <Routes>
-              <Route
-                path="/devutilities/user-agent"
-                element={<UserAgentParser />}
-              />
-
               <Route path="/" element={<Home />} />
               <Route path="/dashboard" element={<Dashboard />} />
 
@@ -359,13 +352,13 @@ function AppInner({ toggleHUD, hudVisible }) {
               {/* Dev Utilities */}
               <Route path="/devutilities" element={<DevUtilities />} />
               <Route
-  path="/devutilities/keycode-inspector"
-  element={<KeycodeInspector />}
-/>
-<Route
-  path="/devutilities/css-animation"
-  element={<CssAnimationGenerator />}
-/>
+                path="/devutilities/keycode-inspector"
+                element={<KeycodeInspector />}
+              />
+              <Route
+                path="/devutilities/css-animation"
+                element={<CssAnimationGenerator />}
+              />
               <Route path="/devutilities/regex" element={<RegexTester />} />
               <Route path="/devutilities/css-unit-converter" element={<CssUnitConverter />} />
               <Route path="/devutilities/json" element={<JsonFormatter />} />
@@ -424,12 +417,16 @@ function AppInner({ toggleHUD, hudVisible }) {
                 element={<FlexboxGridGenerator />}
               />
               <Route
-                path="/devutilities/markdown-table-genertaor"
+                path="/devutilities/markdown-table-generator"
                 element={<MarkdownTableGenerator />}
               />
               <Route
                 path="/devutilities/url-parser"
                 element={<UrlParserBuilder />}
+              />
+              <Route
+                path="/devutilities/user-agent"
+                element={<UserAgentParser />}
               />
               <Route
                 path="/devutilities/bcrypt"
@@ -462,7 +459,6 @@ function AppInner({ toggleHUD, hudVisible }) {
                 path="/devutilities/glassmorphism"
                 element={<CssGlassmorphismPlayground />}
               />
-              <Route path="*" element={<Navigate to="/" replace />} />
               <Route
                 path="/devutilities/lorem-ipsum"
                 element={<LoremIpsumGenerator />}
@@ -472,8 +468,8 @@ function AppInner({ toggleHUD, hudVisible }) {
                 element={<SvgOptimizer />}
               />
               <Route
-              path="/devutilities/password-generator"
-              element={<PasswordGenerator />}
+                path="/devutilities/password-generator"
+                element={<PasswordGenerator />}
               />
               <Route
                 path="/devutilities/html-multi-converter"
@@ -484,6 +480,7 @@ function AppInner({ toggleHUD, hudVisible }) {
                 path="/devutilities/design-tokens"
                 element={<TokenGenerator />}
               />
+              <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
             
           </div>
