@@ -174,7 +174,7 @@ const SIDEBAR_SECTIONS = [
       {
         label: "Markdown Table Generator",
         description: "Build markdown tables visually",
-        path: "/devutilities/markdown-table-genertaor",
+        path: "/devutilities/markdown-table-generator",
       },
       {
         label: "Regex Tester",
@@ -268,6 +268,12 @@ const SIDEBAR_SECTIONS = [
         label: "JWT Decoder",
         description: "Inspect tokens",
         path: "/devutilities/jwt",
+      },
+      {
+        label: "CSS Animation Generator",
+        description:
+          "Create custom keyframe animations, customize duration and timing functions, and copy generated CSS.",
+        path: "/devutilities/css-animation",
       },
       {
         label: "CSS Gradient Generator",
